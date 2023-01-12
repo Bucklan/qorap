@@ -18,4 +18,7 @@ class Category extends Model
     public function categories(){
         return $this->hasMany(Category::class, 'parent_id');
     }
+    public function gender(){
+        return $this->belongsTo(Gender::class);
+    }
 }

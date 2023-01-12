@@ -13,4 +13,13 @@ return [
     'comments' => 'Комменты',
     'views' => 'Просмотры',
     'likes' => 'Лайк',
+    'Admin page' => 'Страница Админ',
+    'User page' => 'Страница пользователей',
+    'searchplaceholder' => 'Что ты ищешь?',
+    'profile' => 'Профиль',
+    'not rated' => 'Не оцененить',
+    'category' => 'Категория'
+
+
+
 ];

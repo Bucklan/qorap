@@ -25,72 +25,89 @@
                         <path
                             d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
                     </svg>
-                    <span>Gifts</span>
+                    <span>{{__('messages.Gifts')}}</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">about gifts</h6>
-                        <a class="collapse-item" href="{{route('adm.users.gifts')}}">All Gifts</a>
+                        @can('viewAny',\Illuminate\Support\Facades\Auth::user())
+                            <a class="collapse-item" href="{{route('adm.users.gifts')}}">All Gifts</a>
+                        @endcan
                         @auth
                             @can('create',App\Models\Gift::class)
-                            <a class="collapse-item" href="{{route('gift.create')}}">Add Gift</a>
+                                <a class="collapse-item" href="{{route('gift.create')}}">Add Gift</a>
+                                <a class="collapse-item" href="{{route('partner.myGifts')}}">My Gifts</a>
                             @endcan
                         @endauth
                     </div>
                 </div>
             </li>
-            <hr class="sidebar-divider my-0">
-            <!-- Nav Item - Music Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <span>Users</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">about users</h6>
-                        <a class="collapse-item" href="{{route('adm.users.index')}}">User List</a>
+            @can('forAdmin',\Illuminate\Support\Facades\Auth::user())
+                <hr class="sidebar-divider my-0">
+                <!-- Nav Item - Music Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <span>Users</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">about users</h6>
+                            <a class="collapse-item" href="{{route('adm.users.index')}}">User List</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <hr class="sidebar-divider my-0">
+                </li>
+                <hr class="sidebar-divider my-0">
+            @endcan
+            @can('viewAny',\Illuminate\Support\Facades\Auth::user())
             <!-- Nav Item - Music Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <span>Category</span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">about categories</h6>
+                            <a class="collapse-item" href="{{route('adm.categories.index')}}">All categories</a>
+                            @auth
+                                <a class="collapse-item" href="{{route('adm.categories.create')}}">Add category</a>
+                            @endauth
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider my-0">
+            @endcan
+            <!-- Nav Item - Music Collapse Menu -->
+            @can('forAdmin',\Illuminate\Support\Facades\Auth::user())
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                   aria-expanded="true" aria-controls="collapseThree">
-                    <span>Category</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFivq"
+                   aria-expanded="true" aria-controls="collapseFivq">
+                    <span>Carts</span>
                 </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div id="collapseFivq" class="collapse" aria-labelledby="headingFivq" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">about categories</h6>
-                        <a class="collapse-item" href="{{route('adm.categories.index')}}">All categories</a>
-                        @auth
-                            <a class="collapse-item" href="{{route('adm.categories.create')}}">Add category</a>
-                        @endauth
+                        <a class="collapse-item" href="{{route('adm.cart.index')}}">Request Carts</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                   aria-expanded="true" aria-controls="collapseThree">
-                    <span>Partners</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">about Partners</h6>
-                        <a class="collapse-item" href="{{route('adm.partners.request')}}">Request Partners</a>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                       aria-expanded="true" aria-controls="collapseFive">
+                        <span>Partners</span>
+                    </a>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">about Partners</h6>
+                            <a class="collapse-item" href="{{route('adm.partners.request')}}">Request Partners</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+        @endcan
 
         <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{url('/')}}">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -111,6 +128,30 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">  {{config('app.languages')[app()->getLocale()]}}</span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <div class="dropdown-divider"></div>
+                                @foreach(config('app.languages') as $ln => $lang)
+                                    <a class="dropdown-item" href="{{route('switch.lang',$ln)}}">
+                                        {{$lang}}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="{{route('home')}}" id="userDropdown"
+                            >aa
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small"> {{__('messages.User page')}}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown no-arrow">
 
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -118,12 +159,12 @@
                                @auth {{ Auth::user()->name }} @endauth
                             </span>
                                 @guest
-                                <img class="img-profile rounded-circle"
-                                     src="{{asset('img/undraw_profile.svg')}}">
+                                    <img class="img-profile rounded-circle"
+                                         src="{{asset('img/undraw_profile.svg')}}">
                                 @endguest
                                 @auth
                                     <img class="img-profile rounded-circle"
-                                         src="{{asset('storage/image/users/'.Auth::user()->image)}}">
+                                         src="{{asset(Auth::user()->image)}}">
                                 @endauth
                             </a>
                             <!-- Dropdown - User Information -->
@@ -144,16 +185,16 @@
                                     @endif
                                 @else
 
-                                    <a class="dropdown-item" href="{{route('profile')}}">
+                                    <a class="dropdown-item" href="{{route('profile.form')}}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        {{ __('Profile') }}
+                                        {{__('profile.profile')}}
                                     </a>
                                     <div class="dropdown-divider">
                                     </div>
                                     <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal"
                                        data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        {{__('messages.log out')}}
                                     </a>
                                 @endguest
                             </div>
@@ -186,9 +227,7 @@
                     </div>
                 </nav>
                 <!--   Session -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
+
                             @if (session('message'))
                                 <div class="alert alert-success" role="alert">
                                     {{ session('message') }}
@@ -201,10 +240,7 @@
                                 @endforeach
 
                             @endif
-                        </div>
-                    </div>
-                </div>
-            <!--  End Session -->
+                <!--  End Session -->
                 <!--  Main Content -->
                 <main class="py-4">
                     @yield('content')

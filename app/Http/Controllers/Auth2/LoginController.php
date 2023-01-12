@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth2;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Gender;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->intended('/gift');
+            return redirect()->intended('/');
         }
 
         $validated = $request->validate([
@@ -29,7 +30,7 @@ class LoginController extends Controller
         if (Auth::attempt($validated)) {
             if (Auth::user()->role->name != "USER") {
                     if (Auth::user()->role->name == "PARTNER") {
-                        return redirect()->intended('/adm/gifts');
+                        return redirect()->intended('/partner/mygifts');
                     }
                     return redirect()->intended('/adm/users');
             }
@@ -47,8 +48,10 @@ class LoginController extends Controller
     public function profile()
     {
         $users = Auth::user();
-        $categories = Category::whereNull('parent_id')->with('categories')->get();
-        return view('gifts.profile', ['user' => $users, 'categories' => $categories]);
+        $categories = Category::whereNull('parent_id')->with('categories.gender')->get();
+        $genders = Gender::all();
+        return view('gifts.profile', ['user' => $users, 'categories' => $categories,'genders'=>$genders]);
     }
+
 
 }

@@ -6,8 +6,8 @@
     <div class="container">
         <form action="{{route('adm.users.search')}}" method="GET">
             <input type="text" name="search" class="search__input form-control border-transparent"
-                   placeholder="Search...">
-            <button class="btn btn-dark">SEARCH</button>
+                   placeholder="{{__('buttons.search')}}...">
+            <button class="btn btn-dark">{{__('buttons.search')}}</button>
         </form>
         <div class="row">
             <div class="col-12">
@@ -15,11 +15,11 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">DETAILS</th>
+                        <th scope="col">{{__('cart.Name')}}</th>
+                        <th scope="col">{{__('login.email')}}</th>
+                        <th scope="col">{{__('buttons.Role')}}</th>
+                        <th scope="col">{{__('buttons.status')}}</th>
+                        <th scope="col">{{__('buttons.details')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,15 +35,16 @@
                                     @method('PUT')
                                     <button class="btn {{$users[$i]->is_active ?' btn-danger' : 'btn-success'}}">
                                         @if($users[$i]->is_active)
-                                            BAN
+                                            {{__('buttons.ban')}}
                                         @else
-                                            UNBAN
+                                            {{__('buttons.unban')}}
                                         @endif
                                     </button>
                                 </form>
                             </td>
                             <td>
-                                <a href="{{route('adm.users.edit',$users[$i]->id)}}" class="btn btn-success">DETAILS</a>
+                                <a href="{{route('adm.users.edit',$users[$i]->id)}}" class="btn btn-success">{{__('buttons.details')}}
+                                </a>
                             </td>
                         </tr>
                     @endfor

@@ -13,4 +13,12 @@ return [
     'comments' => 'Пікір',
     'views' => 'Қаралым',
     'likes' => 'Баға',
+    'Admin page' => 'Админ Парақшасы',
+    'User page' => 'Пайдаланушы беті',
+    'searchplaceholder' => 'Сізге қандай сыйлық керек?',
+    'profile' => 'Профиль',
+    'not rated' => 'Бағаламау',
+    'category' => 'Санат'
+
+
 ];

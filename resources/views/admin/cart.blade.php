@@ -11,8 +11,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">User Name</th>
                         <th scope="col">Name Gift</th>
+                        <th scope="col">User Name</th>
                         <th scope="col">Number gift</th>
                         <th scope="col">Status</th>
                         <th scope="col">Confirm</th>
@@ -22,7 +22,7 @@
                     @for($i = 1;$i<=count($giftsInCart);$i++)
                         <tr>
                             <th scope="row">{{$i}}</th>
-                            <td>{{$giftsInCart[$i-1]->gift->name}}</td>
+                            <td>{{$giftsInCart[$i-1]->gift->{'name_'.app()->getLocale()} }}</td>
                             <td>{{$giftsInCart[$i-1]->user->name}}</td>
                             <td>{{$giftsInCart[$i-1]->number}}</td>
                             <td>{{$giftsInCart[$i-1]->status}}</td>

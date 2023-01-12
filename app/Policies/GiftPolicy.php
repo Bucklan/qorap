@@ -17,7 +17,8 @@ class GiftPolicy
 
     public function view(User $user, Gift $gift)
     {
-        //
+        return ($user->id == $gift->user_id) && ($user->role->name == 'PARTNER');
+
     }
 
     public function create(User $user)

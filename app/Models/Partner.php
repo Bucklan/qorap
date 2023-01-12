@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Partner extends Model
 {
     use HasFactory;
-    protected $fillable = ['name_company','user_id','image','category_id'];
+    protected $fillable = ['name_company','user_id','image','category_id','is_partner'];
 
     public function user(){
         return $this->hasOne(User::class);

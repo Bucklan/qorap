@@ -17,12 +17,12 @@ class CommentPolicy
 
     public function view(User $user, Comment $comment)
     {
-        //
+//        return  $user->giftsWithStatus('confirmed')->where('id',$user->gifts->id,);
     }
 
     public function create(User $user)
     {
-        return $user->role->name == 'USER';
+        return $user->role->name == 'USER' ;
     }
 
 

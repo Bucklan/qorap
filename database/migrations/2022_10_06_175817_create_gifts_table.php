@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('gifts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('content');
-            $table->text('img')->nullable();
+            $table->string('name_kz')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('name_ru')->nullable();
+            $table->text('content_kz')->nullable();
+            $table->text('content_en')->nullable();
+            $table->text('content_ru')->nullable();
+            $table->text('image');
             $table->unsignedInteger('price');
-
 //            $table->unsignedInteger('user_id');
 //            $table->foreign('user_id')->references('id')->on('users');
 

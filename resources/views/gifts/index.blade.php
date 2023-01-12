@@ -1,67 +1,257 @@
-@extends('layouts.app2')
+@extends('layouts.app3')
 
 @section('title','MAIN PAGE')
 
 @section('content')
-    <div class="content">
-        <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">
-                {{ __('messages.Main_page') }}
-            </h2>
-        </div>
-        <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-        @foreach($AllGifts as $gift)
-            <!-- BEGIN: Blog Layout -->
-            <div class="intro-y col-span-12 md:col-span-6 box">
-                <div class="h-[320px] before:block before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-10 before:bg-gradient-to-t before:from-black/90 before:to-black/10 image-fit">
-                    <img alt="Midone - HTML Admin Template" class="rounded-t-md" src="{{asset('/storage/images/gifts/'.$gift->image)}}">
-                    <div class="absolute w-full flex items-center px-5 pt-6 z-10">
-                        <div class="w-10 h-10 flex-none image-fit">
-                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="{{asset('/storage/image/users/'.$gift->user->image)}}">
-                        </div>
-                        <div class="ml-3 text-white mr-auto">
-                            <a href="#" class="font-medium">{{$gift->user->name}}</a>
-                            <div class="text-xs mt-0.5">{{$gift->created_at->day}}.{{$gift->created_at->month}}.{{$gift->created_at->year}}</div>
-                        </div>
-                        <div class="dropdown ml-3">
-                            <a href="javascript:;" class="bg-white/20 dropdown-toggle w-8 h-8 flex items-center justify-center rounded-full" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-vertical" class="w-4 h-4 text-white"></i> </a>
-                            <div class="dropdown-menu w-40">
-                                <ul class="dropdown-content">
-                                    <li>
-                                        <a href="" class="dropdown-item"> <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i>{{ __('messages.edit_gift') }}</a>
-                                    </li>
-                                    <li>
-                                        <form action="{{route('gift.destroy',$gift->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="dropdown-item"> <i data-lucide="trash" class="w-4 h-4 mr-2"></i>{{ __('messages.delete_gift') }}</button>
-                                        </form>
-                                    </li>
-                                </ul>
+    <div class="holder">
+        <div class="container">
+            <!-- Two columns -->
+            <!-- Page Title -->
+            @empty($AllGifts)
+                <div class="holder mt-0">
+                    <div class="container">
+                        <div class="page404-bg">
+                            <div class="page404-text">
+                                <div class="minicart-empty-icon">
+                                    <i class="icon-gift"></i>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 306 262"
+                                         style="enable-background:new 0 0 306 262;" xml:space="preserve"><path
+                                            class="st0"
+                                            d="M78.1,59.5c0,0-37.3,22-26.7,85s59.7,237,142.7,283s193,56,313-84s21-206-69-240s-249.4-67-309-60C94.6,47.6,78.1,59.5,78.1,59.5z"/></svg>
+                                </div>
+                                <div class="txt2">{{__('profile.our Gift is empty!')}}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="absolute bottom-0 text-white px-5 pb-6 z-10"> <span class="bg-white/20 px-2 py-1 rounded">{{ $gift->category->{'name_'.app()->getLocale()} }}</span> <a href="{{route('gift.show',$gift->id)}}" class="block font-medium text-xl mt-3">{{$gift->name}}</a> </div>
                 </div>
-                <div class="p-5 text-slate-600 dark:text-slate-500">{{$gift->content}}</div>
-                <div class="flex items-center px-5 py-3 border-t border-slate-200/60 dark:border-darkmode-400">
-                    <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full text-primary bg-primary/10 dark:bg-darkmode-300 dark:text-slate-300 ml-auto tooltip" title="Share"> <i data-lucide="share-2" class="w-3 h-3"></i> </a>
-                    <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-primary text-white ml-2 tooltip" title="Download PDF"> <i data-lucide="share" class="w-3 h-3"></i> </a>
-                </div>
-                <div class="px-5 pt-3 pb-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                    <div class="w-full flex text-slate-500 text-xs sm:text-sm">
-                        <div class="mr-2"> {{ __('messages.comments') }}: <span class="font-medium">{{count($gift->comments)}}</span> </div>
-                        <div class="mr-2"> {{ __('messages.views') }}: <span class="font-medium"></span> </div>
-                        <div class="ml-auto"> {{ __('messages.likes') }}: <span class="font-medium"></span> </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-            <!-- END: Blog Layout -->
-            <div class="col-3">
-                <a href="{{route('partner.create')}}" class="btn btn-primary"><h3>{{ __('messages.I want to become a partner') }}</h3></a>
+            @else
+                <div class="page-title text-center">
+                    <h1>{{__('messages.Gifts')}}</h1>
+                    <h5>{{count($AllGifts)}}x {{__('messages.Gifts')}}</h5>
 
-            </div>
+                </div>
+                <!-- /Page Title -->
+                <div class="row">
+                    <!-- Center column -->
+                    <div class="col-lg aside">
+                        <div class="prd-grid-wrap">
+                            <!-- Products Grid -->
+                            <form action="{{route('gifts.search')}}" method="GET">
+
+                                <div class="row justify-content-center mb-5">
+                                    <div class="col-sm-8">
+                                        <label class="visually-hidden" for="autoSizingInputGroup">{{__('profile.from Price')}}</label>
+                                        <div class="input-group">
+                                            <input type="number" min="0" value="0" class="form-control" id="autoSizingInputGroup"
+                                                   placeholder="{{__('profile.from Price')}}" name="from_price">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label class="visually-hidden" for="autoSizingInputGroup">{{__('profile.to Price')}}</label>
+                                        <div class="input-group">
+                                            <input type="number" min="0" class="form-control" id="autoSizingInputGroup"
+                                                   placeholder="{{__('profile.to Price')}}" name="to_price">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label class="visually-hidden" for="autoSizingSelect">{{__('messages.category')}}</label>
+                                        <select class="form-control" id="autoSizingSelect" name="category">
+                                            @foreach($categories as $cat)
+                                                <option value="{{$cat->id}}" class="active">{{$cat->{'name_'.app()->getLocale()} }}</option>
+
+                                            @foreach($cat->categories as $c)
+                                                    <option value="{{$c->id}}" >--{{$c->{'name_'.app()->getLocale()} }}</option>
+                                                    @foreach($c->categories as $cs)
+                                                        <option value="{{$cs->id}}">----{{$cs->{'name_'.app()->getLocale()} }}</option>
+                                                    @endforeach
+                                                @endforeach
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label class="visually-hidden" for="sort">{{__('profile.Sort')}}</label>
+                                        <select class="form-control" id="sort" name="sortBy">
+                                            <option value="1">{{__('profile.sort1')}}</option>
+                                            <option value="2">{{__('profile.sort2')}}</option>
+                                            <option value="3">{{__('profile.sort3')}}</option>
+                                            <option value="4">{{__('profile.sort4')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto mt-3">
+                                        <button class="btn btn-success" title="{{__('buttons.search')}}"><i class="icon-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="prd-grid
+                        product-listing data-to-show-4
+                        data-to-show-md-3 data-to-show-sm-2 js-category-grid"
+                                 data-grid-tab-content>
+                                @foreach($AllGifts as $gift)
+                                    <div class="prd prd--style2 prd-labels--max prd-labels-shadow ">
+                                        <div class="prd-inside">
+                                            <div class="prd-img-area">
+                                                <a href="{{route('gift.show',$gift->id)}}"
+                                                   class="prd-img image-hover-scale image-container">
+                                                    <img
+                                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                        data-src="{{asset($gift->image)}}"
+
+                                                        alt="Oversized Cotton Blouse"
+                                                        class="js-prd-img lazyload fade-up">
+                                                    <div class="foxic-loader"></div>
+                                                    <div class="prd-big-squared-labels">
+                                                        {{--EGER NEW TAUAR BOLSA--}}
+                                                        {{--                                                <div class="label-new"><span>New</span></div>--}}
+                                                        {{--ENDNEWGIFT--}}
+
+                                                        {{--                                                EGER SALE BOLSA--}}
+                                                        {{--                                                <div class="label-sale"><span>-10% <span--}}
+                                                        {{--                                                            class="sale-text">Sale</span></span>--}}
+
+                                                        {{--                                                    <div class="countdown-circle">--}}
+                                                        {{--                                                        <div class="countdown js-countdown"--}}
+                                                        {{--                                                             data-countdown="2021/07/01"></div>--}}
+                                                        {{--                                                    </div>--}}
+
+                                                        {{--                                                </div>--}}
+                                                        {{--                                                ENDSALEGIFT--}}
+
+                                                    </div>
+                                                </a>
+                                                <div class="prd-circle-labels">
+                                                    {{--                                            HEARTICON--}}
+
+{{--                                                    <a href="#"--}}
+{{--                                                       class="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0"--}}
+{{--                                                       title="Add To Wishlist">--}}
+{{--                                                        <i class="icon-heart-stroke"></i>--}}
+{{--                                                    </a>--}}
+                                                    {{--                                            ENDHEARTICON--}}
+                                                    {{--                                            BLACKHEART--}}
+{{--                                                    <a href="#"--}}
+{{--                                                       class="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0"--}}
+{{--                                                       title="Remove From Wishlist">--}}
+{{--                                                        <i class="icon-heart-hover"></i>--}}
+{{--                                                    </a>--}}
+                                                    {{--                                            ENDBLACKHEART--}}
+                                                    {{--                                            DETAILS--}}
+                                                    <a href="{{route('gift.show',$gift->id)}}"
+                                                       class="circle-label-qview">
+                                                        <i class="icon-eye"></i><span>{{__('buttons.details')}}</span></a>
+                                                    {{--                                            ENDDETAILS--}}
+
+                                                </div>
+
+                                                <ul class="list-options color-swatch">
+                                                    <li data-image="{{asset($gift->image)}}"
+                                                        class="active">
+                                                        <a href="#" class="js-color-toggle" data-toggle="tooltip"
+                                                           data-placement="right" title="{{$gift->name}}">
+                                                            <img src="{{asset($gift->image)}}"
+                                                                 data-src="{{asset($gift->image)}}"
+                                                                 class="lazyload fade-up" alt="Color Name">
+                                                        </a>
+                                                    </li>
+                                                    {{--                                            <li data-image="images/skins/fashion/products/product-03-2.jpg">--}}
+                                                    {{--                                                <a href="#" class="js-color-toggle" data-toggle="tooltip"--}}
+                                                    {{--                                                   data-placement="right" title="Color Name">--}}
+                                                    {{--                                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="--}}
+                                                    {{--                                                        data-src="images/skins/fashion/products/product-03-2.jpg"--}}
+                                                    {{--                                                        class="lazyload fade-up" alt="Color Name">--}}
+                                                    {{--                                                </a>--}}
+                                                    {{--                                            </li>--}}
+                                                    {{--                                            <li data-image="images/skins/fashion/products/product-03-3.jpg">--}}
+                                                    {{--                                                <a href="#" class="js-color-toggle"--}}
+                                                    {{--                                                   data-toggle="tooltip" data-placement="right"--}}
+                                                    {{--                                                   title="Color Name">--}}
+                                                    {{--                                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="--}}
+                                                    {{--                                                        data-src="images/skins/fashion/products/product-03-3.jpg"--}}
+                                                    {{--                                                        class="lazyload fade-up" alt="Color Name">--}}
+                                                    {{--                                                </a>--}}
+                                                    {{--                                            </li>--}}
+                                                </ul>
+                                            </div>
+                                            <div class="prd-info">
+                                                <div class="prd-info-wrap">
+                                                    {{--                                            <div class="prd-rating justify-content-center"><i--}}
+                                                    {{--                                                    class="icon-star-fill fill"></i><i--}}
+                                                    {{--                                                    class="icon-star-fill fill"></i><i--}}
+                                                    {{--                                                    class="icon-star-fill fill"></i><i--}}
+                                                    {{--                                                    class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i>--}}
+                                                    {{--                                            </div>--}}
+                                                    <div class="prd-tag">
+                                                        <a href="#">{{$gift->user->partner->name_company}}</a>
+                                                    </div>
+                                                    <h2 class="prd-title">
+                                                        <a href="{{route('gift.show',$gift->id)}}">{{$gift->{'name_'.app()->getLocale()} }}</a>
+                                                    </h2>
+                                                    {{--                                            BIGSITEVERSIONADDCARD--}}
+                                                    <div class="prd-action">
+                                                        <form action="{{route('cart.puttocart',$gift->id)}}"
+                                                              method="post">
+                                                            @csrf
+                                                            <button class="btn js-prd-addtocart">
+                                                                {{__('buttons.addtocart')}}
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    {{--                                            ENDBIGSITEVERSIONADDCARD--}}
+                                                </div>
+                                                <div class="prd-hovers">
+                                                    <div class="prd-circle-labels">
+                                                        <div>
+                                                            <a href="#"
+                                                               class="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0"
+                                                               title="Add To Wishlist">
+                                                                <i class="icon-heart-stroke"></i>
+                                                            </a>
+                                                            <a href="#"
+                                                               class="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0"
+                                                               title="Remove From Wishlist">
+                                                                <i class="icon-heart-hover"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="prd-hide-mobile">
+                                                            <a href="#" class="circle-label-qview js-prd-quickview"
+                                                               data-src="ajax/ajax-quickview.html">
+                                                                <i class="icon-eye"></i>
+                                                                <span>QUICK VIEW</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="prd-price">
+                                                        <div class="price-old">{{$gift->price+rand(0,25000)}} KZT</div>
+                                                        <div class="price-new">{{$gift->price}} KZT</div>
+                                                    </div>
+                                                    {{--                                            MOBILEVERSIONADDCARD--}}
+                                                    <div class="prd-action">
+                                                        <div class="prd-action-left">
+                                                            <form action="{{route('cart.puttocart',$gift->id)}}"
+                                                                  method="post">
+                                                                @csrf
+                                                                <button class="btn js-prd-addtocart"
+                                                                        data-product='{"name": "Oversized Cotton Blouse", "path":"images/skins/fashion/products/product-03-1.jpg", "url":"product.html", "aspect_ratio":0.778}'>
+                                                                    {{__('buttons.addtocart')}}
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    {{--                                            ENDMOBILEVERSIONADDCARD--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /Center column -->
+                </div>
+            @endempty
+            <!-- /Two columns -->
         </div>
     </div>
 @endsection

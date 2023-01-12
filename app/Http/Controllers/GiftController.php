@@ -3,25 +3,123 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Gender;
 use App\Models\Gift;
+use App\Models\Partner;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GiftController extends Controller
 {
     //
-    public function giftByCategory(Category $category)
+    public function my_balance(Request $request)
+    {
+        $validated = $request->validate([
+            'price' => 'required|numeric'
+        ]);
+        Auth::user()->update(['my_balance' => Auth::user()->my_balance + $validated['price']]);
+        return redirect()->route('gift.index')->with('message', __('your application has been accepted'));
+    }
+
+    public function Getbalance()
+    {
+        return view('gifts.balance');
+    }
+
+    public function home()
     {
         $categories = Category::whereNull('parent_id')->with('categories')->get();
-        return view('gifts.index', ['AllGifts' => $category->gifts, 'categories' => $categories]);
+        $genders = Gender::all();
+        $gifts = Gift::all();
+        $partners = Partner::where('is_partner', true)->get();
+
+        return view('contents.index', ['gifts' => $gifts,
+            'categories' => $categories,
+            'genders' => $genders,
+            'partners' => $partners
+        ]);//,'categories'=>$categories
+
+    }
+
+    public function giftByCategory(Category $category)
+    {
+        $bool = false;
+        foreach ($category->gifts as $gifts) {
+            if ($gifts->id) {
+                $bool = true;
+            }
+        }
+        $gifts = null;
+        if ($bool) {
+            $gifts = $category->gifts;
+        }
+        $categories = Category::whereNull('parent_id')->with('categories')->get();
+        $genders = Gender::all();
+
+        return view('gifts.index', [
+            'AllGifts' => $gifts,
+            'categories' => $categories,
+            'genders' => $genders,
+
+        ]);
+    }
+
+    public function giftByGender(Gender $gender)
+    {
+        $genders = Gender::with('categories.gifts')->get();
+        return view('gifts.index', ['AllGifts' => $gender->categories->gifts, 'genders' => $genders]);
     }
 
 
-    public function index(Gift $allGift)
+    public function index(Request $request, Gift $allGift)
     {
+        $request->validate([
+            'category' => 'numeric|exists:categories,id',
+            'sortBy' => 'numeric',
+            'name' => 'required|max:255',
+        ]);
+        $gifts = null;
         $categories = Category::whereNull('parent_id')->with('categories')->get();
-//        dd($categories);
-        return view('gifts.index', ['AllGifts' => $allGift::with('comments.user')->get(), 'categories' => $categories]);//,'categories'=>$categories
+        if ($request->category != null &&
+            $request->from_price < $request->to_price &&
+            $request->sortBy != null) {
+            if ($request->sortBy == 1) {
+                $gifts = Gift::orderBy('id', 'DESC')
+                    ->where('price', '>=', $request->from_price)
+                    ->where('price', '<=', $request->to_price)
+                    ->where('category_id', '=', $request->category)
+                    ->with('category')->get();
+            }
+            if ($request->sortBy == 2) {
+                $gifts = Gift::orderBy('id', 'ASC')
+                    ->where('price', '>=', $request->from_price)
+                    ->where('price', '<=', $request->to_price)
+                    ->where('category_id', '=', $request->category)
+                    ->with('category')->get();
+            }
+            if ($request->sortBy == 3) {
+                $gifts = Gift::orderBy('price', 'ASC')
+                    ->where('price', '>=', $request->from_price)
+                    ->where('price', '<=', $request->to_price)
+                    ->where('category_id', '=', $request->category)
+                    ->with('category')->get();
+            }
+            if ($request->sortBy == 4) {
+                $gifts = Gift::orderBy('price', 'DESC')
+                    ->where('price', '>=', $request->from_price)
+                    ->where('price', '<=', $request->to_price)
+                    ->where('category_id', '=', $request->category)
+                    ->with('category')->get();
+            }
+        } elseif ($request->name) {
+            $gifts = Gift::where('name_' . app()->getLocale(), 'LIKE', '%' . $request->name . '%')
+                ->with('category')->get();
+        } else {
+            $gifts = Gift::with('category')->get();
+        }
+        $genders = Gender::all();
+        return view('gifts.index', ['AllGifts' => $gifts, 'categories' => $categories, 'genders' => $genders]);//,'categories'=>$categories
     }
 
 
@@ -35,32 +133,29 @@ class GiftController extends Controller
 
     public function store(Request $request, Gift $gift)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'content' => 'required',
+        $validate = $request->validate([
+            'name_en' => 'required|max:255',
+            'name_ru' => 'required|max:255',
+            'name_kz' => 'required|max:255',
+            'content_en' => 'required',
+            'content_ru' => 'required',
+            'content_kz' => 'required',
             'price' => 'required|numeric',
-            'image' => 'mimes:jpg,png,jpeg,gif',
+            'image' => 'required|mimes:jpg,png,jpeg,gif',
             'category_id' => 'required|numeric|exists:categories,id'
         ]);
-        $imageName = "default.jpg";
         if ($request->hasFile('image')) {
-            $imageName = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('public/images/gifts', $imageName);
+            $fileName = time() . $request->file('image')->getClientOriginalName();
+            $image_path = $request->file('image')->storeAs('gifts', $fileName, 'public');
+            $validate['image'] = '/storage/' . $image_path;
         }
-
-
-        Auth::user()->gifts()->create([
-            'name' => $request->input('name'),
-            'content' => $request->input('content'),
-            'price' => $request->input('price'),
-            'image' => $imageName,
-            'category_id' => $request->input('category_id'),
-        ]);
-        return redirect()->route('adm.users.gifts')->with('message', 'gift saved');
+        Auth::user()->gifts()->create($validate);
+        return redirect()->route('adm.users.gifts')->with('message', __('session.gift saved'));
     }
 
     public function show(Gift $gift)
     {
+        $genders = Gender::all();
         $myRating = 0;
         $giftLikee = false;
         if (Auth::check()) {
@@ -98,7 +193,8 @@ class GiftController extends Controller
             'myRating' => $myRating,
             'avg' => $avgRating,
             'like' => $giftLikee,
-            'count' => $sumLike]);
+            'count' => $sumLike,
+            'genders' => $genders]);
     }
 
 
@@ -114,20 +210,30 @@ class GiftController extends Controller
     {
         $this->authorize('update', $gift);
         $validate = $request->validate([
-            'name' => 'required|max:255',
-            'content' => 'required',
+            'name_en' => 'required|max:255',
+            'name_ru' => 'required|max:255',
+            'name_kz' => 'required|max:255',
+            'content_en' => 'required',
+            'content_ru' => 'required',
+            'content_kz' => 'required',
             'price' => 'required|numeric',
+            'image' => 'required|mimes:jpg,png,jpeg,gif',
             'category_id' => 'required|numeric|exists:categories,id'
         ]);
+        if ($request->hasFile('image')) {
+            $fileName = time() . $request->file('image')->getClientOriginalName();
+            $image_path = $request->file('image')->storeAs('gifts', $fileName, 'public');
+            $validate['image'] = '/storage/' . $image_path;
+        }
         $gift->update($validate);
-        return redirect()->route('gift.index')->with('message', 'gift successfully changed');
+        return redirect()->route('gift.index')->with('message', __('session.gift successfully changed'));
     }
 
     public function destroy(Gift $gift)
     {
         $this->authorize('delete', $gift);
         $gift->delete();
-        return redirect()->route('gift.index')->with('message', 'gift successfully deleted');
+        return redirect()->route('gift.index')->with('message', __('session.gift successfully deleted'));
     }
 
     public function rate(Request $request, Gift $gift)
@@ -159,6 +265,7 @@ class GiftController extends Controller
 
     public function like(Request $request, Gift $gift)
     {
+//        dd($request);
         $validate = $request->validate([
             'like' => 'required'
         ]);
@@ -170,5 +277,20 @@ class GiftController extends Controller
 
         }
         return back();
+    }
+
+    public function selected()
+    {
+        $bool = false;
+        $selecteds = Auth::user()->giftsLike()->where('like', true)->get();
+        foreach ($selecteds as $selected) {
+            if ($selected) {
+                $bool = true;
+            }
+        }
+        if ($bool) {
+            return view('gifts.selected', ['selecteds' => $selecteds]);
+        }
+        return view('gifts.selected');
     }
 }

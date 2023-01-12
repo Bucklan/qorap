@@ -2,7 +2,7 @@
 return [
     'login'=>'Login me',
     'register'=>'register me',
-    'Gifts' => 'gifts',
+    'Gifts' => 'Gifts',
     'for him' => 'for him',
     'for her' => 'for her',
     'for animals' => 'for animals',
@@ -13,6 +13,11 @@ return [
     'comments' => 'comments',
     'views' => 'views',
     'likes' => 'likes',
-    'q' => '',
-    'r' => '',
+    'Admin page' => 'Admin page',
+    'User page' => 'User page',
+    'searchplaceholder' => 'What are you looking for?',
+    'profile' => 'Profile',
+    'not rated' => 'Not rated',
+    'category' => 'Category'
+
 ];

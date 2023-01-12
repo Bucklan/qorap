@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained();
-            $table->text('image');
+            $table->text('image')->default('/storage/default.jpg');
             $table->boolean("is_partner")->default(false);
             $table->timestamps();
         });

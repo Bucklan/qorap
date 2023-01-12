@@ -23,7 +23,10 @@ class User extends Authenticatable
         'password',
         'image',
         'role_id',
-        'is_active'
+        'is_active',
+        'gender_id',
+        'my_balance',
+
     ];
 
     /**
@@ -48,6 +51,9 @@ class User extends Authenticatable
     public function gifts()
     {
         return $this->hasMany(Gift::class);
+    }
+    public function gender(){
+        return $this->belongsTo(Gender::class);
     }
 
     public function giftsRated()

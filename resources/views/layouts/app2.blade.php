@@ -14,29 +14,26 @@
             <!-- BEGIN: Breadcrumb -->
             <nav aria-label="breadcrumb" class="-intro-x h-full mr-auto">
                 <ol class="breadcrumb breadcrumb-light">
-                    <li class="breadcrumb-item"><a href="#">{{ __('messages.Main_page') }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"></li>
+                    <div class="intro-x dropdown w-8 h-8">
+                        <div class="dropdown-toggle w-8 h-8 rounded-full"
+                             role="button" aria-expanded="false" data-tw-toggle="dropdown">
+                            {{config('app.languages')[app()->getLocale()]}}
+                        </div>
+                        <div class="dropdown-menu w-56">
+                            <ul class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
+                                @foreach(config('app.languages') as $ln => $languages)
+                                    <li class="p-2">
+                                        <a href="{{route('switch.lang',$ln)}}" class="dropdown-item hover:bg-white/5">{{$languages}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
                 </ol>
             </nav>
             <!-- END: Breadcrumb -->
             <!-- BEGIN: Search -->
-            <div class="intro-x relative ml-xl-n5">
-                <div class="intro-x dropdown w-8 h-8">
-                    <div class="dropdown-toggle w-8 h-8 rounded-full"
-                         role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                        {{config('app.languages')[app()->getLocale()]}}
-                    </div>
-                    <div class="dropdown-menu w-56">
-                        <ul class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
-                           @foreach(config('app.languages') as $ln => $languages)
-                            <li class="p-2">
-                                <a href="{{route('switch.lang',$ln)}}" class="dropdown-item hover:bg-white/5">{{$languages}}</a>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <!-- END: Search -->
             <!-- BEGIN: Account Menu -->
             <div class="intro-x dropdown w-8 h-8">

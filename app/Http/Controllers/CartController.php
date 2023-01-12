@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gift;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,11 +11,26 @@ class CartController extends Controller
 {
     public function buy()
     {
-        $ids = Auth::user()->giftsWithStatus('in_cart')->allRelatedIds();
-        foreach ($ids as $id) {
-            Auth::user()->giftsWithStatus('in_cart')->updateExistingPivot($id, ['status' => 'ordered']);
+        $bool = false;
+        $price = 0;
+        $qwert = Auth::user()->giftsWithStatus('in_cart')->get();
+        foreach ($qwert as $q) {
+            $price += $q->pivot->number * $q->price;
         }
-        return back();
+        foreach ($qwert as $q) {
+            if ($q->pivot->number != 0 && $price <= Auth::user()->my_balance) {
+                $bool = true;
+            }
+        }
+        if ($bool) {
+            $ids = Auth::user()->giftsWithStatus('in_cart')->allRelatedIds();
+            foreach ($ids as $id) {
+                Auth::user()->giftsWithStatus('in_cart')->updateExistingPivot($id, ['status' => 'ordered']);
+            }
+            Auth::user()->update(['my_balance' => Auth::user()->my_balance - $price]);
+            return back()->with('message', __('cart.your carts successfully sended'));
+        }
+        return back()->withErrors(__('you don`t have enough money'));
 
     }
 
@@ -25,28 +41,33 @@ class CartController extends Controller
         for ($i = 0; $i < count($giftsIsNull); $i++) {
             if ($giftsIsNull[$i]->pivot->number <= 0 && $giftsIsNull[$i] != null) {
                 $this->deleteFromCart($giftsIsNull[$i]);
+                return back();
             }
+        }
+        $total = 0;
+        for ($i = 0; $i < count($giftsInCart); $i++) {
+            $total = $total + $giftsInCart[$i]->price * $giftsInCart[$i]->pivot->number;
         }
         for ($i = 0; $i < count($giftsInCart); $i++) {
-            if ($giftsInCart[$i] == null) {
-                return view('cart.index',['giftsInNull'=> true]);
-            } else {
-                return view('cart.index', ['giftsInCart' => $giftsInCart]);
+            if ($giftsInCart[$i]) {
+                return view('cart.index', ['giftsInCart' => $giftsInCart, 'total' => $total]);
             }
         }
+        return view('cart.index', ['giftsInNull' => true]);
     }
 
     public function putToCart(Gift $gift)
     {
         $giftsInCart = Auth::user()->giftsWithStatus('in_cart')->where('gift_id', $gift->id)->first();
         if ($giftsInCart != null)
-            Auth::user()->giftsWithStatus('in_cart')->updateExistingPivot($gift->id,
-                ['number' => $giftsInCart->pivot->number + 1]);
+            Auth::user()->giftsWithStatus('in_cart')
+                ->updateExistingPivot($gift->id,
+                    ['number' => $giftsInCart->pivot->number + 1]);
         else
-            Auth::user()->giftsWithStatus('in_cart')->attach($gift->id,
-                ['number' => 1]);
+            Auth::user()->giftsWithStatus('in_cart')
+                ->attach($gift->id, ['number' => 1]);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.index')->with('message', __('session.cart to successfully added'));
     }
 
     public function removecart(Gift $gift)
@@ -59,7 +80,7 @@ class CartController extends Controller
             Auth::user()->giftsWithStatus('in_cart')->attach($gift->id,
                 ['number' => 1]);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.index')->with('message', __('session.cart to successfully deleted'));
     }
 
     public function deleteFromCart(Gift $gift)
@@ -68,14 +89,15 @@ class CartController extends Controller
             ->where('gift_id', $gift->id)->first();
         if ($giftsBought != null)
             Auth::user()->giftsWithStatus('in_cart')->detach($gift->id);
-        return back();
+        return back()->with('message', __('session.cart to successfully deleted'));
     }
-//    public function deleteallcart()
-//    {
-//        $giftsBought = Auth::user()->giftsWithStatus('in_cart')->get();
-//        if ($giftsBought != null)
-//            Auth::user()->giftsWithStatus('in_cart')->detach();
-//    return redirect()->route('cart.index');
-//    }
+
+    public function deleteallcart()
+    {
+        $giftsBought = Auth::user()->giftsWithStatus('in_cart')->get();
+        if ($giftsBought != null)
+            Auth::user()->giftsWithStatus('in_cart')->detach();
+        return redirect()->route('cart.index')->with('message', 'session.cart to successfully deleted');
+    }
 
 }

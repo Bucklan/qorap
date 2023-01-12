@@ -17,7 +17,7 @@ class UserController extends Controller
     public function showPartners(Partner $partner)
     {
         $partners = Partner::where('id',$partner->id)->first();
-        return view('admin.moderator.showPartners',['partner'=>$partners]);
+        return view('admin.moderator.partners.showPartners',['partner'=>$partners]);
     }
 
     public function confirm(Cart $cart)
@@ -51,7 +51,7 @@ class UserController extends Controller
     public function partners()
     {
         $partners = User::with('partner')->get();
-        return view('admin.partners', ['partners' => $partners]);
+        return view('admin.moderator.partners.partners', ['partners' => $partners]);
     }
 
     public function gifts(Request $request)

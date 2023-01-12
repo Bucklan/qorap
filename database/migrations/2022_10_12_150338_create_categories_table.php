@@ -15,15 +15,13 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            //'name','parent_id','gender','user_id'
+            $table->string('name_kz')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('name_ru')->nullable();
+            $table->text('image')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
-            $table->text('gender')->nullable();
-
-//            $table->unsignedInteger('user_id');
-//            $table->foreign('user_id')->references('id')->on('users');
-
             $table->foreignId('user_id')->nullable()->constrained();
+
 
             $table->timestamps();
         });
