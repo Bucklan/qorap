@@ -7,7 +7,8 @@ use App\Models\Category;
 use App\Models\Partner;
 use App\Models\Role;
 use App\Models\User;
-use http\Url;
+use Illuminate\Auth\Authenticatable;
+//use http\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,13 @@ class PartnerContoller extends Controller
 
     public function store(Request $request)
     {
-        $user_id = Auth::user()->id;
+        $bool = true;
+        $gg = Partner::get();
+        foreach ($gg as $ggs) {
+            if ($ggs->user_id == Auth::user()->id) {
+                $bool = false;
+            }
+        }
         $request->validate([
             'name_company' => 'required|max:255',
             'image' => 'required|mimes:png,jpg',
@@ -36,13 +43,15 @@ class PartnerContoller extends Controller
             $image_path = $request->file('image')->storeAs('gifts', $fileName, 'public');
         }
 
-
-        Auth::user()->partner()->create([
-            'user_id' => $user_id,
-            'name_company' => $request->input('name_company'),
-            'image' => '/storage/' . $image_path,
-        ]);
-        return redirect()->route('gift.index')->with('message', 'Your request has been sent successfully');
+        if ($bool==true) {
+            Auth::user()->partner()->create([
+                'user_id' => Auth::user()->id,
+                'name_company' => $request->input('name_company'),
+                'image' => '/storage/' . $image_path,
+            ]);
+            return redirect()->route('gift.index')->with('message', 'Your request has been sent successfully');
+        }
+        return back()->withErrors('Sizde uzhe market bar!');
     }
 
     public function update(Partner $partner)
@@ -58,7 +67,7 @@ class PartnerContoller extends Controller
 
     public function destroy(Partner $partner)
     {
-    $partner->delete();
-    return back();
+        $partner->delete();
+        return back();
     }
 }

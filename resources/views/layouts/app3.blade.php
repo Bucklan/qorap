@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-auto hdr-logo">
                         <a href="{{url('/')}}" class="logo">
-                            <img srcset="{{asset('images/fixbox.png')}}" width="50" height="50" alt="Logo">
+                            <img src="{{asset('images/fixbox.png')}}" width="50" height="50" alt="Logo">
                         </a>
 
                     </div>
@@ -106,7 +106,7 @@
                                     <div class="dropdn-content">
                                         <div class="container">
                                             <form method="get" action="{{route('gifts.search')}}" class="search search-off-popular">
-                                                <input name="name" type="text" class="search-input input-empty"
+                                                <input label="null" name="name"  type="text" class="search-input input-empty"
                                                        placeholder="{{__('messages.searchplaceholder')}}">
                                                 <button class="search-button"><i class="icon-search"></i>
                                                 </button>
@@ -120,7 +120,7 @@
                             <!-- /Header Search -->
                             <!-- Header Account -->
                             <div class="dropdn dropdn_account dropdn_fullheight">
-                                <a href="#" @auth title="My Balance: {{\Illuminate\Support\Facades\Auth::user()->my_balance}} KZT" @endauth class="dropdn-link js-dropdn-link js-dropdn-link only-icon"
+                                <a href="#" @auth title="My Balance: {{ Auth::user()->my_balance}} KZT" @endauth class="dropdn-link js-dropdn-link js-dropdn-link only-icon"
                                    data-panel="#dropdnAccount">@guest<i
                                         class="icon-user"></i>@else{{ Auth::user()->name }}@endguest<span
                                         class="dropdn-link-txt"></span></a>
@@ -200,7 +200,7 @@
                                                         @endforeach
                                                         <div class="mmenu-col">
                                                             <h3 class="submenu-title"><a
-                                                                    href="#">Kimge</a>
+                                                                    href="#">{{__('buttons.Kimge')}}</a>
                                                             </h3>
                                                             <ul class="submenu-list">
                                                                 @foreach($genders as $gender)
@@ -346,7 +346,7 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group">
-                                <input type="text" name="email"
+                                <input label="null" type="text" name="email"
                                        class="form-control form-control--sm  @error('email') is-invalid @enderror"
                                        placeholder="{{__('login.email')}}">
                                 @error('email')
@@ -356,7 +356,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password"
+                                <input label="null" type="password" name="password"
                                        class="form-control form-control--sm @error('password') is-invalid @enderror"
                                        placeholder="{{__('login.password')}}">
                                 @error('password')
@@ -431,7 +431,7 @@
                     <div class="col-lg-4">
                         <div class="footer-block">
                             <div class="footer-logo">
-                                <a href="index.html" class="logo"><h1 class="fa-stack-1x text-white"
+                                <a href="#" class="logo"><h1 class="fa-stack-1x text-white"
                                                                       style="margin-left: 150px;margin-top: 50px">
                                         FIXBOX</h1></a>
                             </div>

@@ -18,6 +18,6 @@ return [
     'ban' => 'Ban',
     'unban' => 'unban',
     'SALE up to 70%' => 'SALE up to 70%',
-    'shop now' => 'shop noew'
-
+    'shop now' => 'shop noew',
+'Kimge' => 'Whom',
 ];

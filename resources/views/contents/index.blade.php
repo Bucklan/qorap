@@ -1,5 +1,15 @@
 @extends('layouts.app3')
 @section('content')
+    <style>
+        #holderCollectionGrid .collection-grid-2-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #464b5c
+        }
+        #holderCollectionGrid .collection-grid-2-title:hover {
+            color: #464b5c
+        }
+    </style>
     <div class="page-content">
         <div id="shopify-section-1586608150816" class="shopify-section index-section index-section--flush">
             <div class="holder fullwidth fullboxed mt-0 full-nopad">
@@ -130,16 +140,6 @@
                 </div>
                 @endforeach
             </div>
-            <style>
-                #holderCollectionGrid .collection-grid-2-title {
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: #464b5c
-                }
-                #holderCollectionGrid .collection-grid-2-title:hover {
-                    color: #464b5c
-                }
-            </style>
         </div>
     </div>
 

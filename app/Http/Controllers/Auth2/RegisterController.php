@@ -14,7 +14,6 @@ class RegisterController extends Controller
 {
     public function create()
     {
-
         return view('auth.register', ['genders' => Gender::all()]);
     }
 
@@ -25,7 +24,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:2|confirmed',
-            'image' => 'mimes:jpg,png,jpeg,gif,webp|dimensions:min_width=16,min_height=16,max_width=100,max_height=100',
+            'image' => 'mimes:jpg,png,jpeg,gif,webp',//|dimensions:min_width=16,min_height=16,max_width=100,max_height=100
         ]);
         if ($request->hasFile('image')) {
             $fileName = time() . $request->file('image')->getClientOriginalName();
