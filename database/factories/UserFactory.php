@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\User\Role;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -31,10 +33,42 @@ class UserFactory extends Factory
      *
      * @return static
      */
-    public function unverified()
+    public function partner(): Factory
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'partner',
+                'email' => 'partner@fixbox.kz',
+                'password' => 'M5E76*^EHr3vb%Xq&KAatvKwT7Jmrsvs',
+            ];
+        })->afterCreating(function (User $user){
+            $user->assignRole(Role::PARTNER);
+        });
+    }
+
+    public function manager(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'manager',
+                'email' => 'manager@fixbox.kz',
+                'password' => 'M5E76*^EHr3vb%Xq&KAatvKwT7Jmrsvs',
+            ];
+        })->afterCreating(function (User $user){
+            $user->assignRole(Role::MANAGER);
+        });
+    }
+
+    public function admin(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'ADMIn',
+                'email' => 'admin@fixbox.kz',
+                'password' => 'M5E76*^EHr3vb%Xq&KAatvKwT7Jmrsvs',
+            ];
+        })->afterCreating(function (User $user){
+            $user->assignRole(Role::ADMIN);
+        });
     }
 }

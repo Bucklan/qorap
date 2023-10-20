@@ -3,7 +3,6 @@
 @section('title','MAIN PAGE')
 
 @section('app')
-    <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -12,7 +11,7 @@
                 <div class="sidebar-brand-icon">
                     <img src="{{asset('fixbox.png')}}" alt="" width="140" height="140">
                 </div>
-                {{--            <div class="sidebar-brand-text mx-3">{{ config('app.name', 'FixBox') }}</div>--}}
+                            <div class="sidebar-brand-text mx-3">{{ config('app.name', 'FixBox') }}</div>
             </a>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -235,7 +234,7 @@
 
                             @if($errors->any())
                                 @foreach($errors->all() as $error)
-                                    {{--                                                   <li>{{$error}}</li>--}}
+                                                                                       <li>{{$error}}</li>
                                 @endforeach
 
                             @endif

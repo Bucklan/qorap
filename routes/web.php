@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Adm\CategoryController;
-use App\Http\Controllers\Adm\CommentController;
-use App\Http\Controllers\Adm\PartnerContoller;
-use App\Http\Controllers\Adm\UserController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\PartnerContoller;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\GiftController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth2\LoginController;
-use App\Http\Controllers\Auth2\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LangController;
 
 /*
@@ -53,13 +53,14 @@ Route::middleware('auth')->group(function () {
     Route::prefix('adm')->as('adm.')->middleware('hasrole:ADMIN,MODERATOR')->group(function () {
         Route::delete('/partner/{partner}/destroy', [PartnerContoller::class, 'destroy'])->name('partner.delete');
         Route::put('/partner/{partner}/update', [PartnerContoller::class, 'update'])->name('partner.update');
-        Route::resource('genders', CategoryController::class);
         Route::get('partner/{partner}', [UserController::class, 'showPartners'])->name('partners.show');
         Route::get('partners', [UserController::class, 'partners'])->name('partners.request');
         Route::resource('categories', CategoryController::class);
         Route::get('gifts', [UserController::class, 'gifts'])->name('users.gifts');
         Route::get('/cart', [UserController::class, 'cart'])->name('cart.index');
         Route::put('/cart/{cart}/confirm', [UserController::class, 'confirm'])->name('cart.confirm');
+
+//        users
         Route::middleware('hasrole:ADMIN')->group(function () {
             Route::get('/users', [UserController::class, 'index'])->name('users.index');
             Route::get('/users/search', [UserController::class, 'index'])->name('users.search');
@@ -80,12 +81,6 @@ Route::get('/gift/gender/{gender}', [GiftController::class, 'giftByGender'])->na
 Route::resource('comments', CommentController::class);
 
 
+require_once('web/auth/register/register.php');
+require_once('web/auth/login/login.php');
 
-Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
-
-
-Route::get('/login', [LoginController::class, 'create'])->name('login.form');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

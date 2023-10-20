@@ -106,7 +106,7 @@
                                     <div class="dropdn-content">
                                         <div class="container">
                                             <form method="get" action="{{route('gifts.search')}}" class="search search-off-popular">
-                                                <input label="null" name="name"  type="text" class="search-input input-empty"
+                                                <input name="name" type="text" class="search-input input-empty"
                                                        placeholder="{{__('messages.searchplaceholder')}}">
                                                 <button class="search-button"><i class="icon-search"></i>
                                                 </button>
@@ -203,11 +203,11 @@
                                                                     href="#">{{__('buttons.Kimge')}}</a>
                                                             </h3>
                                                             <ul class="submenu-list">
-                                                                @foreach($genders as $gender)
-                                                                    <li>
-                                                                        <a href="{{route('gift.category',$gender->id)}}">{{$gender->{'gender_'.app()->getLocale()} }}</a>
-                                                                    </li>
-                                                                @endforeach
+{{--                                                                @foreach($gifts as $gender)--}}
+{{--                                                                    <li>--}}
+{{--                                                                        <a href="{{route('gift.category',$gender->id)}}">{{$gender->{'gender_'.app()->getLocale()} }}</a>--}}
+{{--                                                                    </li>--}}
+{{--                                                                @endforeach--}}
                                                             </ul>
                                                         </div>
                                                         <div class="mmenu-bottom justify-content-center">

@@ -56,16 +56,16 @@
                                     </div>
                                 </div>
                             </a>
-                            {{--                            <a href="#" target="_self" class="bnslider-slide ">--}}
-                            {{--                                <div class="bnslider-image-mobile lazyload fade-up-fast"--}}
-                            {{--                                     data-bgset="images/skins/electronics/slider/slide-electronics-03.webp"--}}
-                            {{--                                     data-sizes="auto"></div>--}}
-                            {{--                                <div class="bnslider-image lazyload fade-up-fast"--}}
-                            {{--                                     data-bgset="images/skins/electronics/slider/slide-electronics-03.webp"--}}
-                            {{--                                     data-sizes="auto"></div>--}}
-                            {{--                                <div class="bnslider-text-wrap bnslider-overlay container">--}}
-                            {{--                                </div>--}}
-                            {{--                            </a>--}}
+                                                        <a href="#" target="_self" class="bnslider-slide ">
+                                                            <div class="bnslider-image-mobile lazyload fade-up-fast"
+                                                                 data-bgset="images/skins/electronics/slider/slide-electronics-03.webp"
+                                                                 data-sizes="auto"></div>
+                                                            <div class="bnslider-image lazyload fade-up-fast"
+                                                                 data-bgset="images/skins/electronics/slider/slide-electronics-03.webp"
+                                                                 data-sizes="auto"></div>
+                                                            <div class="bnslider-text-wrap bnslider-overlay container">
+                                                            </div>
+                                                        </a>
                         </div>
                         <div class="bnslider-loader"></div>
                         <div class="bnslider-arrows d-sm-none container">
@@ -153,12 +153,12 @@
             </div>
             <div class="prd-grid-wrap position-relative">
                 <div class="prd-grid data-to-show-3 data-to-show-lg-3 data-to-show-md-2 data-to-show-sm-2 data-to-show-xs-2 js-category-grid">
-                    @for($i=count($gifts);$i>count($gifts)-6;$i--)
+                    @foreach($gifts as $gift)
                     <div class="prd prd-hor ">
                         <div class="prd-inside">
                             <div class="prd-img-area">
-                                <a href="{{route('gift.show',$gifts[$i-1]->id)}}" class="prd-img image-hover-scale image-container">
-                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{asset($gifts[$i-1]->image)}}" class="js-prd-img lazyload">
+                                <a href="{{route('gift.show',$gift->id)}}" class="prd-img image-hover-scale image-container">
+                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{asset($gift->image)}}" class="js-prd-img lazyload">
                                     <div class="foxic-loader"></div>
                                     <div class="prd-big-circle-labels">
                                         <div class="label-new"><span>{{__('home.New')}}</span></div>
@@ -167,7 +167,7 @@
                                 <div class="prd-circle-labels">
                                     <a href="#" class="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i class="icon-heart-stroke"></i></a>
                                     <a href="#" class="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i class="icon-heart-hover"></i></a>
-                                    <a href="{{route('gift.show',$gifts[$i-1]->id)}}" class="circle-label-qview">
+                                    <a href="{{route('gift.show',$gift->id)}}" class="circle-label-qview">
                                         <i class="icon-eye"></i><span>{{__('buttons.details')}}</span></a>
                                 </div>
 
@@ -175,18 +175,18 @@
                             <div class="prd-info">
                                 <div class="prd-info-wrap">
                                     <div class="prd-info-top">
-{{--                                        <div class="prd-rating">--}}
-{{--                                            <i class="icon-star-fill fill">--}}
-{{--                                            </i>--}}
-{{--                                            <i class="icon-star-fill fill"></i>--}}
-{{--                                            <i class="icon-star-fill fill"></i>--}}
-{{--                                            <i class="icon-star-fill fill"></i>--}}
-{{--                                            <i class="icon-star-fill fill"></i>--}}
-{{--                                        </div>--}}
+                                        <div class="prd-rating">
+                                            <i class="icon-star-fill fill">
+                                            </i>
+                                            <i class="icon-star-fill fill"></i>
+                                            <i class="icon-star-fill fill"></i>
+                                            <i class="icon-star-fill fill"></i>
+                                            <i class="icon-star-fill fill"></i>
+                                        </div>
                                     </div>
-                                    <h2 class="prd-title"><a href="{{route('gift.show',$gifts[$i-1]->id)}}">{{$gifts[$i-1]->{'name_'.app()->getLocale()} }}</a></h2>
+                                    <h2 class="prd-title"><a href="{{route('gift.show',$gift->id)}}">{{$gift->{'name_'.app()->getLocale()} }}</a></h2>
                                     <div class="prd-description">
-                                        {{$gifts[$i-1]->{'content_'.app()->getLocale()} }}
+                                        {{$gift->{'content_'.app()->getLocale()} }}
                                     </div>
                                 </div>
                                 <div class="prd-hovers">
@@ -196,12 +196,12 @@
                                     </div>
                                     <div class="prd-price">
 
-                                        <div class="price-new">{{$gifts[$i-1]->price }} KZT</div>
+                                        <div class="price-new">{{$gift->price }} KZT</div>
                                     </div>
                                     <div class="prd-action">
 
                                         <div class="prd-action-left">
-                                            <form action="{{route('cart.puttocart',$gifts[$i-1]->id)}}" method="post">
+                                            <form action="{{route('cart.puttocart',$gift->id)}}" method="post">
                                                 @csrf
                                                 <button class="btn js-prd-addtocart">
                                                     {{__('buttons.addtocart')}}
@@ -210,7 +210,7 @@
                                         </div>
                                         <div class="prd-action-right">
                                             <div class="prd-action-right-inside">
-                                                <div class="prd-tag"><a href="#">{{$gifts[$i-1]->user->partner->name_company}}</a></div>
+                                                <div class="prd-tag"><a href="#">{{$gift->user->partner->name_company}}</a></div>
                                                 <div class="prd-rating"><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i><i class="icon-star-fill fill"></i></div>
                                             </div>
                                         </div>
@@ -219,7 +219,7 @@
                             </div>
                         </div>
                     </div>
-                    @endfor
+                    @endforeach
                     </div>
                 </div>
             </div>
@@ -233,13 +233,13 @@
                 <h2 class="h2-style">{{__('home.OUR PARTNERS')}}</h2>
             </div>
             <ul class="brand-carousel js-brand-carousel slick-arrows-aside-simple" data-slick='{"slidesToShow": 5,  "responsive": [{"breakpoint": 992,"settings": {"slidesToShow": 4 }},{"breakpoint": 480,"settings": {"slidesToShow": 2 }}]}'>
-                @foreach($partners as $partner)
-                <li>
-                    <div>
-                        <img class="lazyload lazypreload" data-src="{{$partner->image}}" data-sizes="auto" alt="Brand">
-                    </div>
-                </li>
-                @endforeach
+{{--                @foreach($partners as $partner)--}}
+{{--                <li>--}}
+{{--                    <div>--}}
+{{--                        <img class="lazyload lazypreload" data-src="{{$partner->image}}" data-sizes="auto" alt="Brand">--}}
+{{--                    </div>--}}
+{{--                </li>--}}
+{{--                @endforeach--}}
             </ul>
         </div>
     </div>

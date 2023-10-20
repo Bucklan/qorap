@@ -30,13 +30,11 @@ class GiftController extends Controller
     public function home()
     {
         $categories = Category::whereNull('parent_id')->with('categories')->get();
-        $genders = Gender::all();
-        $gifts = Gift::all();
+        $gifts = Gift::latest()->take(6)->get();
         $partners = Partner::where('is_partner', true)->get();
 
         return view('contents.index', ['gifts' => $gifts,
             'categories' => $categories,
-            'genders' => $genders,
             'partners' => $partners
         ]);//,'categories'=>$categories
 
