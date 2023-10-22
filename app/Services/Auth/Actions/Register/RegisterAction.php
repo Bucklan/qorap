@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterAction implements Register
 {
-public function execute(RegisterDto $dto): array
-{
+    public function execute(RegisterDto $dto): array
+    {
+        dd($dto);
 //    if ($request->hasFile('image')) {
 //        $fileName = time() . $request->file('image')->getClientOriginalName();
 //        $image_path = $request->file('image')->storeAs('users', $fileName, 'public');
@@ -24,8 +25,18 @@ public function execute(RegisterDto $dto): array
 //    ]);
 //    $user->assignRole(\App\Enums\User\Role::USER);
 //    Auth::login($user);
-}
-public function checkRegistered(){}
-    public function ensureThatEmailIsNotRegisteredAndDeleted(){}
-    public function createUser(){}
+    }
+
+    public function createUser(RegisterDto $dto)
+    {
+    }
+
+    public function checkRegistered(Register $dto)
+    {
+
+    }
+
+    public function ensureThatEmailIsNotRegisteredAndDeleted(RegisterDto $dto, User $user)
+    {
+    }
 }

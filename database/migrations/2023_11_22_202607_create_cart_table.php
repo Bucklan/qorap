@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('my_balance')->default(0);
+        Schema::create('cart', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('gift_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->unsignedInteger('quantity')->default(1);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-           $table->dropColumn('my_balance');
-        });
+        Schema::dropIfExists('cart');
     }
 };

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->tinyInteger('gender')->nullable()->comment('Пол');
+            $table->integer('year_of_birth')->nullable()->comment('Год рождения');
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean("is_active")->default(true);
-            $table->text('image')->default('/storage/users/default.jpg');
+            $table->dateTime('login_blocked_at')->nullable()->comment('Время блокировки');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
