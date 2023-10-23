@@ -45,13 +45,20 @@
                                 <div class="form-group">
                                     <input type="password" name="password_confirmation" class="form-control" placeholder="{{__('register.repassword')}}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="image" class="form-label">{{__('cart.Image')}}</label>
-                                    <input class="form-control @error('image') is-invalid @enderror" id="image" type="file"
-                                           accept="image/png, image/gif, image/jpeg" name="image">
 
-                                    @error('image')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                <div class="form-group">
+                                    <fieldset name="gender">
+                                        <div class="form-group">
+                                            <input type="radio" class="form-control" placeholder="Female">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="radio" class="form-control" placeholder="Male">
+                                        </div>
+                                    </fieldset>
+                                    @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                            </span>
                                     @enderror
                                 </div>
                                 <div class="clearfix">

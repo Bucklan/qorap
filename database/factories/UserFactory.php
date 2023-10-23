@@ -28,23 +28,7 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return static
-     */
-    public function partner(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'name' => 'partner',
-                'email' => 'partner@fixbox.kz',
-                'password' => 'M5E76*^EHr3vb%Xq&KAatvKwT7Jmrsvs',
-            ];
-        })->afterCreating(function (User $user){
-            $user->assignRole(Role::PARTNER);
-        });
-    }
+
 
     public function manager(): Factory
     {
