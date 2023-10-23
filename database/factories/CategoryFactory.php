@@ -17,12 +17,12 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name_kz' => '',
-            'name_kz' => '',
-            'name_kz' => '',
-            'image' => '',
-            'parent_id' => '',
-            'user_id' => '',
+//            'name_kz' => '',
+//            'name_kz' => '',
+//            'name_kz' => '',
+//            'image' => '',
+//            'parent_id' => '',
+//            'user_id' => '',
         ];
     }
 }

@@ -67,10 +67,6 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
     public function giftsBought(){
         return $this->belongsToMany(Gift::class,'cart')
             ->withTimestamps()
@@ -81,8 +77,5 @@ class User extends Authenticatable
             ->wherePivot('status',$status)
             ->withTimestamps()
             ->withPivot('number','status');
-    }
-    public function partner(){
-        return $this->hasOne(Partner::class);
     }
 }

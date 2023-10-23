@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client\Open;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
-use App\Models\Gift;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class CommentController extends Controller
 {

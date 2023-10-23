@@ -1,31 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client\Open;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gender;
 use App\Models\Gift;
 use App\Models\Partner;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GiftController extends Controller
 {
     //
-    public function my_balance(Request $request)
-    {
-        $validated = $request->validate([
-            'price' => 'required|numeric'
-        ]);
-        Auth::user()->update(['my_balance' => Auth::user()->my_balance + $validated['price']]);
-        return redirect()->route('gift.index')->with('message', __('your application has been accepted'));
-    }
 
-    public function Getbalance()
-    {
-        return view('gifts.balance');
-    }
 
     public function home()
     {
