@@ -7,17 +7,16 @@ use App\Models\Gender;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\Auth\Contracts\Register;
-use App\Services\Auth\Dto\RegisterDtoFactory;
+use App\Services\Auth\Dto\Register\RegisterDtoFactory;
 use App\Services\Auth\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
     public function create()
     {
-        return view('auth.register', ['genders' => Gender::all()]);
+        return view('auth.register');
     }
 
     public function register(RegisterRequest $request)

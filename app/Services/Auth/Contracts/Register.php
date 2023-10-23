@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth\Contracts;
 
-use App\Services\Auth\Dto\RegisterDto;
+use App\Services\Auth\Dto\Register\RegisterDto;
 
 interface Register
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Auth\Dto;
+namespace App\Services\Auth\Dto\Register;
 
 use App\Services\Auth\Requests\RegisterRequest;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
@@ -23,8 +23,9 @@ class RegisterDtoFactory
         return new RegisterDto([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password']
-
+            'password' => $data['password'],
+            'gender' => $data['gender'],
+            'year_of_birth' => $data['year_of_birth'],
         ]);
     }
 }

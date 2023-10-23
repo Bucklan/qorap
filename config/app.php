@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\RepositoryServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -200,6 +201,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Services\Auth\Providers\ActionServiceProvider::class,
+        RepositoryServiceProvider::class,
+
 
     ],
 

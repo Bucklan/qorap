@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Auth\Dto;
+namespace App\Services\Auth\Dto\Register;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
