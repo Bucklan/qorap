@@ -16,6 +16,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     return $this->model
         ->query()
+        ->withTrashed()
         ->where('email', $email)
         ->exists();
 }

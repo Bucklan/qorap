@@ -28,7 +28,6 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()
                 ->constrained();
             $table->foreignId('company_id')->nullable()->constrained();
-
             $table->timestamps();
         });
     }
