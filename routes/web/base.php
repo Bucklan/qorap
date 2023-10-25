@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LangController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,12 +50,13 @@ Route::middleware('auth')->group(function () {
 //    });
 });
 
-
+require_once('client/base.php');
+require_once('admin/base.php');
 Route::middleware('guest')->group(function () {
     require_once('auth/base.php');
 });
 
 Route::middleware('auth')->group(function (){
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
