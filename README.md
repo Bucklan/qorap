@@ -1,14 +1,11 @@
-<h1>Laravel + PostgreSQL <br>
- Marketplace, Music app, etc.<br>
-- Авторизация <br>
-- Policy, Permission <br>
-- CRM
-- Middleware <br>
-- CRUD <br>
-- REST API <br>
-- selected, like, rating, comment, chat, partner, ban user, roles, cart, category(tree) <br>
-- validation <br>
-- languages <br>
-- storage <br>
-- session <br>
-- ManyToMany, OneToOne,OneToMany</h1>
+<h3>
+    Step 1
+</h3>
+<p>composer install</p>
+<h3>
+    Step 2
+</h3>
+<p> db connection and cp .env.example .env <h4>Then</h4> php artisan migrate:fresh --seed</p>
+<h3>
+    Step 3
+</h3>
