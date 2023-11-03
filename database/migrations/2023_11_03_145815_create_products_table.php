@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gifts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->json('name');
             $table->json('description')
                 ->nullable()
                 ->comment('Описание');
+            $table->json('short_description')
+                ->nullable()
+                ->comment('Описание');
             $table->integer('quantity')
                 ->default(0)
                 ->comment('Количество');
-            $table->tinyInteger('type');//nullable
+            $table->tinyInteger('type')->nullable();//nullable
             $table->unsignedInteger('price');
             $table->unsignedInteger('old_price')->nullable();
             $table->foreignId('category_id')->nullable()
@@ -39,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gifts');
+        Schema::dropIfExists('products');
     }
 };

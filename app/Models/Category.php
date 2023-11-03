@@ -4,21 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations as Relations;
 
 class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','parent_id','gender','user_id'];
+    protected $guarded = ['id'];
 
-    public function gifts(){
-        return $this->hasMany(Gift::class);
+    public function parent(): Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 
-    public function categories(){
+    public function children(): Relations\HasMany
+    {
         return $this->hasMany(Category::class, 'parent_id');
-    }
-    public function gender(){
-        return $this->belongsTo(Gender::class);
     }
 }
