@@ -20,7 +20,7 @@ return new class extends Migration
                 ->nullable()
                 ->constrained();
 
-            $table->foreignId('gift_id')
+            $table->foreignId('product_id')
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();

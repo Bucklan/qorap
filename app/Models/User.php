@@ -29,10 +29,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements \Spatie\MediaLibrary\HasMedia
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,
-        SoftDeletes, InteractsWithMedia, HasRoles;
+        SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.

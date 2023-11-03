@@ -17,7 +17,7 @@ class UserStatusMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->is_active == false) {
+        if (Auth::check() && Auth::user()->login_blocked_at != null) {
             Auth::logout();
             return redirect()->route('login.form')->withErrors('Sorry,You are banned!');
         }

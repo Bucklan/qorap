@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('rating', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('gift_id')->constrained();
+            $table->foreignId('product_id')->constrained();
             $table->unsignedTinyInteger('rating');
             $table->timestamps();
         });
