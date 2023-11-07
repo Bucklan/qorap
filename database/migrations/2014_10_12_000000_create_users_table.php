@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->text('phone')->nullable()->unique();
             $table->string('password');
             $table->tinyInteger('gender')->nullable()->comment('Пол');
             $table->integer('year_of_birth')->nullable()->comment('Год рождения');
             $table->timestamp('email_verified_at')->nullable();
-            $table->dateTime('login_blocked_at')->nullable()->comment('Время блокировки');
-            $table->dateTime('password_changed_at')->nullable()->comment('Последнее изменение пароля');
+            $table->timestamp('login_blocked_at')->nullable()->comment('Время блокировки');
+            $table->timestamp('password_changed_at')->nullable()->comment('Последнее изменение пароля');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

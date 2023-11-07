@@ -10,7 +10,14 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = [
+        'name',
+        'parent_id',
+    ];
+
+    protected $casts = [
+
+    ];
 
     public function parent(): Relations\BelongsTo
     {

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+
+    protected $table = [
+        'name',
+        'phone',
+        'number_of_stores',
+        'social_link',
+        'status',
+        'user_id',
+        'city_id',
+    ];
 }

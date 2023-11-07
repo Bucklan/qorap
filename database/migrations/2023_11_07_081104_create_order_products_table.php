@@ -12,15 +12,17 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained('orders')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('name');
-            $table->string('phone')->nullable();
-            $table->unsignedTinyInteger('number_of_stores')->default(1);
-            $table->json('social_link')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->foreignId('user_id')->nullable()->constrained('users');
-            $table->foreignId('city_id')->nullable()->constrained('cities');
+            $table->unsignedInteger('quantity');
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('order_products');
     }
 };

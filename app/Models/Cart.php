@@ -11,15 +11,11 @@ class Cart extends Pivot
     use HasFactory;
 
     protected $table = 'cart';
-    protected $fillable = ['gift_id', 'user_id', 'status', 'numberic'];
-
-    public function gift()
-    {
-        return $this->belongsTo(Gift::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = [
+        'product_id',
+        'user_id',
+        'city_id',
+        'quantity',
+        'price',
+    ];
 }
