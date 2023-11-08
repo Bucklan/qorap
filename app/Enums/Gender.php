@@ -3,9 +3,19 @@
 namespace App\Enums;
 
 
-
-enum Gender
+enum Gender: int
 {
-    const MALE = '1';
-    const FEMALE = '2';
+    case MALE = 1;
+    case FEMALE = 2;
+    case UNKNOWN = 3;
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::MALE => 'Male',
+            self::FEMALE => 'Female',
+            self::UNKNOWN => 'Unknown',
+        };
+    }
+
 }

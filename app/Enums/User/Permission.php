@@ -2,14 +2,18 @@
 
 namespace App\Enums\User;
 
-enum Permission
+enum Permission: string
 {
-    const DASHBOARD = 'DASHBOARD';
-    const ORDERS = 'ORDERS';
-    const CLIENTS = 'CLIENTS';
-    const MANAGERS = 'MANAGERS';
-    const CATEGORIES = 'CATEGORIES';
-    const PRODUCTS = 'PRODUCTS';
-    const CITIES = 'CITIES';
-    const DELIVERIES = 'DELIVERIES';
+    case CITIES = 'Cities';
+    case ADDRESSES = 'Addresses';
+    case COMPANIES = 'Companies';
+    case CATEGORIES = 'Categories';
+    case PRODUCTS = 'Products';
+    case COLORS = 'Colors';
+    case ORDERS = 'Orders';
+    case CART = 'Carts';
+    case DASHBOARD = 'Dashboard';
+    case CLIENTS = 'Clients';
+    case MANAGERS = 'Managers';
+    case ProductStatuses = 'ProductStatuses';
 }

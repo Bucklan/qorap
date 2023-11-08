@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Liveware;
 
 use App\Livewire\Forms\ProductForm;
 use App\Models\Product;
@@ -9,9 +9,7 @@ use Livewire\Component;
 class EditProduct extends Component
 {
     public ProductForm $form;
-
-    public function mount(Product $product): void
-    {
+    public function mount(Product $product){
         $this->form->setProduct($product);
     }
 
@@ -21,9 +19,8 @@ class EditProduct extends Component
 
         $this->form->update();
     }
-
     public function render()
     {
-        return view('livewire.edit-post');
+        return view('liveware.edit-product');
     }
 }

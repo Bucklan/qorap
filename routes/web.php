@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 //Route::view('login','livewire.auth.home');
 Route::view('product/create', 'products.create');
+Route::get('product/{product}/edit', \App\Liveware\EditProduct::class);
 
 
 
