@@ -1,18 +1,19 @@
-<html>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible"
-          content="ie=edge">
-    <title>
-        Document</title>
+          content="width=device-width, initial-scale=1.0">
+{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
+    <title></title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     @livewireStyles
 </head>
 <body>
-@yield('content')
-@livewireScripts
+<main>
+    {{ $slot }}
+</main>
 </body>
+<script src="{{ asset('js/app.js') }}"></script>
+@livewireScripts
 </html>

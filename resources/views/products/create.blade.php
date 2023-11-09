@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts5f.app')
 @section('content')
     <div class="container-lg">
         <div class="flex">

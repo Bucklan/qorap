@@ -15,5 +15,5 @@ enum Permission: string
     case DASHBOARD = 'Dashboard';
     case CLIENTS = 'Clients';
     case MANAGERS = 'Managers';
-    case ProductStatuses = 'ProductStatuses';
+    case ProductStatuses = 'ProductStatuses';   
 }

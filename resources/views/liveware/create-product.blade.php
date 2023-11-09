@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <div>
     @if($success)
         <span class="block mb-4 text-green-500">Post saved successfully.</span>
@@ -6,7 +8,6 @@
         <div>
             <label for="title" class="block font-medium text-sm text-gray-700">Title</label>
             <input id="title" wire:model="form.title" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="text" />
-            <x-input-form class="" ></x-input-form>
             @error('title')
             <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
             @enderror
@@ -25,3 +26,4 @@
         </button>
     </form>
 </div>
+@endsection

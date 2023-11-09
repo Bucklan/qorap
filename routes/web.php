@@ -1,5 +1,6 @@
 <?php
 
+use App\Liveware as Liveware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/register',Liveware\RegisterForm::class);
+Route::get('/login',Liveware\LoginForm::class);
 //Route::view('login','livewire.auth.home');
-Route::view('product/create', 'products.create');
-Route::get('product/{product}/edit', \App\Liveware\EditProduct::class);
+//Route::view('product/create', 'products.create');
+//Route::get('product/{product}/edit', \App\Liveware\EditProduct::class);
 
 
 
