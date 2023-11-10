@@ -4,6 +4,7 @@ namespace App\Liveware;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\Features\SupportValidation\Rule;
 
@@ -15,14 +16,14 @@ class LoginForm extends Component
     public string $password;
     public function login(){
         $validate = $this->validate();
-        if(Auth::attempt(array('email' => $this->email, 'password' => $this->password))){
+        $user = User::where('email',$this->email)->where('password',$this->password)->first();
+        if($user){
+            Auth::login($user);
             $this->reset($this->email,$this->password);
-           return redirect()->route('home');
-        }else{
-            session()->flash('error', 'email and password are wrong.');
+            return redirect()->route('dashboard');
+        } else{
+            return back()->withErrors('email and password are wrong.');
         }
-
-
     }
     public function render()
     {

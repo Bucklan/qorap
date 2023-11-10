@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/register',Liveware\RegisterForm::class);
 Route::get('/login',Liveware\LoginForm::class);
+//Route::get('/',Liveware\Dashboard::class)->name('dashboard');
+Route::view('/','home');
 //Route::view('login','livewire.auth.home');
 //Route::view('product/create', 'products.create');
 //Route::get('product/{product}/edit', \App\Liveware\EditProduct::class);
