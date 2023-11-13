@@ -1,8 +1,7 @@
-@extends('layouts.app')
-@section('content')
+
 <div>
     @if($success)
-        <span class="block mb-4 text-green-500">Post saved successfully.</span>
+        <span class="block mb-4 text-green-500">Product saved successfully.</span>
     @endif
     <form method="POST" wire:submit="save">
         <div>
@@ -26,4 +25,3 @@
         </button>
     </form>
 </div>
-@endsection
