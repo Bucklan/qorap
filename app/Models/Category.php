@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $table = [
+    protected $fillable = [
         'name',
         'parent_id',
     ];
@@ -27,5 +27,10 @@ class Category extends Model
     public function children(): Relations\HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function products(): Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class,'product_category');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Livewire\Livewire;
 
@@ -13,9 +14,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-//        return
+        $products = Product::all();
+
+        return view('products.index', compact('products'));
     }
 
     /**

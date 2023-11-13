@@ -14,11 +14,9 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('body');
-//            $table->json('title');
-//            $table->json('body')->nullable();
-            $table->json('short_body')->nullable();
+            $table->string('name');
+            $table->text('description');
+            $table->json('short_description')->nullable();
             $table->integer('quantity')->nullable()->default(0); //poka shto
             $table->tinyInteger('type')->nullable()->default(1);//poka shto
             $table->unsignedInteger('price')->nullable();//poka shto

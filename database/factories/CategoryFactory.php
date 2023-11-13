@@ -9,20 +9,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
     public function definition()
     {
         return [
-//            'name_kz' => '',
-//            'name_kz' => '',
-//            'name_kz' => '',
-//            'image' => '',
-//            'parent_id' => '',
-//            'user_id' => '',
+            'name' => json_encode([]),
+            'parent_id' => null,
         ];
     }
 }

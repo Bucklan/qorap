@@ -5,18 +5,19 @@
     @endif
     <form method="POST" wire:submit="save">
         <div>
-            <label for="title" class="block font-medium text-sm text-gray-700">Title</label>
-            <input id="title" wire:model="form.title" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="text" />
-            @error('title')
+            <label for="name" class="block font-medium text-sm text-gray-700">Title</label>
+            <input id="name" wire:model="name" wire:keydown="validateTitle" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="text" />
+
+            @error('name')
             <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="mt-4">
-            <label for="body" class="block font-medium text-sm text-gray-700">Body</label>
-            <textarea id="body" wire:model="form.body" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm"></textarea>
-            @error('body')
-            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
+            <label for="description" class="block font-medium text-sm text-gray-700">Body</label>
+            <textarea id="description" wire:model="description"  wire:keydown="validateTitle" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm"></textarea>
+            @error('description')
+            <span class="mt-2 text-sm text-red-600">{{ $mpessage }}</span>
             @enderror
         </div>
 
