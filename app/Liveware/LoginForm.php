@@ -13,17 +13,20 @@ class LoginForm extends Component
     public string $email;
     #[Rule('required|string|max:255')]
     public string $password;
-    public function login(){
-        $validate = $this->validate();
-        if(Auth::attempt(array('email' => $this->email, 'password' => $this->password))){
-            $this->reset($this->email,$this->password);
-           return redirect()->route('home');
-        }else{
-            session()->flash('error', 'email and password are wrong.');
+
+    public function login()
+    {
+        $this->validate();
+        $user = User::where('email', $this->email)->where('password', $this->password)->first();
+        if ($user) {
+            Auth::login($user);
+                $this->reset($this->email, $this->password);
+                return redirect()->route('home');
+        } else {
+            return back()->withErrors('email and password are wrong.');
         }
-
-
     }
+
     public function render()
     {
         return view('liveware.login-form');
