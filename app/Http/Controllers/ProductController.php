@@ -26,9 +26,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('products.create');
+
     }
 
     /**

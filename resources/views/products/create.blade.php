@@ -1,10 +1,3 @@
-@extends('layouts5f.app')
-@section('content')
-    <div class="container-lg">
-        <div class="flex">
-            <div class="col-span-12">
-                <livewire:create-product/>
-            </div>
-        </div>
-    </div>
-@endsection
+<x-app-layout>
+    <livewire:products-create/>
+</x-app-layout>

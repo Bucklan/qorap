@@ -21,6 +21,22 @@
             @enderror
         </div>
 
+        <div class="mt-4">
+            <label for="description" class="block font-medium text-sm text-gray-700">Body</label>
+            <textarea id="description" wire:model="description" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm"></textarea>
+            @error('description')
+            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mt-4">
+            <label for="price" class="block font-medium text-sm text-gray-700">Price</label>
+            <input type="number" id="price" wire:model="price" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+            @error('price')
+            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
+            @enderror
+        </div>
+
         <button class="mt-4 px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
             Save
         </button>

@@ -13,16 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+Route::get('products/create', [\App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
 Route::get('/register',Liveware\RegisterForm::class);
 Route::get('/login',Liveware\LoginForm::class);
-//Route::view('/','home')->name('home');
-//Route::get('/products',Liveware\IndexProduct::class)->name('product.index');
-Route::get('/products/create',Liveware\CreateProduct::class)->name('product.create');
-Route::get('products/{product}/edit', Liveware\EditProduct::class)->name('product.edit');
-//Route::get('/products',Liveware\CreateProduct::class)->name('home');
-//Route::view('login','livewire.auth.home');
-//Route::view('product/create', 'products.create');
 
 
 
