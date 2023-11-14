@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
 Route::get('/register',Liveware\RegisterForm::class);
 Route::get('/login',Liveware\LoginForm::class);
-Route::view('/','home')->name('home');
+//Route::view('/','home')->name('home');
 //Route::get('/products',Liveware\IndexProduct::class)->name('product.index');
 Route::get('/products/create',Liveware\CreateProduct::class)->name('product.create');
 Route::get('products/{product}/edit', Liveware\EditProduct::class)->name('product.edit');

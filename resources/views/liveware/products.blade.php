@@ -1,14 +1,18 @@
 <div>
     <div class="space-y-6">
         <div class="space-x-8">
-            <input type="search" id="search" placeholder="Search...">
+            <input wire:model.live="searchQuery" type="search" id="search" placeholder="Search...">
 
-            <select name="category">
+            <select wire:model.live="searchCategory" name="category">
                 <option value="0">-- CHOOSE CATEGORY --</option>
-                @foreach($categories as $id => $category)
-                    <option value="{{ $id }}">{{ $category }}</option>
+                @foreach($categories as $value => $category)
+                    @php
+                        $categoryName = json_decode($category, true)
+                    @endphp
+                    <option value="{{$value}}">{{ $categoryName['en'] }}</option>
                 @endforeach
             </select>
+
         </div>
         <div class="bg-white">
             <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -38,7 +42,8 @@
                                     @endphp
 
                                     <p>{{ $categoryName['en'] }}</p>
-                                    @endforeach</p>
+                                    @endforeach
+                                    </p>
                             </div>
                             <p class="text-sm font-medium text-gray-900"> {{ $product->name }} KZT</p>
                         </div>

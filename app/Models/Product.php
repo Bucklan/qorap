@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Relations as Relations;
@@ -25,4 +26,15 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class,'product_category');
     }
+
+    public static function getCategory()
+    {
+        return category_id;
+    }
+//    public function scopeGetCategory($query, $categoryId)
+//    {
+//        return $query->with('categories', function ($query) use ($categoryId) {
+//            $query->where('category_id', $categoryId);
+//        });
+//    }
 }

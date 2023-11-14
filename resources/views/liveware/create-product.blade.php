@@ -6,7 +6,7 @@
     <form method="POST" wire:submit="save">
         <div>
             <label for="name" class="block font-medium text-sm text-gray-700">Title</label>
-            <input id="name" wire:model="name" wire:keydown="validateTitle" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="text" />
+            <input id="name" wire:model="name"  class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="text" />
 
             @error('name')
             <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
@@ -15,9 +15,9 @@
 
         <div class="mt-4">
             <label for="description" class="block font-medium text-sm text-gray-700">Body</label>
-            <textarea id="description" wire:model="description"  wire:keydown="validateTitle" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm"></textarea>
+            <textarea id="description" wire:model="description" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm"></textarea>
             @error('description')
-            <span class="mt-2 text-sm text-red-600">{{ $mpessage }}</span>
+            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
             @enderror
         </div>
 
