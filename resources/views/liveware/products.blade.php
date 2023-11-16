@@ -51,6 +51,8 @@
                             </div>
                             <p class="text-sm font-medium text-gray-900"> {{ $product->price }} KZT</p>
                         </div>
+                        <a href="{{ route('products.edit', $product) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest">
+                            Edit </a>
                         <button type="button" wire:click="deleteProduct({{ $product->id }})" onclick="return confirm('Are you sure?') || event.stopImmediatePropagation()" class="mt-4 px-4 py-2 bg-red-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700">
                             Delete
                         </button>

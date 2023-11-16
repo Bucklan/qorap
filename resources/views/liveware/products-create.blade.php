@@ -11,8 +11,8 @@
                     <input id="name"
                            class="block mt-1 w-full border-solid border-2 border-black-600 rounded-md shadow-sm"
                            type="text"
-                           wire:model="name"/>
-                    @error('name')
+                           wire:model="form.name"/>
+                    @error('form.name')
                     <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
                     @enderror
                 </div>
@@ -23,15 +23,15 @@
                     <textarea
                             id="description"
                             class="block mt-1 w-full  border-solid border-2 border-black-600 rounded-md shadow-sm"
-                            wire:model="description"></textarea>
-                    @error('description')
+                            wire:model="form.description"></textarea>
+                    @error('form.description')
                     <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="mt-4">
                     <label for="category">Category</label>
-                    <select wire:model="category_id"
+                    <select wire:model="form.category_id"
                             id="category"
                             class="block mt-1 w-full  border-solid border-2 border-black-600 rounded-md shadow-sm"
                             name="category"
@@ -43,7 +43,7 @@
                             <option value="{{$value}}" >{{ $categoryName['en'] }}</option>
                         @endforeach
                     </select>
-                    @error('category_id')
+                    @error('form.category_id')
                     <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
                     @enderror
                 </div>
