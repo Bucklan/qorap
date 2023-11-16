@@ -19,7 +19,6 @@
             </a>
         </div>
         <div class="text-red-600" wire:loading>Loading...</div>
-{{--        <div class="min-w-full align-middle" wire:loading.class="opacity-50">--}}
         <div class="bg-white">
             <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
@@ -37,28 +36,26 @@
                                         {{ $product->name }}
                                     </a>
                                 </h3>
-{{--                                @dd($product->categories)--}}
-                                <p class="mt-1 text-sm text-gray-500">
-                                @foreach($product->categories as $category)
-                                    @php
-                                        $categoryName = json_decode($category->name, true);
-//                                        $currentLanguage = App::getLocale();
-                                    @endphp
 
-                                    <p>{{ $categoryName['en'] }}</p>
-                                    @endforeach
-                                    </p>
+                                <p class="mt-1 text-sm text-gray-500">
+                                        @foreach($product->categories as $category)
+                                            @php
+                                                $categoryName = json_decode($category->name, true);
+                                            @endphp
+
+                                            <p>{{ $categoryName['en'] }}</p>
+                                        @endforeach
+                                </p>
                             </div>
                             <p class="text-sm font-medium text-gray-900"> {{ $product->price }} KZT</p>
                         </div>
                         <a href="{{ route('products.edit', $product) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest">
                             Edit </a>
-                        <button type="button" wire:click="deleteProduct({{ $product->id }})" onclick="return confirm('Are you sure?') || event.stopImmediatePropagation()" class="mt-4 px-4 py-2 bg-red-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700">
+                        <a wire:click="deleteProduct({{ $product->id }})" onclick="return confirm('Are you sure?') || event.stopImmediatePropagation()" href="#"
+                           class="inline-flex items-center px-4 py-2 bg-red-600 rounded-md font-semibold text-xs text-white uppercase tracking-widest">
                             Delete
-                        </button>
+                        </a>
                     </div>
-
-
                     @empty
                         <tr>
                             <td class="px-6 py-4 text-sm" colspan="3">
@@ -66,7 +63,6 @@
                             </td>
                         </tr>
                     @endforelse
-                    <!-- More products... -->
                 </div>
             </div>
         </div>
