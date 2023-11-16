@@ -27,10 +27,7 @@ class Product extends Model
         return $this->belongsToMany(Category::class,'product_category');
     }
 
-    public static function getCategory()
-    {
-        return category_id;
-    }
+
 //    public function scopeGetCategory($query, $categoryId)
 //    {
 //        return $query->with('categories', function ($query) use ($categoryId) {

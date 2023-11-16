@@ -1,0 +1,43 @@
+<div>
+
+    <form method="POST" wire:submit="save">
+        <div>
+            <label for="name" class="block font-medium text-sm text-gray-700">Name</label>
+            <input id="name" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="text" wire:model="name" />
+            @error('name')
+            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mt-4">
+            <label for="description" class="block font-medium text-sm text-gray-700">Description</label>
+            <textarea id="description" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" wire:model="description"></textarea>
+            @error('description')
+            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mt-4">
+            <label for="category">Category</label>
+            <select wire:model="category_id"
+                    id="category"
+                    class="block mt-1 w-full  border-solid border-2 border-black-600 rounded-md shadow-sm"
+                    name="category"
+                    multiple>
+                @foreach($categories as $value => $category)
+                    @php
+                        $categoryName = json_decode($category, true)
+                    @endphp
+                    <option value="{{$value}}" >{{ $categoryName['en'] }}</option>
+                @endforeach
+            </select>
+            @error('category_id')
+            <span class="mt-2 text-sm text-red-600">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <button class="mt-4 px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
+            Save Product
+        </button>
+    </form>
+</div>

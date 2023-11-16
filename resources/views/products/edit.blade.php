@@ -1,4 +1,3 @@
-@extends('layouts5f.app')
-@section('content')
-    <livewire:edit-product/>
-@endsection
+<x-app-layout>
+    <livewire:products-edit />
+</x-app-layout>

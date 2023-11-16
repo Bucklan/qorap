@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Liveware as Liveware;
 use Illuminate\Support\Facades\Route;
 
@@ -13,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
-Route::get('products/create', [\App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+Route::get('products/{product}/edit', Liveware\ProductsEdit::class);
+//Route::get('products/{product}/edit', [ProductController::class,'edit'])->name('products.edit');
 Route::get('/register',Liveware\RegisterForm::class);
 Route::get('/login',Liveware\LoginForm::class);
 

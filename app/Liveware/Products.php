@@ -28,7 +28,7 @@ class Products extends Component
 
     public function updating($key): void
     {
-        if ($key === 'searchQuery' || $key === 'searchCategory') {
+        if ($key === 'searchQuery' || $key === 'searchCategory' || $key=== 'deleteProduct') {
             $this->resetPage();
         }
     }
