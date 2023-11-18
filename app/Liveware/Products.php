@@ -7,8 +7,6 @@ use App\Models\Product;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,6 +18,7 @@ class Products extends Component
     public string $searchQuery = '';
     public int $searchCategory = 0;
     public $listeners = ['deleteProduct'];
+    public bool $alertClass = false;
 
     public function mount(): void
     {
@@ -28,22 +27,26 @@ class Products extends Component
 
     public function updating($key): void
     {
-        if ($key === 'searchQuery' || $key === 'searchCategory' || $key=== 'deleteProduct') {
+        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'deleteProduct') {
             $this->resetPage();
         }
     }
-//    public function validateTitle(): void
-//    {
-//        $this->validateOnly('title');
-//    }
+
+    public function addClass()
+    {
+        $this->alertClass = true;
+    }
 
     public function deleteProduct(int $productId): void
     {
-        Product::where('id', $productId)->delete();
+        $product = Product::where('id',$productId)->first();
+        $product->delete();
     }
+
     public function render(): View
     {
         $products = Product::with('categories')
+//            ->where('quantity','>','0')
             ->when($this->searchQuery !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchQuery . '%'))
             ->when($this->searchCategory > 0, fn(Builder $query) => $query->whereHas('categories', function ($query) {
                 $query->where('category_id', $this->searchCategory);

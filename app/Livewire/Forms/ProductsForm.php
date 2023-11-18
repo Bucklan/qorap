@@ -2,26 +2,50 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 use App\Models as Models;
 
 class ProductsForm extends Form
 {
+
+//    protected array $rules = [
+//        'name' => 'required|min:3',
+//        'description' => 'required"min:3',
+//        'price' => 'required|integer|min:50',
+//        'quantity' => 'required|integer',
+//        'productCategories' => 'required|array',
+//        'images' => 'required|array',
+//        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+//    ];
     public ?Models\Product $product;
     #[Rule('required|min:3')]
     public string $name = '';
     #[Rule('required|min:3')]
     public string $description = '';
+    #[Rule('required|integer|min:50')]
+    public int $price = 0;
+    #[Rule('required|min:1')]
+    public int $quantity = 0;
     #[Rule('required|array', as: 'category')]
-    public array $productCategories = [];
+    public array $productCategories = [1];
+    #[Rule('required|array')]
+    public array $images;
+
+//    public function updated($images)
+//    {
+//        $this->validateOnly($images);
+//    }
+
 
     public function setProducts(Models\Product $product): void
     {
         $this->product = $product;
         $this->name = $product->name;
         $this->description = $product->description;
+        $this->price = $product->price;
+        $this->quantity = $product->quantity;
+        $this->images = $product->images;
         $this->productCategories = $product->categories()->allRelatedIds()->toArray();
     }
 
@@ -30,6 +54,9 @@ class ProductsForm extends Form
         $this->validate();
         $product = Models\Product::create($this->all());
         $product->categories()->sync($this->productCategories);
+        foreach ($this->images as $image){
+            $product->addMedia($image)->toMediaCollection('products');
+        }
     }
 
     public function update(): void

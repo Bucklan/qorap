@@ -203,6 +203,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         \App\Services\Auth\Providers\ActionServiceProvider::class,
         RepositoryServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
     ],

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\User\Permission;
 use App\Models as Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,9 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        (new UserFactory())->admin()->create();
-        Models\User::factory(3)->create();
-
-        Models\Product::factory(50)->create();
+        $this->call(RoleSeeder::class);
+        $this->call(Permission::class);
+        $this->call(RolePermissionSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }

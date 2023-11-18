@@ -15,5 +15,22 @@ enum Permission: string
     case DASHBOARD = 'Dashboard';
     case CLIENTS = 'Clients';
     case MANAGERS = 'Managers';
-    case ProductStatuses = 'ProductStatuses';   
+    case ProductStatuses = 'ProductStatuses';
+
+    public function label(){
+        return match ($this){
+            self::CITIES => 'Cities',
+            self::ADDRESSES => 'Addresses',
+            self::COMPANIES => 'Companies',
+            self::CATEGORIES => 'Categories',
+            self::PRODUCTS => 'Products',
+            self::COLORS => 'Colors',
+            self::ORDERS => 'Orders',
+            self::CART => 'Carts',
+            self::DASHBOARD => 'Dashboard',
+            self::CLIENTS => 'Clients',
+            self::MANAGERS => 'Managers',
+            self::ProductStatuses => 'ProductStatuses',
+        };
+    }
 }

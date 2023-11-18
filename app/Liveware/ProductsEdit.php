@@ -23,6 +23,7 @@ class ProductsEdit extends Component
     public function save(): void
     {
         $this->form->update();
+        session()->flash('message','Your product successfully updated!');
         $this->redirect('/products');
     }
 

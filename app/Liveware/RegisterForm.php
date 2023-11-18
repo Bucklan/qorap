@@ -2,8 +2,11 @@
 
 namespace App\Liveware;
 
+use App\Enums\User\Role;
 use App\Models\User;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -22,13 +25,21 @@ class RegisterForm extends Component
     public function register()
     {
 
-        $validated = $this->validate();
-        User::create($validated);
+        $validatedData = $this->validate();
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        $user = User::create($validatedData);
+
+        $user->assignRole(Role::USER->value); // Assign the user role
+
+        Auth::login($user); // Log in the user after registration
+
         session()->flash('message', 'You are successfully registered!');
-        $this->reset('name', 'email', 'password', 'password_confirmation');
+        $this->reset(['name', 'email', 'password', 'password_confirmation']);
+
+        return redirect()->to('/products');
     }
 
-    private function passwordConfirmed()
+    private function passwordConfirmed(): bool
     {
         return $this->password == $this->password_confirmation;
     }

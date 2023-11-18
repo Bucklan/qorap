@@ -14,13 +14,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('',function (){
+    return url('dashboard');
+});
+Route::get('/dashboard', Liveware\Dashboard::class)->name('dashboard');
+Route::get('products', Liveware\Products::class)->name('products.index');
 Route::get('products/create', Liveware\ProductsCreate::class)->name('products.create');
 Route::get('products/{product}/edit', Liveware\ProductsEdit::class)->name('products.edit');
-//Route::get('products/{product}/edit', [ProductController::class,'edit'])->name('products.edit');
 Route::get('/register',Liveware\RegisterForm::class);
 Route::get('/login',Liveware\LoginForm::class);
-
+Route::post('logout',Liveware\Logout::class)->name('logout');
+Route::prefix('admin')->as('admin.')->middleware('role:admin')->group(function (){
+    Route::get('',Liveware\Admin\AdminDashboard::class)->name('index');
+});
 
 
 //require __DIR__.'/auth.php';

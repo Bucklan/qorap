@@ -8,9 +8,11 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ProductsCreate extends Component
 {
+    use WithFileUploads;
     public ProductsForm $form;
     public Collection $categories;
 
@@ -22,6 +24,7 @@ class ProductsCreate extends Component
     public function save(): void
     {
         $this->form->save();
+        session()->flash('message','Your product successfully created!');
         $this->redirect('/products');
     }
 
