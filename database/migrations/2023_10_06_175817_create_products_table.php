@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->tinyInteger('type')->nullable()->default(1);//poka shto
             $table->unsignedInteger('price')->nullable();//poka shto
             $table->unsignedInteger('old_price')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->foreignId('shop_id')->nullable()->constrained('shops');
             $table->timestamps();
         });
     }

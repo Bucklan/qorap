@@ -15,15 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('',function (){
-    return url('dashboard');
+    return redirect()->route('dashboard');
 });
 Route::get('/dashboard', Liveware\Dashboard::class)->name('dashboard');
 Route::get('products', Liveware\Products::class)->name('products.index');
 Route::get('products/create', Liveware\ProductsCreate::class)->name('products.create');
 Route::get('products/{product}/edit', Liveware\ProductsEdit::class)->name('products.edit');
-Route::get('/register',Liveware\RegisterForm::class);
-Route::get('/login',Liveware\LoginForm::class);
-Route::post('logout',Liveware\Logout::class)->name('logout');
+Route::middleware('guest')->group(function (){
+    Route::get('/register',Liveware\RegisterForm::class);
+    Route::get('/login',Liveware\LoginForm::class);
+});
+Route::middleware('auth')->group(function (){
+    Route::post('logout',Liveware\Logout::class)->name('logout');
+});
 Route::prefix('admin')->as('admin.')->middleware('role:admin')->group(function (){
     Route::get('',Liveware\Admin\AdminDashboard::class)->name('index');
 });

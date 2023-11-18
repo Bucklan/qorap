@@ -9,3 +9,9 @@
 <h3>
     Step 3
 </h3>
+<p>php artisan serve</p>
+
+to login for admin
+email: admin@gmail.com
+password: admin123
+

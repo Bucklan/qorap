@@ -77,8 +77,8 @@
                     <label for="images" class="form-label">Image Product</label>
                     <input type="file" multiple="multiple" class="mt-1 w-full b border-solid border-2 border-black-600 rounded-md shadow-sm" id="images" wire:model="form.images">
                 </div>
-                @error('images')
-                <div class="alert alert-danger mt-2">{{$message}}</div>
+                @error('form.images')
+                <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                 @enderror
                 <button class="mt-4 px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
                     Save

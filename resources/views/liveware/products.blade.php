@@ -1,7 +1,7 @@
 <div>
     <livewire:navbar/>
     <div class="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8 mt-4">
-    @if(session('message'))
+        @if(session('message'))
             <div id="{{$alertClass ? 'opacity-0' : ''}} alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50" role="alert">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -16,7 +16,7 @@
                     </svg>
                 </button>
             </div>
-        @endif
+       @endif
         <div class="space-y-6">
             <div class="flex justify-between">
                 <div class="space-x-8">
@@ -66,7 +66,6 @@
                         <div class="group relative {{$product->quantity ? '' : 'opacity-25'}}">
                             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                                 @if($media = $product->getFirstMedia('products'))
-                                    @dd($media->getUrl())
                                     <img src="{{$media->getUrl()}}"
                                          alt="Front of men&#039;s Basic Tee in black."
                                          class="h-full w-full object-cover object-center lg:h-full lg:w-full">

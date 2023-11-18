@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('phone')->nullable();
@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->tinyInteger('status')->default(1);
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('city_id')->nullable()->constrained('cities');
+            $table->foreignId('address_id')->nullable()->constrained('addresses');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('shops');
     }
 };

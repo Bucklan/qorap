@@ -21,7 +21,7 @@ class Product extends Model implements HasMedia
         'type',
         'price',
         'old_price',
-        'company_id',
+        'shop_id',
     ];
 
     public function categories(): Relations\BelongsToMany

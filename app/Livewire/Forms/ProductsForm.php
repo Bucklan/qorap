@@ -9,15 +9,6 @@ use App\Models as Models;
 class ProductsForm extends Form
 {
 
-//    protected array $rules = [
-//        'name' => 'required|min:3',
-//        'description' => 'required"min:3',
-//        'price' => 'required|integer|min:50',
-//        'quantity' => 'required|integer',
-//        'productCategories' => 'required|array',
-//        'images' => 'required|array',
-//        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-//    ];
     public ?Models\Product $product;
     #[Rule('required|min:3')]
     public string $name = '';
