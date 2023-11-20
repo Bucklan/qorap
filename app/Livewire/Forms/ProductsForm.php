@@ -36,7 +36,7 @@ class ProductsForm extends Form
         $this->description = $product->description;
         $this->price = $product->price;
         $this->quantity = $product->quantity;
-        $this->images = $product->images;
+//        $this->images = $product->getMedia('products')->pluck('id')->toArray();
         $this->productCategories = $product->categories()->allRelatedIds()->toArray();
     }
 

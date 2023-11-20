@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable,
-        SoftDeletes, HasRoles;
+        SoftDeletes,HasRoles;
 
     protected $fillable = [
         'name',

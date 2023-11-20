@@ -1,8 +1,10 @@
 <div>
+
     <livewire:navbar/>
+
     <div class="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8 mt-4">
         @if(session('message'))
-            <div id="{{$alertClass ? 'opacity-0' : ''}} alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50" role="alert">
+            <div id="{{$alertClass ? 'hidden' : ''}} alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50" role="alert">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
@@ -52,7 +54,7 @@
                 @endcan
             </div>
         </div>
-        <div class="text-red-600"
+        <div class="text-green-600"
              wire:loading>
             Loading...
         </div>
@@ -65,8 +67,8 @@
                     @forelse($products as $product)
                         <div class="group relative {{$product->quantity ? '' : 'opacity-25'}}">
                             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                @if($media = $product->getFirstMedia('products'))
-                                    <img src="{{$media->getUrl()}}"
+                                @if($product->getFirstMedia('products'))
+                                    <img src="{{$product->getFirstMediaUrl('products')}}"
                                          alt="Front of men&#039;s Basic Tee in black."
                                          class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                                 @else
@@ -96,15 +98,9 @@
                                     KZT</p>
                             </div>
                             {{$product->quantity}}x
-                            <a href="{{ route('products.edit', $product) }}"
+                            <a href="{{--{{ route('cart.store', $product->id) }}--}}"
                                class="inline-flex items-center px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest">
-                                Edit </a>
-                            <a wire:click="deleteProduct({{ $product->id }})"
-                               onclick="return confirm('Are you sure?') || event.stopImmediatePropagation()"
-                               href="#"
-                               class="inline-flex items-center px-4 py-2 bg-red-600 rounded-md font-semibold text-xs text-white uppercase tracking-widest">
-                                Delete
-                            </a>
+                                Add to cart </a>
                         </div>
                     @empty
                         <tr>
@@ -120,7 +116,17 @@
                 </div>
             </div>
         </div>
-            {{ $products->links() }}
+            {!! $products->links() !!}
     </div>
 </div>
+<script>
+
+    let btn = document.querySelector('#dropdownDefault');
+
+    btn.addEventListener("click", function(event) {
+        event.preventDefault();
+        let dropdown = document.querySelector('#dropdown');
+        dropdown.classList.toggle('hidden');
+    });
+</script>
 

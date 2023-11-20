@@ -14,6 +14,7 @@ class Products extends Component
 {
     use WithPagination;
 
+
     public Collection $categories;
     public string $searchQuery = '';
     public int $searchCategory = 0;
@@ -40,7 +41,9 @@ class Products extends Component
     public function deleteProduct(int $productId): void
     {
         $product = Product::where('id',$productId)->first();
+
         $product->delete();
+        session()->flash('message','Your product successfully deleted!');
     }
 
     public function render(): View

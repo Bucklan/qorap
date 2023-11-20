@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 /storage/app/public
+/public/assets-back
+public/assets-front

@@ -161,10 +161,10 @@ return [
     */
 
     'providers' => [
-        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
+        App\Providers\TelescopeServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -203,7 +203,8 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         \App\Services\Auth\Providers\ActionServiceProvider::class,
         RepositoryServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
+        \Spatie\Permission\PermissionServiceProvider::class,
+
 
 
     ],

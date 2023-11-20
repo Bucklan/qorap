@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/qwe',function (){
+    return view('admin.app');
+});
 Route::get('',function (){
-    return redirect()->route('dashboard');
+    return view('layouts.app');
 });
 Route::get('/dashboard', Liveware\Dashboard::class)->name('dashboard');
 Route::get('products', Liveware\Products::class)->name('products.index');
@@ -34,3 +37,5 @@ Route::prefix('admin')->as('admin.')->middleware('role:admin')->group(function (
 
 
 //require __DIR__.'/auth.php';
+
+

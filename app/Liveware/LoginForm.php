@@ -19,7 +19,6 @@ class LoginForm extends Component
     public function login()
     {
         $validate = $this->validate();
-
         if (Auth::attempt($validate)) {
             $this->reset($this->email, $this->password);
             return redirect()->intended('/products');
