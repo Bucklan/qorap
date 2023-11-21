@@ -18,7 +18,8 @@ class Products extends Component
     public Collection $categories;
     public string $searchQuery = '';
     public int $searchCategory = 0;
-    public $listeners = ['deleteProduct'];
+    public int $fromPrice = 0;
+    public int $toPrice = 0;
     public bool $alertClass = false;
 
     public function mount(): void
@@ -28,9 +29,17 @@ class Products extends Component
 
     public function updating($key): void
     {
-        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'deleteProduct') {
+        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'deleteProduct'|| $key === 'fromPrice'|| $key === 'toPrice') {
             $this->resetPage();
         }
+    }
+    function updatedFromPrice($value): void
+    {
+        $this->fromPrice = (int)$value;
+    }
+    function updatedToPrice($value): void
+    {
+        $this->toPrice = (int)$value;
     }
 
     public function addClass()
@@ -54,8 +63,8 @@ class Products extends Component
             ->when($this->searchCategory > 0, fn(Builder $query) => $query->whereHas('categories', function ($query) {
                 $query->where('category_id', $this->searchCategory);
             }))
-//            ->when($this->minPrice > 0 && $this->maxPrice > $this->minPrice, fn(Builder $query) =>
-//             $query->where('price', '>=', $this->minPrice)->where('price', '<=', $this->maxPrice))
+            ->when($this->fromPrice > 0 && $this->toPrice > $this->fromPrice, fn(Builder $query) =>
+             $query->where('price', '>=', $this->fromPrice)->where('price', '<=', $this->toPrice))
             ->paginate(10);
 
         return view('liveware.products', [

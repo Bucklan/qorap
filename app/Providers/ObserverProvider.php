@@ -8,8 +8,7 @@ use Illuminate\Support\ServiceProvider;
 
 class ObserverProvider extends ServiceProvider
 {
-
-    public function boot()
+    public function boot(): void
     {
         User::observe(UserObserver::class);
     }

@@ -9,9 +9,18 @@ use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-
-    public function run()
+    private array $categories = [
+        0 => '{"kz":"gul","en":"rose"}',
+        1 => '{"kz":"siylyq","en":"gift"}',
+        2 => '{"kz":"qorap","en":"box"}'
+    ];
+    public function run(): void
     {
-        Category::factory()->count(10)->create();
+        foreach ($this->categories as $value => $category) {
+            Category::query()->create([
+                'name' => $category,
+                'parent_id' => null,
+            ]);
+        }
     }
 }

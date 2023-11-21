@@ -22,6 +22,7 @@ class UserFactory extends Factory
 
             return [
                 'name' => fake()->name(),
+                'surname' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => 'client123', // password
@@ -37,6 +38,7 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'manager',
+                'surname' => 'manager',
                 'email' => 'manager@kz',
                 'password' => 'manager123',
             ];
@@ -50,7 +52,8 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'Admin',
-                'email' => 'admin@kz',
+                'surname' => 'Admin',
+                'email' => 'admin@gmail.com',
                 'password' => 'admin123',
             ];
         })/*->afterCreating(function (User $user){

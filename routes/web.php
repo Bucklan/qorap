@@ -25,8 +25,8 @@ Route::get('products', Liveware\Products::class)->name('products.index');
 Route::get('products/create', Liveware\ProductsCreate::class)->name('products.create');
 Route::get('products/{product}/edit', Liveware\ProductsEdit::class)->name('products.edit');
 Route::middleware('guest')->group(function (){
-    Route::get('/register',Liveware\RegisterForm::class);
-    Route::get('/login',Liveware\LoginForm::class);
+    Route::get('/register',Liveware\RegisterForm::class)->name('register');
+    Route::get('/login',Liveware\LoginForm::class)->name('login');
 });
 Route::middleware('auth')->group(function (){
     Route::post('logout',Liveware\Logout::class)->name('logout');
