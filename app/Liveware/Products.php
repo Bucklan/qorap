@@ -23,7 +23,7 @@ class Products extends Component
 
     public function mount(): void
     {
-        $this->categories = Category::pluck('name', 'id');
+        $this->categories = Category::with('products')->get();
     }
 
     public function updating($key): void
