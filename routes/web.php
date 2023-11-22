@@ -28,6 +28,9 @@ Route::middleware('guest')->group(function (){
     Route::get('/register',Liveware\RegisterForm::class)->name('register');
     Route::get('/login',Liveware\LoginForm::class)->name('login');
 });
+Route::get('shops/guide',function (){
+    return view('shops.guide');
+})->name('shops.guide');
 Route::middleware('auth')->group(function (){
     Route::post('logout',Liveware\Logout::class)->name('logout');
 });

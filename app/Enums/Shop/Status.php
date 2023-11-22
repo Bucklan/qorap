@@ -11,9 +11,9 @@ enum Status: string
     public function label(): string
     {
         return match ($this) {
-            self::ONLINE => 'ONLINE',
-            self::STORE => 'STORE',
-            self::ONLINE_AND_STORE => 'ONLINE_AND_STORE',
+            self::ONLINE => 'Online',
+            self::STORE => 'Store',
+            self::ONLINE_AND_STORE => 'Online and Store',
         };
     }
 }

@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'name',
@@ -26,7 +26,7 @@ class Product extends Model implements HasMedia
 
     public function categories(): Relations\BelongsToMany
     {
-        return $this->belongsToMany(Category::class,'product_category');
+        return $this->belongsToMany(Category::class, 'product_category');
     }
 
 
@@ -37,4 +37,13 @@ class Product extends Model implements HasMedia
 //        });
 //    }
 
+    public function scopeWherePriceBetween(Builder $query, int $fromPriceByFilter, int $toPriceByFilter): ?Builder
+    {
+        return $fromPriceByFilter ||
+        $toPriceByFilter &&
+        $fromPriceByFilter <= $toPriceByFilter
+            ? $query
+                ->whereBetween('price', [$fromPriceByFilter, $toPriceByFilter])
+            : null;
+    }
 }

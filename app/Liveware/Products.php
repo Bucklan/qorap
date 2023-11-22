@@ -20,7 +20,7 @@ class Products extends Component
     public int $searchCategory = 0;
     public int $fromPrice = 0;
     public int $toPrice = 0;
-    public bool $alertClass = false;
+    public int $paginate = 15;
 
     public function mount(): void
     {
@@ -29,43 +29,48 @@ class Products extends Component
 
     public function updating($key): void
     {
-        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'deleteProduct'|| $key === 'fromPrice'|| $key === 'toPrice') {
+        if ($key === 'searchQuery'
+            || $key === 'searchCategory'
+            || $key === 'deleteProduct'
+            || $key === 'fromPrice'
+            || $key === 'toPrice'
+            || $key === 'paginate'
+        ) {
             $this->resetPage();
         }
     }
+
     function updatedFromPrice($value): void
     {
         $this->fromPrice = (int)$value;
     }
+
+    function updatedPaginate($value): void
+    {
+        $this->paginate = (int)$value;
+    }
+
     function updatedToPrice($value): void
     {
         $this->toPrice = (int)$value;
     }
 
-    public function addClass()
-    {
-        $this->alertClass = true;
-    }
-
     public function deleteProduct(int $productId): void
     {
-        $product = Product::where('id',$productId)->first();
+        $product = Product::where('id', $productId)->first();
 
         $product->delete();
-        session()->flash('message','Your product successfully deleted!');
+        session()->flash('message', 'Your product successfully deleted!');
     }
 
     public function render(): View
     {
         $products = Product::with('categories')
-//            ->where('quantity','>','0')
             ->when($this->searchQuery !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchQuery . '%'))
             ->when($this->searchCategory > 0, fn(Builder $query) => $query->whereHas('categories', function ($query) {
                 $query->where('category_id', $this->searchCategory);
-            }))
-            ->when($this->fromPrice > 0 && $this->toPrice > $this->fromPrice, fn(Builder $query) =>
-             $query->where('price', '>=', $this->fromPrice)->where('price', '<=', $this->toPrice))
-            ->paginate(10);
+            }))->when($this->fromPrice || $this->toPrice, fn(Builder $query) => $query->wherePriceBetween($this->fromPrice, $this->toPrice));
+        $products = $this->paginate ? $products->paginate($this->paginate) : $products->get();
 
         return view('liveware.products', [
             'products' => $products,

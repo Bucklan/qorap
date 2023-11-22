@@ -19,6 +19,14 @@
                                                 <span class="text-sm text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <input type="text" wire:model="surname" placeholder="surname" />
+                                                @error('surname')
+                                                <span class="text-sm text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
                                             <div class="form-group">
                                                 <input type="text" wire:model="email" placeholder="Email" />
                                                 @error('email')
@@ -35,7 +43,10 @@
                                                 <input type="password" wire:model="password_confirmation" placeholder="Confirm password" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="date" wire:model="password_confirmation" placeholder="Confirm password" />
+                                                <input type="number" wire:model="year_of_birth" placeholder="Year of Birthday" />
+                                                @error('year_of_birth')
+                                                <span class="text-sm text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="login_footer form-group mb-50">
                                                 <div class="chek-form">

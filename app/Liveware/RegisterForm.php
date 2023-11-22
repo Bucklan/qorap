@@ -15,14 +15,18 @@ class RegisterForm extends Component
 
     #[Rule('required|string|max:255')]
     public string $name = '';
+    #[Rule('required|string|max:255')]
+    public string $surname = '';
     #[Rule('required|email|unique:users,email')]
     public string $email = '';
     #[Rule('required|max:255|confirmed')]
     public string $password = '';
     #[Rule('required|max:255')]
     public string $password_confirmation = '';
+    #[Rule('required|numeric|min:1950|max:2023')]
+    public int $year_of_birth = 1950;
 
-    public function register()
+    public function register(): \Illuminate\Http\RedirectResponse
     {
 
         $validatedData = $this->validate();
@@ -36,7 +40,7 @@ class RegisterForm extends Component
         session()->flash('message', 'You are successfully registered!');
         $this->reset(['name', 'email', 'password', 'password_confirmation']);
 
-        return redirect()->to('/products');
+        return redirect('/dashboard');
     }
 
     private function passwordConfirmed(): bool

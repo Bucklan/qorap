@@ -10,13 +10,15 @@
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets-back/imgs/theme/favicon.svg" />
-    <!-- Template CSS -->
-    <link href="assets-back/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets-back/imgs/theme/favicon.svg')}}" />
+    <link href="{{asset('assets-back/css/main.css?v=1.1')}}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+{{--@include('liveware.admin.navbar')--}}
+{{--@include('liveware.admin.navbar')--}}
+{{--@include('liveware.admin.navbar')--}}
+{{--@include('liveware.admin.navbar')--}}
 <div class="screen-overlay"></div>
 <aside class="navbar-aside" id="offcanvas_aside">
     <div class="aside-top">
@@ -272,14 +274,13 @@
         </div>
     </footer>
 </main>
-<script src="assets-back/js/vendors/jquery-3.6.0.min.js"></script>
-<script src="assets-back/js/vendors/bootstrap.bundle.min.js"></script>
-<script src="assets-back/js/vendors/select2.min.js"></script>
-<script src="assets-back/js/vendors/perfect-scrollbar.js"></script>
-<script src="assets-back/js/vendors/jquery.fullscreen.min.js"></script>
-<script src="assets-back/js/vendors/chart.js"></script>
-<!-- Main Script -->
-<script src="assets-back/js/main.js?v=1.1" type="text/javascript"></script>
-<script src="assets-back/js/custom-chart.js" type="text/javascript"></script>
+<script src="{{asset('assets-back/js/vendors/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets-back/js/vendors/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets-back/js/vendors/select2.min.js')}}"></script>
+<script src="{{asset('assets-back/js/vendors/perfect-scrollbar.js')}}"></script>
+<script src="{{asset('assets-back/js/vendors/jquery.fullscreen.min.js')}}"></script>
+<script src="{{asset('assets-back/js/vendors/chart.js')}}"></script>
+<script src="{{asset('assets-back/js/main.js?v=1.1')}}" type="text/javascript"></script>
+<script src="{{asset('assets-back/js/custom-chart.js')}}" type="text/javascript"></script>
 </body>
 </html>
