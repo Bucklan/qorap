@@ -12,7 +12,9 @@ class ProductSeeder extends Seeder
     public function run()
     {
 
-        Product::factory()->count(20)->create();
-
+        $products = Product::factory()->count(20)->create();
+        foreach ($products as $product) {
+            $product['old_price'] = $product['price'] + 1000;
+        }
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Enums\User\Role;
 use App\Liveware as Liveware;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,29 +15,26 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/qwe',function (){
-    return view('admin.app');
-});
+
 Route::get('',function (){
-    return view('layouts.app');
+//    return redirect()->route('dashboard');
+})->middleware('guest');
+Route::get('/dashboard', Liveware\User\Dashboard::class)->name('dashboard');
+Route::get('products', Liveware\User\Products\Products::class)->name('products.index');
+Route::get('products/create', Liveware\User\Products\ProductsCreate::class)->name('products.create');
+Route::get('products/{product}/edit', Liveware\User\Products\ProductsEdit::class)->name('products.edit');
+    Route::get('/register', Liveware\User\Auth\RegisterForm::class)->name('register');
+    Route::get('/login', Liveware\User\Auth\LoginForm::class)->name('login');
+    Route::post('logout', Liveware\User\Auth\Logout::class)->name('logout');
+Route::prefix('admin')->as('admin.')
+    ->group(function (){
+        Route::get('',function (){
+            return redirect()->route('admin.employer.dashboard');
+        });
+        Route::get('login', Liveware\Admin\Auth\Login::class)->name('login')->middleware('guest');
+        Route::get('dashboard', Liveware\Admin\Employer\Dashboard::class)->name('employer.dashboard')->middleware('auth');
 });
-Route::get('/dashboard', Liveware\Dashboard::class)->name('dashboard');
-Route::get('products', Liveware\Products::class)->name('products.index');
-Route::get('products/create', Liveware\ProductsCreate::class)->name('products.create');
-Route::get('products/{product}/edit', Liveware\ProductsEdit::class)->name('products.edit');
-Route::middleware('guest')->group(function (){
-    Route::get('/register',Liveware\RegisterForm::class)->name('register');
-    Route::get('/login',Liveware\LoginForm::class)->name('login');
-});
-Route::get('shops/guide',function (){
-    return view('shops.guide');
-})->name('shops.guide');
-Route::middleware('auth')->group(function (){
-    Route::post('logout',Liveware\Logout::class)->name('logout');
-});
-Route::prefix('admin')->as('admin.')->middleware('role:admin')->group(function (){
-    Route::get('',Liveware\Admin\AdminDashboard::class)->name('index');
-});
+
 
 
 //require __DIR__.'/auth.php';

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
+use App\Enums\User\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,5 +40,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
 //        'password' => 'hashed',
     ];
-
+public function scopeHasRoleIsUser(Builder $query,string $email): bool
+{
+    $query = $query->where('email', $email)->first();
+    return $query->hasRole(Role::USER);
+}
 }

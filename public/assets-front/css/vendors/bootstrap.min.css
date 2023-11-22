@@ -576,6 +576,10 @@ progress {
 .opacity-50{
     opacity: 0.5;
 }
+.btn-outline-none{
+    outline: none;
+    border: none;
+}
 
 @media (min-width: 576px) {
     .container, .container-sm {

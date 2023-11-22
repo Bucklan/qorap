@@ -10,7 +10,8 @@ Route::middleware('auth')->group(function (){
 });
 
 require_once('open/categories.php');
-require_once('open/gifts.php');
+require_once('open/products.php');
 require_once('open/cities.php');
 require_once('open/comments.php');
+
 
