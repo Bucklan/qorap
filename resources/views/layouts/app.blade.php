@@ -45,7 +45,7 @@
 
 <body>
 
-@include('liveware.users.navbar')
+@include('livewire.users.navbar')
 {{$slot}}
 @livewireScripts
 </body>

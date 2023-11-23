@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'class_namespace' => 'App\\Liveware',
+    'class_namespace' => 'App\\Livewire',
 
     /*
     |---------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'view_path' => resource_path('views/liveware'),
+    'view_path' => resource_path('views/livewire'),
 
     /*
     |---------------------------------------------------------------------------
@@ -142,5 +142,5 @@ return [
     |
     */
 
-    'pagination_theme' => 'tailwind',
+    'pagination_theme' => 'bootstrap',
 ];

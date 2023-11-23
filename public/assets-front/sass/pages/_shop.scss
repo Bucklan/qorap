@@ -1114,6 +1114,10 @@
 		color: $color-hot;
 		background: #fde0e9;
 	}
+	&.loading-stock {
+		background: $background-3;
+		color: $color-brand-2;
+	}
 
 }
 .detail-info {

@@ -5131,7 +5131,10 @@ table .product-thumbnail img {
   color: #f74b81;
   background: #fde0e9;
 }
-
+.stock-status. .loading-stock {
+  color: #f0ac39;
+  background: #fde0e9;
+}
 .detail-info .product-price-cover {
   display: -webkit-box;
   display: -ms-flexbox;

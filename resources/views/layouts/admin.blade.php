@@ -29,19 +29,19 @@
 
 <body>
 @auth
-{{--@include('liveware.admin.navbar')--}}
-{{--@include('liveware.admin.navbar')--}}
-{{--@include('liveware.admin.navbar')--}}
-{{--@include('liveware.admin.navbar')--}}
-@include('liveware.admin.elements.aside')
-<main class="main-wrap">
-    @include('liveware.admin.elements.header')
-    <section
-            class="content-main">
-        {{$slot}}
-    </section>
-    @include('liveware.admin.elements.footer')
-</main>
+    {{--@include('livewire.admin.navbar')--}}
+    {{--@include('livewire.admin.navbar')--}}
+    {{--@include('livewire.admin.navbar')--}}
+    {{--@include('livewire.admin.navbar')--}}
+    @include('livewire.admin.elements.aside')
+    <main class="main-wrap">
+        @include('livewire.admin.elements.header')
+        <section
+                class="content-main">
+            {{$slot}}
+        </section>
+        @include('livewire.admin.elements.footer')
+    </main>
 @else
     {{$slot}}
 @endauth
