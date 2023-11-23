@@ -2,42 +2,34 @@
 
 namespace App\Livewire\Users\Auth;
 
-use App\Enums\User\Role;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Rule;
+
+use App\Services\User\Auth\Contracts as Contracts;
+use App\Services\User\Auth\Dto\Register\RegisterDtoFactory;
 use Livewire\Component;
 
 class RegisterForm extends Component
 {
 
-    #[Rule('required|string|max:255')]
     public string $name = '';
-    #[Rule('required|string|max:255')]
     public string $surname = '';
-    #[Rule('required|email|unique:users,email')]
     public string $email = '';
-    #[Rule('required|max:255|confirmed')]
     public string $password = '';
-    #[Rule('required|max:255')]
     public string $password_confirmation = '';
-    #[Rule('required|numeric|min:1950|max:2023')]
-    public int $year_of_birth = 1950;
+    public int $year_of_birth = 2023;
+    protected $rules = [
+        'name' => 'required|string|max:255',
+        'surname' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|max:255|confirmed',
+        'year_of_birth' => 'required|numeric|min:1950|max:2023',
+    ];
 
     public function register()
     {
+        app(Contracts\Register::class)->execute(
+            RegisterDtoFactory::fromArray($this->validate()));
+        return redirect()->to('dashboard');
 
-        $validatedData = $this->validate();
-        $user = User::create($validatedData);
-
-        $user->assignRole(Role::USER->value); // Assign the user role
-
-        Auth::login($user); // Log in the user after registration
-
-        session()->flash('message', 'You are successfully registered!');
-        $this->reset(['name', 'email', 'password', 'password_confirmation']);
-
-        return redirect()->route('dashboard');
     }
 
     private function passwordConfirmed(): bool
@@ -45,7 +37,7 @@ class RegisterForm extends Component
         return $this->password == $this->password_confirmation;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.users.auth.register-form')->layout('layouts.app');
     }

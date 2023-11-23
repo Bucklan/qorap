@@ -201,7 +201,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        \App\Services\Auth\Providers\ActionServiceProvider::class,
+        \App\Services\User\Auth\Providers\ActionServiceProvider::class,
         RepositoryServiceProvider::class,
         \Spatie\Permission\PermissionServiceProvider::class,
         \App\Providers\ObserverProvider::class,

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Services\Auth as Auth;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -14,10 +12,10 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function register(Auth\Requests\RegisterRequest $request)
+    public function register(\App\Services\User\Auth\Requests\RegisterRequest $request)
     {
-        app(Auth\Contracts\Register::class)->execute(
-            Auth\Dto\Register\RegisterDtoFactory::fromRequest($request)
+        app(\App\Services\User\Auth\Contracts\Register::class)->execute(
+            \App\Services\User\Auth\Dto\Register\RegisterDtoFactory::fromRequest($request)
         );
         return redirect()->route('gift.index');
     }

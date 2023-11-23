@@ -15,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable,
-        SoftDeletes,HasRoles;
+        SoftDeletes, HasRoles;
 
     protected $fillable = [
         'name',
@@ -40,9 +40,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
 //        'password' => 'hashed',
     ];
-public function scopeHasRoleIsUser(Builder $query,string $email): bool
-{
-    $query = $query->where('email', $email)->first();
-    return $query->hasRole(Role::USER);
-}
+
+    public function scopeHasRoleIsUser(Builder $query, string $email): bool
+    {
+        $query = $query->where('email', $email)->first();
+        return $query->hasRole(Role::USER);
+    }
+
+    public function isLoginBlocked(): bool
+    {
+        return $this->login_blocked_at != null;
+    }
 }

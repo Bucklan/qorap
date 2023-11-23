@@ -2,37 +2,31 @@
 
 namespace App\Livewire\Users\Auth;
 
+use App\Services\User\Auth\Contracts\Login;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Features\SupportValidation\Rule;
 
 class LoginForm extends Component
 {
-    #[Rule('required|email|exists:users,email')]
     public string $email;
-    #[Rule('required|string|max:255')]
     public string $password;
-    public bool $alertError = false;
+
+    protected $rules = [
+        'email' => 'required|email|exists:users,email',
+        'password' => 'required|string|max:255',
+    ];
 
     public function login()
     {
         $validate = $this->validate();
-        if (Auth::attempt($validate)) {
-            $this->reset($this->email, $this->password);
-            return redirect()->intended('/products');
-        } else {
-            dd(4532);
-            session()->flash('error', 'email and password are wrong.');
-        }
-        return redirect()->back();
+        app(Login::class)->execute(
+            $validate['email'], $validate['password']);
+        return redirect()->to('/dashboard');
     }
 
-    public function alertClass()
-    {
-        $this->alertError = true;
-    }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.users.auth.login-form')->layout('layouts.app');
     }
