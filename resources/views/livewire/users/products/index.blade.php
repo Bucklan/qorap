@@ -18,28 +18,42 @@
                         <div class="custome-checkbox mr-80" >
                             @foreach($categories as $value => $category)
                                 @php
-                                    $categoryName = json_decode($category->name, true)
+                                    try {
+                                        $categoryName = json_decode($category->name, true);
+                                        $englishName = $categoryName['en'] ?? ''; // Assuming 'en' key exists
+                                    } catch (\Exception $e) {
+                                        $englishName = ''; // Handle JSON decoding errors gracefully
+                                    }
                                 @endphp
-                                <input class="form-check-input" type="checkbox" wire:model.live="searchCategory" id="category_{{ $category->id }}" value="{{$category->id}}"/>
-                                <label class="form-check-label" for="category_{{ $category->id }}"><span>{{$categoryName['en']}} ({{count($category->products)}})</span></label>
-                                    <br />
-                            @endforeach
+
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       wire:model="searchCategory"
+                                       id="category_{{ $category->id }}"
+                                       value="{{ $category->id }}"
+                                        {{ in_array($category->id, $searchCategory) ? 'checked' : '' }} />
+                                <label class="form-check-label"
+                                       for="category_{{ $category->id }}">
+                                    <span>{{ $englishName }} ({{ count($category->products) }})</span>
+                                </label>
+                                <br/>
+                                @endforeach
                         </div>
                     </div>
-{{--                    <div class="sidebar-widget widget-category-2 mb-30">--}}
-{{--                        <h5 class="section-title style-1 mb-30">--}}
-{{--                            Color</h5>--}}
-{{--                        <div class="custome-checkbox mr-80">--}}
-{{--                            @foreach($categories as $value => $category)--}}
-{{--                                @php--}}
-{{--                                    $categoryName = json_decode($category->name, true)--}}
-{{--                                @endphp--}}
-{{--                                <input class="form-check-input" type="checkbox" wire:model.live="searchCategory" id="exampleCheckbox{{$value}}" value="{{$category->id}}" />--}}
-{{--                                <label class="form-check-label" for="exampleCheckbox{{$value}}"><span>{{$categoryName['en']}} ({{count($category->products)}})</span></label>--}}
-{{--                                <br />--}}
-{{--                            @endforeach--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="sidebar-widget widget-category-2 mb-30">--}}
+                    {{--                        <h5 class="section-title style-1 mb-30">--}}
+                    {{--                            Color</h5>--}}
+                    {{--                        <div class="custome-checkbox mr-80">--}}
+                    {{--                            @foreach($categories as $value => $category)--}}
+                    {{--                                @php--}}
+                    {{--                                    $categoryName = json_decode($category->name, true)--}}
+                    {{--                                @endphp--}}
+                    {{--                                <input class="form-check-input" type="checkbox" wire:model.live="searchCategory" id="exampleCheckbox{{$value}}" value="{{$category->id}}" />--}}
+                    {{--                                <label class="form-check-label" for="exampleCheckbox{{$value}}"><span>{{$categoryName['en']}} ({{count($category->products)}})</span></label>--}}
+                    {{--                                <br />--}}
+                    {{--                            @endforeach--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                     <!-- Fillter By Price -->
                     <div class="sidebar-widget price_range range mb-30">
@@ -50,13 +64,19 @@
                         <div class="price-filter">
                             <div class="price-filter-inner row">
                                 <div class="col-5">
-                                    <input type="number" min="0" wire:model.live="fromPrice" placeholder="from">
+                                    <input type="number"
+                                           min="0"
+                                           wire:model.live="fromPrice"
+                                           placeholder="from">
                                 </div>
                                 <div class="col-1 mt-2">
                                     <strong>-</strong>
                                 </div>
                                 <div class="col-5">
-                                    <input type="number" min="0" wire:model.live="toPrice" placeholder="to">
+                                    <input type="number"
+                                           min="0"
+                                           wire:model.live="toPrice"
+                                           placeholder="to">
                                 </div>
                             </div>
                         </div>
@@ -68,7 +88,12 @@
 
                         <div class="totall-product">
                             <p>
-                                We found <strong class="text-brand">{{count($products)}}</strong> items for you!
+                                We
+                                found
+                                <strong class="text-brand">{{count($products)}}</strong>
+                                items
+                                for
+                                you!
                             </p>
                         </div>
 
@@ -88,11 +113,11 @@
                                 <div class="sort-by-dropdown">
                                     <ul>
                                         @foreach($paginates as $paginate)
-                                        <li>
-                                            <a class="{{$paginate == $this->paginate ? 'active' : ''}}"
-                                               wire:click="LengthPagination({{$paginate}})">{{$paginate ? : 'All'}}</a>
-                                        </li>
-                                            @endforeach
+                                            <li>
+                                                <a class="{{$paginate == $this->paginate ? 'active' : ''}}"
+                                                   wire:click="LengthPagination({{$paginate}})">{{$paginate ? : 'All'}}</a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -139,12 +164,18 @@
 
                         {{--                        end--}}
                     </div>
-                    <div class="row product-grid" wire:loading.class="opacity-50">
+                    <div class="row product-grid"
+                         wire:loading.class="opacity-50">
                         @foreach($products as $product)
-                            <livewire:users.components.product-cart :$product wire:key="{{ $product->id}}"/>
+                            <livewire:users.components.product-cart
+                                    :$product
+                                    wire:key="{{ $product->id}}"/>
                         @endforeach
                     </div>
-{{--                   {{ $products->links()}}--}}
+
+                    @if($paginate)
+                        {{ $products->links()}}
+                    @endif
                 </div>
             </div>
             </div>

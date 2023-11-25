@@ -40,8 +40,7 @@
                 </h2>
                 <div class="product-rate-cover">
                     <div class="product-rate d-inline-block">
-                        <div class="product-rating"
-                             style="width: 90%"></div>
+                        <div class="product-rating" style="width: 90%"></div>
                     </div>
                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                 </div>

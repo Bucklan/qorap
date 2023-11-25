@@ -18,10 +18,11 @@ class Products extends Component
     public Collection $categories;
     public string $searchQuery = '';
     public array $searchCategory = [];
-    public int $fromPrice = 0;
-    public int $toPrice = 0;
+    public ?int $fromPrice = null;
+    public ?int $toPrice = null;
     public array $paginates = [15,20,50,100,0];
     public int $paginate = 15;
+    protected $queryString = ['searchCategory'];
 
     public function mount(): void
     {
@@ -44,14 +45,18 @@ class Products extends Component
             $this->resetPage();
         }
     }
-    public function updatedSearchCategory($value): void
-    {
-        $this->searchCategory[] = $value;
-    }
     function updated($value): void
     {
         $this->fromPrice = (int)$value;
         $this->paginate = (int)$value;
+        $this->toPrice = (int)$value;
+    }
+    function updatedFromPrice($value): void
+    {
+        $this->fromPrice = (int)$value;
+    }
+    function updatedToPrice($value): void
+    {
         $this->toPrice = (int)$value;
     }
 
@@ -68,10 +73,11 @@ class Products extends Component
         $products = Product::with('categories')
             ->when($this->searchQuery !== '', fn(Builder $query)
             => $query->where('name', 'like', '%' . $this->searchQuery . '%'))->orWhere('description', 'like', '%' . $this->searchQuery . '%')
-            ->when(count($this->searchCategory), fn(Builder $query)
-            => $query->whereHas('categories', function ($query) {
-                $query->where('category_id', $this->searchCategory);
-            }))
+            ->when(count($this->searchCategory) > 0, function ($query) {
+                $query->whereHas('categories', function ($query) {
+                    $query->whereIn('category_id', $this->searchCategory);
+                });
+            })
             ->when($this->fromPrice || $this->toPrice, fn(Builder $query) => $query->wherePriceBetween($this->fromPrice, $this->toPrice));
         $products = $this->paginate ? $products->paginate($this->paginate) : $products->get();
 
