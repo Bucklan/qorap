@@ -70,15 +70,8 @@ class Products extends Component
 
     public function render(): View
     {
-        $products = Product::with('categories')
-            ->when($this->searchQuery !== '', fn(Builder $query)
-            => $query->where('name', 'like', '%' . $this->searchQuery . '%'))->orWhere('description', 'like', '%' . $this->searchQuery . '%')
-            ->when(count($this->searchCategory) > 0, function ($query) {
-                $query->whereHas('categories', function ($query) {
-                    $query->whereIn('category_id', $this->searchCategory);
-                });
-            })
-            ->when($this->fromPrice || $this->toPrice, fn(Builder $query) => $query->wherePriceBetween($this->fromPrice, $this->toPrice));
+        $products = new Product();
+        $products->allFiltersForProducts($this->searchQuery, $this->searchCategory, $this->fromPrice, $this->toPrice);
         $products = $this->paginate ? $products->paginate($this->paginate) : $products->get();
 
         return view('livewire.users.products.index', [
