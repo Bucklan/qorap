@@ -46,4 +46,6 @@ class Product extends Model implements HasMedia
                 ->whereBetween('price', [$fromPriceByFilter, $toPriceByFilter])
             : null;
     }
+
+
 }

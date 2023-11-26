@@ -45,7 +45,7 @@
 
 <body>
 
-@include('livewire.users.navbar')
+<livewire:users.navbar :cities/>
 {{$slot}}
 @livewireScripts
 </body>

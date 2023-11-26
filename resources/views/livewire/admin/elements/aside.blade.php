@@ -1,7 +1,7 @@
 <div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
-            <a href="index.html" class="brand-wrap">
+            <a href="#" class="brand-wrap">
 {{--                <img src="{{asset('assets-back/imgs/theme/logo.svg')}}" class="logo" alt="Nest Dashboard" />--}}
             </a>
             <div>
@@ -11,68 +11,66 @@
         <nav>
             <ul class="menu-aside">
                 <li class="menu-item active">
-                    <a class="menu-link" href="index.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 {{--            Products--}}
                 <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-products-list.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Products</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-products-list.html">Product List</a>
-                        <a href="page-products-grid.html">Product grid</a>
-                        <a href="page-products-grid-2.html">Product grid 2</a>
-                        <a href="page-categories.html">Categories</a>
+                        <a href="{{route('admin.products.index')}}">Product List</a>
+                        <a href="#">Categories</a>
                     </div>
                 </li>
                 {{--            Orders--}}
                 <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-orders-1.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Orders</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-orders-1.html">Order list 1</a>
-                        <a href="page-orders-2.html">Order list 2</a>
-                        <a href="page-orders-detail.html">Order detail</a>
+                        <a href="#">Order list 1</a>
+                        <a href="#">Order list 2</a>
+                        <a href="#">Order detail</a>
                     </div>
                 </li>
 
                 <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-sellers-cards.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-store"></i>
                         <span class="text">Sellers</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-sellers-cards.html">Sellers cards</a>
-                        <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a>
+                        <a href="#">Sellers cards</a>
+                        <a href="#">Sellers list</a>
+                        <a href="#">Seller profile</a>
                     </div>
                 </li>
                 <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-form-product-1.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-add_box"></i>
                         <span class="text">Add product</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-form-product-1.html">Add product 1</a>
-                        <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a>
+                        <a href="#">Add product 1</a>
+                        <a href="#">Add product 2</a>
+                        <a href="#">Add product 3</a>
+                        <a href="#">Add product 4</a>
                     </div>
                 </li>
                 <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-transactions-1.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-monetization_on"></i>
                         <span class="text">Transactions</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-transactions-1.html">Transaction 1</a>
-                        <a href="page-transactions-2.html">Transaction 2</a>
+                        <a href="#">Transaction 1</a>
+                        <a href="#">Transaction 2</a>
                     </div>
                 </li>
                 <li class="menu-item has-submenu">
@@ -81,19 +79,19 @@
                         <span class="text">Account</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-account-login.html">User login</a>
-                        <a href="page-account-register.html">User registration</a>
-                        <a href="page-error-404.html">Error 404</a>
+                        <a href="#">User login</a>
+                        <a href="#">User registration</a>
+                        <a href="#">Error 404</a>
                     </div>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-comment"></i>
                         <span class="text">Reviews</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i> <span class="text">Brands</span> </a>
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-stars"></i> <span class="text">Brands</span> </a>
                 </li>
                 <li class="menu-item">
                     <a class="menu-link" disabled href="#">
@@ -110,12 +108,12 @@
                         <span class="text">Settings</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-settings-1.html">Setting sample 1</a>
-                        <a href="page-settings-2.html">Setting sample 2</a>
+                        <a href="#">Setting sample 1</a>
+                        <a href="#">Setting sample 2</a>
                     </div>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="page-blank.html">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-local_offer"></i>
                         <span class="text"> Starter page </span>
                     </a>

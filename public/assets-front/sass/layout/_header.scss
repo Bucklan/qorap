@@ -1654,7 +1654,7 @@
 					content: none;
 				}
 				&:before {
-					font-family: uicons-regular-straight !important;
+					font-family: uicons-regular-straight, serif !important;
 					content: "\f1c6";
 					color: $color-muted;
 					margin-right: 7px;
@@ -1663,7 +1663,6 @@
 			}
 		}
 		.select2-container {
-			max-width: unset;
 			min-width: 158px;
 			max-width: 158px;
 			margin-right: 30px;
@@ -1676,7 +1675,7 @@
 		background-color: #fff;
 		input {	
 			max-width: 600px;	
-			border-width: 0px;
+			border-width: 0;
 			border-radius: 0 5px 5px 0;
 			margin-left: 20px;
 			background-color: #fff;

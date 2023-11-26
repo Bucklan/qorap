@@ -3,24 +3,24 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Database\Factories\CategoryFactory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-    private array $categories = [
-        0 => '{"kz":"gul","en":"rose"}',
-        1 => '{"kz":"siylyq","en":"gift"}',
-        2 => '{"kz":"qorap","en":"box"}'
-    ];
     public function run(): void
     {
-        foreach ($this->categories as $value => $category) {
-            Category::query()->create([
-                'name' => $category,
-                'parent_id' => null,
-            ]);
+        $categories = [
+            0 => ['kz' => 'Гүл', 'ru' => 'Цветы', 'en' => 'rose'],
+            1 => ['kz' => 'Сыйлық', 'ru' => 'Подарок', 'en' => 'gift'],
+            2 => ['kz' => 'Қорап', 'ru' => 'Сет', 'en' => 'box'],
+        ];
+
+        foreach ($categories as $translation) {
+            $category = new Category();
+            foreach ($translation as $locale => $value) {
+                $category->setTranslation('name', $locale, $value);
+            }
+            $category->save();
         }
     }
 }

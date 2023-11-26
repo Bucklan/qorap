@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CitySeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(ColorSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(ProductCategory::class);
         $this->call(RoleSeeder::class);
