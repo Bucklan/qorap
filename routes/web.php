@@ -19,7 +19,7 @@ Route::get('',function (){
 });
 Route::get('/dashboard', Livewire\Users\Dashboard::class)->name('dashboard');
 Route::get('products', Livewire\Users\Products\Products::class)->name('products.index');
-Route::get('products/show', Livewire\Users\Products\Show::class)->name('products.show');
+Route::get('products/{product}', Livewire\Users\Products\Show::class)->name('products.show');
 Route::get('products/create', Livewire\Users\Products\ProductsCreate::class)->name('products.create');
 Route::get('products/{product}/edit', Livewire\Users\Products\ProductsEdit::class)->name('products.edit');
     Route::get('/register', Livewire\Users\Auth\RegisterForm::class)->name('register');

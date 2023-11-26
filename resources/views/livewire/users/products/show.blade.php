@@ -56,7 +56,7 @@
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="detail-info pr-30 pl-30">
                                     <span class="stock-status out-stock"> Sale Off </span>
-                                    <h2 class="title-detail">NAME</h2>
+                                    <h2 class="title-detail">{{$product->name}}</h2>
                                     <div class="product-detail-rating">
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
@@ -67,15 +67,15 @@
                                     </div>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
-                                            <span class="current-price text-brand">PRICE</span>
+                                            <span class="current-price text-brand">{{$product->price}} KZT</span>
                                             <span>
                                                 <span class="save-price font-md color3 ml-15">26% Off</span>
-                                                <span class="old-price font-md ml-15">OLDPRICE</span>
+                                                <span class="old-price font-md ml-15">{{$product->old_price}} KZT</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="short-desc mb-30">
-                                        <p class="font-lg">SHORT_DESCRIPTION</p>
+                                        <p class="font-lg">{{$product->description}}</p>
                                     </div>
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">Size / Weight: </strong>
@@ -111,13 +111,17 @@
                                     <div class="font-xs">
                                         <ul class="mr-50 float-start">
                                             <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
-                                            <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
+                                            <li class="mb-5">MFG:<span class="text-brand"> {{$product->created_at->format('d.m.Y')}} </span></li>
                                             <li>LIFE: <span class="text-brand">70 days</span></li>
                                         </ul>
                                         <ul class="float-start">
                                             <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                            <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
-                                            <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
+                                            <li class="mb-5">Category:
+                                            @foreach($product->categories as $category)
+                                                    <a href="#" rel="category">{{$category->name}},</a>
+                                            @endforeach
+                                            </li>
+                                            <li>Stock:<span class="in-stock text-brand ml-5">{{$product->quanatity}} Items In Stock</span></li>
                                         </ul>
                                     </div>
                                 </div>

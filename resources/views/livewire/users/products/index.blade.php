@@ -16,16 +16,8 @@
                         <h5 class="section-title style-1 mb-30">
                             Category</h5>
                         <div class="custome-checkbox mr-80" >
-                            @foreach($categories as $value => $category)
-                                @php
-                                    try {
-                                        $categoryName = json_decode($category->name, true);
-                                        $englishName = $categoryName['en'] ?? ''; // Assuming 'en' key exists
-                                    } catch (\Exception $e) {
-                                        $englishName = ''; // Handle JSON decoding errors gracefully
-                                    }
-                                @endphp
-
+                            @foreach($categories as $category)
+                                {{$category->id}}
                                 <input class="form-check-input"
                                        type="checkbox"
                                        wire:model="searchCategory"
@@ -34,7 +26,7 @@
                                         {{ in_array($category->id, $searchCategory) ? 'checked' : '' }} />
                                 <label class="form-check-label"
                                        for="category_{{ $category->id }}">
-                                    <span>{{ $englishName }} ({{ count($category->products) }})</span>
+                                    <span>{{ $category->name }} ({{ count($category->products) }})</span>
                                 </label>
                                 <br/>
                                 @endforeach
@@ -115,7 +107,7 @@
                                         @foreach($paginates as $paginate)
                                             <li>
                                                 <a class="{{$paginate == $this->paginate ? 'active' : ''}}"
-                                                   wire:click="LengthPagination({{$paginate}})">{{$paginate ? : 'All'}}</a>
+                                                   wire:click="LengthPagination({{$paginate}})">{{$paginate ?: 'All'}}</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -138,7 +130,7 @@
                                                href="#">Featured</a>
                                         </li>
                                         <li>
-                                            <a href="#">Price:
+                                            <a {{--wire:model="priceFilter"--}}>Price:
                                                 Low
                                                 to
                                                 High</a>
@@ -172,10 +164,11 @@
                                     wire:key="{{ $product->id}}"/>
                         @endforeach
                     </div>
-
-                    @if($paginate)
-                        {{ $products->links()}}
-                    @endif
+{{--                    <livewire:users.components.paginate--}}
+{{--                            :$collections="$products"--}}
+{{--                            :$paginate--}}
+{{--                            :$paginates="$paginates"--}}
+{{--                            wire:key="paginate"/>--}}
                 </div>
             </div>
             </div>

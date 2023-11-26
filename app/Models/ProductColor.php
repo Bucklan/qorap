@@ -10,4 +10,6 @@ class ProductColor extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public $translatable = ['name'];
 }

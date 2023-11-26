@@ -19,19 +19,14 @@
                 </div>
                 <div class="product-action-1">
                     <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
-                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                    <a aria-label="Quick view" href="{{route('products.show',$product->id)}}" class="action-btn"><i class="fi-rs-eye"></i></a>
                 </div>
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
                     @foreach($product->categories as $value => $category)
-                        @php
-                            $categoryName = json_decode($category->name, true)
-                        @endphp
-                        <a href="#">{{$categoryName['en']}}</a>
-                        @if($value < count($product->categories) - 1)
-                            ,
-                        @endif
+                        <a href="#">{{$category->name}}</a>
+                        {{$value < count($product->categories) - 1 ? ', ' : ''}}
                     @endforeach
 
                 </div>
