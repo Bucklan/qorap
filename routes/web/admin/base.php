@@ -1,8 +1,16 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-require_once('auth/base.php');
-require_once('employer/base.php');
-require_once('partner/base.php');
+
+Route::middleware('role:ADMIN|MANAGER|PARTNER')
+    ->prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+        Route::middleware('guest')->group(function () {
+                require_once('auth/login.php');
+            });
+        require_once('admin/base.php');
+        require_once('partner/base.php');
+    });
+
 
 

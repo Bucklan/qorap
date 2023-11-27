@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
+use App\LiveWire as Livewire;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [LoginController::class, 'create'])->name('login.form');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', Livewire\Users\Auth\LoginForm::class)
+    ->name('login');

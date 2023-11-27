@@ -1,6 +1,6 @@
 <?php
-use App\Http\Controllers\Auth\RegisterController;
+use App\LiveWire as Livewire;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/register', Livewire\Users\Auth\RegisterForm::class)
+    ->name('register');
