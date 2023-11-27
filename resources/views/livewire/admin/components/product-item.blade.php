@@ -10,6 +10,7 @@
                 <a class="itemside" href="#">
                     <div class="left">
 {{--                        https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg--}}
+{{--                        {{asset('assets-back/imgs/items/1.jpg')}}--}}
                         <img src="{{asset('assets-back/imgs/items/1.jpg')}}" class="img-sm img-thumbnail" alt="Item" />
                     </div>
                     <div class="info">

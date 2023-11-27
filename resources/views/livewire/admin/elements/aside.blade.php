@@ -24,9 +24,11 @@
                     </a>
                     <div class="submenu">
                         <a href="{{route('admin.products.index')}}">Product List</a>
+                        <a href="{{route('admin.products.create')}}">Product Create</a>
                         <a href="#">Categories</a>
                     </div>
                 </li>
+
                 {{--            Orders--}}
                 <li class="menu-item has-submenu">
                     <a class="menu-link" href="#">
@@ -49,18 +51,6 @@
                         <a href="#">Sellers cards</a>
                         <a href="#">Sellers list</a>
                         <a href="#">Seller profile</a>
-                    </div>
-                </li>
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#">
-                        <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Add product</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="#">Add product 1</a>
-                        <a href="#">Add product 2</a>
-                        <a href="#">Add product 3</a>
-                        <a href="#">Add product 4</a>
                     </div>
                 </li>
                 <li class="menu-item has-submenu">

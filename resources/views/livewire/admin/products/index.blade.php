@@ -18,7 +18,7 @@
                    class="btn btn-light rounded font-md">Export</a>
                 <a href="#"
                    class="btn btn-light rounded font-md">Import</a>
-                <a href="#"
+                <a href="{{route('admin.products.create')}}"
                    class="btn btn-primary btn-sm rounded">Create
                     new</a>
             </div>

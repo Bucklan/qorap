@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->json('short_description')->nullable();
+            $table->string('short_description')->nullable();
             $table->integer('quantity')->nullable()->default(0); //poka shto
             $table->tinyInteger('type')->nullable()->default(1);//poka shto
             $table->unsignedInteger('price')->nullable();//poka shto

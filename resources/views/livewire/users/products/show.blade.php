@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <div class="short-desc mb-30">
-                                        <p class="font-lg">{{$product->description}}</p>
+                                        <p class="font-lg">{{$product->short_description}}</p>
                                     </div>
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">Size / Weight: </strong>
@@ -90,11 +90,9 @@
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">COLORS </strong>
                                         <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">RED</a></li>
-                                            <li class="active"><a href="#">BLACK</a></li>
-                                            <li><a href="#">YELLOW</a></li>
-                                            <li><a href="#">WHITE</a></li>
-                                            <li><a href="#">VIOLET</a></li>
+                                            @foreach($product->colors as $color)
+                                                <li><a href="#">{{$color->name}}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="detail-extralink mb-50">

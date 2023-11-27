@@ -31,6 +31,7 @@ Route::middleware('role:ADMIN|MANAGER|PARTNER')->prefix('admin')->as('admin.')
             return redirect()->route('admin.employer.dashboard');
         });
         Route::get('products', Livewire\Admin\Products\Index::class)->name('products.index');
+        Route::get('products/create', Livewire\Admin\Products\Create::class)->name('products.create');
         Route::get('login', Livewire\Admin\Auth\Login::class)->name('login')->middleware('guest');
         Route::get('dashboard', Livewire\Admin\Employer\Dashboard::class)->name('employer.dashboard')->middleware('auth');
 });
