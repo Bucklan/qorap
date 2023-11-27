@@ -3,5 +3,5 @@
 use App\LiveWire as Livewire;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', Livewire\Users\Auth\LoginForm::class)
+Route::get('/login', \App\Livewire\Frontend\Auth\LoginForm::class)
     ->name('login');

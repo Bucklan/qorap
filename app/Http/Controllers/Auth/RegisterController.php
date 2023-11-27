@@ -12,10 +12,10 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function register(\App\Services\User\Auth\Requests\RegisterRequest $request)
+    public function register(\App\Services\Frontend\Auth\Requests\RegisterRequest $request)
     {
-        app(\App\Services\User\Auth\Contracts\Register::class)->execute(
-            \App\Services\User\Auth\Dto\Register\RegisterDtoFactory::fromRequest($request)
+        app(\App\Services\Frontend\Auth\Contracts\Register::class)->execute(
+            \App\Services\Frontend\Auth\Dto\Register\RegisterDtoFactory::fromRequest($request)
         );
         return redirect()->route('gift.index');
     }

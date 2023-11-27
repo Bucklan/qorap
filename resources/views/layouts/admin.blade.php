@@ -33,14 +33,14 @@
     {{--@include('livewire.admin.navbar')--}}
     {{--@include('livewire.admin.navbar')--}}
     {{--@include('livewire.admin.navbar')--}}
-    @include('livewire.admin.elements.aside')
+    @include('livewire.backend.elements.aside')
     <main class="main-wrap">
-        @include('livewire.admin.elements.header')
+        @include('livewire.backend.elements.header')
         <section
                 class="content-main">
             {{$slot}}
         </section>
-        @include('livewire.admin.elements.footer')
+        @include('livewire.backend.elements.footer')
     </main>
 @else
     {{$slot}}

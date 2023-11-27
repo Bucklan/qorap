@@ -1,11 +1,11 @@
 <?php
 
 
-use Illuminate\Support\Facades\Route;
 use App\Livewire as LiveWire;
+use Illuminate\Support\Facades\Route;
 
-Route::get('products', Livewire\Users\Products\Products::class)->name('products.index');
-Route::get('products/{product}', Livewire\Users\Products\Show::class)->name('products.show');
+Route::get('products', LiveWire\Frontend\Products\Index::class)->name('products.index');
+Route::get('products/{product}', LiveWire\Frontend\Products\Show::class)->name('products.show');
 
 //Route::resource('/gift', GiftController::class)->only('index', 'show', 'giftByCategory');
 //Route::get('/gift/category/{category}', [GiftController::class, 'giftByCategory'])->name('gift.category');

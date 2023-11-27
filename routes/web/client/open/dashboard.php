@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Livewire as LiveWire;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', Livewire\Users\Dashboard::class)
+Route::get('/dashboard', LiveWire\Frontend\Elements\Dashboard::class)
     ->name('dashboard');

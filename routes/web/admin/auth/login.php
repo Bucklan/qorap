@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Livewire as Livewire;
-Route::get('login', Livewire\Admin\Auth\Login::class)
+use Illuminate\Support\Facades\Route;
+
+Route::get('login', Livewire\Backend\Auth\Login::class)
     ->name('login');
 
 
