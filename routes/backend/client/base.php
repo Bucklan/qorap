@@ -15,8 +15,13 @@ require_once('open/products.php');
 require_once('open/dashboard.php');
 //require_once('open/comments.php');
 
-Route::get('',function (){
+Route::get('', function () {
     return redirect()->route('dashboard');
 });
 
+Route::middleware('guest')->group(function () {
+    require_once('auth/base.php');
+});
+Route::get('auth/google',[App\Http\Controllers\Auth\GoogleController::class,'redirectGoogle']);
+Route::get('auth/google/callback',[App\Http\Controllers\Auth\GoogleController::class,'handleGoogleCallback']);
 
