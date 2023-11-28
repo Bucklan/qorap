@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController
@@ -15,6 +17,7 @@ class GoogleController
 
     public function handleGoogleCallback()
     {
+        $password = Str::random(10);
         try {
             $user = Socialite::driver('google')->user();
             $findUser = User::where('google_id', $user->id)->first();
@@ -28,10 +31,11 @@ class GoogleController
                     'surname' => $user->user['family_name'],
                     'email' => $user->email,
                     'google_id' => $user->id,
-                    'password' => encrypt(rand(8123123321, 321123321123)),
+                    'password' => Hash::make($password),
                 ]);
 
                 Auth::login($newUser);
+                \Mail::to($newUser->email)->send(new \App\Mail\User\PasswordMail($password));
                 return redirect('/');
             }
         } catch (\Exception $e) {
