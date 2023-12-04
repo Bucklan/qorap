@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations as Relations;
 
 class Address extends Model
 {
@@ -17,4 +18,9 @@ class Address extends Model
         'building',
         'apartment',
     ];
+
+    public function city(): Relations\BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
 }

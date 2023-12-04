@@ -89,8 +89,6 @@
                             </p>
                         </div>
 
-                        {{--                        sort by--}}
-
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
                                 <div class="sort-by-product-wrap">
@@ -159,7 +157,7 @@
                     <div class="row product-grid"
                          wire:loading.class="opacity-50">
                         @foreach($products as $product)
-                            <livewire:users.components.product-cart
+                            <livewire:frontend.components.product-cart
                                     :$product
                                     wire:key="{{ $product->id}}"/>
                         @endforeach

@@ -51,4 +51,9 @@ class Product extends Model implements HasMedia
                 ->whereBetween('price', [$fromPriceByFilter, $toPriceByFilter])
             : null;
     }
+
+    public function shop(): Relations\BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

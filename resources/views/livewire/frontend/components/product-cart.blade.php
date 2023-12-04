@@ -41,7 +41,7 @@
                 </div>
                 <div>
                                             <span class="font-small text-muted">By <a
-                                                        href="vendor-details-1.html">SHOP NAME</a></span>
+                                                        href="{{route('shops.show',$product->shop->id)}}">{{$product->shop->name}}</a></span>
                 </div>
                 <div class="product-card-bottom">
                     <div class="product-price">

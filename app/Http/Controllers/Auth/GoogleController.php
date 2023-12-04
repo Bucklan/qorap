@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\User\Role;
 use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,8 +32,9 @@ class GoogleController
                     'surname' => $user->user['family_name'],
                     'email' => $user->email,
                     'google_id' => $user->id,
-                    'password' => Hash::make($password),
+                    'password' => $password,
                 ]);
+                $newUser->assignRole(Role::USER);
 
                 Auth::login($newUser);
                 \Mail::to($newUser->email)->send(new \App\Mail\User\PasswordMail($password));

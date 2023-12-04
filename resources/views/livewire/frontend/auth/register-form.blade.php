@@ -71,11 +71,11 @@
                                         <img src="assets-front/imgs/theme/icons/logo-facebook.svg" alt="" />
                                         <span>Continue with Facebook</span>
                                     </a>
-                                    <a href="#" class="social-login google-login">
+                                    <a href="{{url('auth/google')}}" class="social-login google-login">
                                         <img src="assets-front/imgs/theme/icons/logo-google.svg" alt="" />
                                         <span>Continue with Google</span>
                                     </a>
-                                    <a href="#" class="social-login apple-login">
+                                    <a href="{{url('auth/google')}}" class="social-login apple-login">
                                         <img src="assets-front/imgs/theme/icons/logo-apple.svg" alt="" />
                                         <span>Continue with Apple</span>
                                     </a>

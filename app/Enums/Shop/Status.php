@@ -2,18 +2,28 @@
 
 namespace App\Enums\Shop;
 
-enum Status: string
-{
-    case ONLINE = "ONLINE";
-    case STORE = "IN_STORE";
-    case ONLINE_AND_STORE = "ONLINE_AND_STORE";
+use BenSampo\Enum\Enum;
 
-    public function label(): string
+class Status extends Enum
+{
+    const ONLINE = "online market";
+    const STORE = "store market";
+    const ONLINE_AND_STORE = "online and store market";
+
+    public static function getDescription($value): string
     {
-        return match ($this) {
-            self::ONLINE => 'Online',
-            self::STORE => 'Store',
-            self::ONLINE_AND_STORE => 'Online and Store',
-        };
+        if ($value === self::ONLINE) {
+            return 'online market';
+        }
+
+        if ($value === self::STORE) {
+            return 'store market';
+        }
+
+        if ($value === self::ONLINE_AND_STORE) {
+            return 'online and store market';
+        }
+
+        return parent::getDescription($value);
     }
 }

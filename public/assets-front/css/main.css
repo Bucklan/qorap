@@ -8333,7 +8333,6 @@ h6.post-title {
 }
 
 .header-style-1 .search-location .select2-container {
-  max-width: unset;
   min-width: 158px;
   max-width: 158px;
   margin-right: 30px;

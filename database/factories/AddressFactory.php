@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,7 +18,12 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'addressable_type' => $this->faker->word(),
+            'addressable_id' => $this->faker->randomNumber(),
+            'city_id' => $this->faker->randomNumber(),
+            'street' => $this->faker->word(),
+            'building' => $this->faker->word(),
+            'apartment' => $this->faker->word(),
         ];
     }
 }

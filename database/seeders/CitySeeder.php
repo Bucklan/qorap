@@ -25,7 +25,6 @@ class CitySeeder extends Seeder
         13 => '{"kz":"Тараз","ru": "Тараз","en":"Taraz"}',
         14 => '{"kz":"Түркістан","ru": "Туркестан","en":"Turkestan"}',
         15 => '{"kz":"Шымкент","ru": "Шымкент","en":"Shymkent"}',
-
     ];
     public function run()
     {
