@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img
+                        <a href="#"><img
                                     src="assets-front/imgs/theme/logo.svg"
                                     alt="logo"/></a>
                     </div>
@@ -97,10 +97,8 @@
                                     <a href="shop-cart.html" ></a>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <a href="#">
                                         <i class="fi fi-rs-user"></i>
-                                    </a>
-                                    <a href="page-account.html">
                                         <span class="lable ml-0">
                                             {{Auth::user() ? Auth::user()->name: ''}}
                                         </span>
@@ -182,15 +180,15 @@
                                         <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="{{route('shops.index')}}">Shops</a></li>
-                                            <li><a href="vendors-list.html">Vendors List</a></li>
-                                            <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
-                                            <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
-                                            <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
-                                            <li><a href="vendor-guide.html">Vendor Guide</a></li>
+                                            <li><a href="#">Vendors List</a></li>
+                                            <li><a href="#">Vendor Details 01</a></li>
+                                            <li><a href="#">Vendor Details 02</a></li>
+                                            <li><a href="#">Vendor Dashboard</a></li>
+                                            <li><a href="#">Vendor Guide</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="page-contact.html">Contact</a>
+                                        <a href="#">Contact</a>
                                     </li>
                                     <li class="position-static">
                                         <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
@@ -198,39 +196,39 @@
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Fruit & Vegetables</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Meat & Poultry</a></li>
-                                                    <li><a href="shop-product-right.html">Fresh Vegetables</a></li>
-                                                    <li><a href="shop-product-right.html">Herbs & Seasonings</a></li>
-                                                    <li><a href="shop-product-right.html">Cuts & Sprouts</a></li>
-                                                    <li><a href="shop-product-right.html">Exotic Fruits & Veggies</a></li>
-                                                    <li><a href="shop-product-right.html">Packaged Produce</a></li>
+                                                    <li><a href="#">Meat & Poultry</a></li>
+                                                    <li><a href="#">Fresh Vegetables</a></li>
+                                                    <li><a href="#">Herbs & Seasonings</a></li>
+                                                    <li><a href="#">Cuts & Sprouts</a></li>
+                                                    <li><a href="#">Exotic Fruits & Veggies</a></li>
+                                                    <li><a href="#">Packaged Produce</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Breakfast & Dairy</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Milk & Flavoured Milk</a></li>
-                                                    <li><a href="shop-product-right.html">Butter and Margarine</a></li>
-                                                    <li><a href="shop-product-right.html">Eggs Substitutes</a></li>
-                                                    <li><a href="shop-product-right.html">Marmalades</a></li>
-                                                    <li><a href="shop-product-right.html">Sour Cream</a></li>
-                                                    <li><a href="shop-product-right.html">Cheese</a></li>
+                                                    <li><a href="#">Milk & Flavoured Milk</a></li>
+                                                    <li><a href="#">Butter and Margarine</a></li>
+                                                    <li><a href="#">Eggs Substitutes</a></li>
+                                                    <li><a href="#">Marmalades</a></li>
+                                                    <li><a href="#">Sour Cream</a></li>
+                                                    <li><a href="#">Cheese</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Meat & Seafood</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Breakfast Sausage</a></li>
-                                                    <li><a href="shop-product-right.html">Dinner Sausage</a></li>
-                                                    <li><a href="shop-product-right.html">Chicken</a></li>
-                                                    <li><a href="shop-product-right.html">Sliced Deli Meat</a></li>
-                                                    <li><a href="shop-product-right.html">Wild Caught Fillets</a></li>
-                                                    <li><a href="shop-product-right.html">Crab and Shellfish</a></li>
+                                                    <li><a href="#">Breakfast Sausage</a></li>
+                                                    <li><a href="#">Dinner Sausage</a></li>
+                                                    <li><a href="#">Chicken</a></li>
+                                                    <li><a href="#">Sliced Deli Meat</a></li>
+                                                    <li><a href="#">Wild Caught Fillets</a></li>
+                                                    <li><a href="#">Crab and Shellfish</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="shop-product-right.html"><img src="#" alt="Nest" /></a>
+                                                    <a href="#"><img src="#" alt="Nest" /></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>
@@ -241,7 +239,7 @@
                                                             <span class="new-price text-success">Save to 50%</span>
                                                         </div>
                                                         <div class="menu-banner-btn">
-                                                            <a href="shop-product-right.html">Shop now</a>
+                                                            <a href="#">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="menu-banner-discount">
@@ -262,7 +260,7 @@
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                <a href="#">
                                     <img alt="Nest"
                                          src="assets-front/imgs/theme/icons/icon-heart.svg"/>
                                     <span class="pro-count white">4</span>
@@ -279,13 +277,13 @@
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img
+                                                <a href="#"><img
                                                             alt="Nest"
                                                             src="assets-front/imgs/shop/thumbnail-3.jpg"/></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4>
-                                                    <a href="shop-product-right.html">Plain
+                                                    <a href="#">Plain
                                                         Striola
                                                         Shirts</a>
                                                 </h4>
@@ -300,13 +298,13 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img
+                                                <a href="#"><img
                                                             alt="Nest"
                                                             src="assets-front/imgs/shop/thumbnail-4.jpg"/></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4>
-                                                    <a href="shop-product-right.html">Macbook
+                                                    <a href="#">Macbook
                                                         Pro
                                                         2022</a>
                                                 </h4>
@@ -328,9 +326,9 @@
                                             </h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="shop-cart.html">View
+                                            <a href="#">View
                                                 cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
+                                            <a href="#">Checkout</a>
                                         </div>
                                     </div>
                                 </div>

@@ -14,8 +14,7 @@ class City extends Model
     public array $translatable = ['name'];
 
     protected $fillable = [
-        'name',
-    ];
+        'name',];
 
     public function addresses(): Relations\HasMany
     {

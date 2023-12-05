@@ -23,8 +23,8 @@
                         <span class="text">Products</span>
                     </a>
                     <div class="submenu">
-                        <a href="{{route('admin.products.index')}}">Product List</a>
-                        <a href="{{route('admin.products.create')}}">Product Create</a>
+                        <a href="{{--{{route('admin.products.index')}}--}}">Product List</a>
+                        <a href="{{--{{route('admin.products.create')}}--}}">Product Create</a>
                         <a href="#">Categories</a>
                     </div>
                 </li>

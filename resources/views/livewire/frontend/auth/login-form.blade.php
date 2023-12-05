@@ -51,29 +51,33 @@
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
                                             </div>
-
                                         </form>
-                                        <div class="card-login mt-115">
-                                            <a href="{{url('auth/google')}}" class="social-login facebook-login">
-                                                <img src="assets-front/imgs/theme/icons/logo-facebook.svg" alt="" />
-                                                <span>Continue with Facebook</span>
-                                            </a>
-                                            <a href="{{url('auth/google')}}" class="social-login google-login">
-                                                <img src="assets-front/imgs/theme/icons/logo-google.svg" alt="" />
-                                                <span>Continue with Google</span>
-                                            </a>
-                                            <a href="{{url('auth/google')}}" class="social-login apple-login">
-                                                <img src="assets-front/imgs/theme/icons/logo-apple.svg" alt="" />
-                                                <span>Continue with Apple</span>
-                                            </a>
-                                        </div>
+
                                     </div>
+
+                                </div>
+                                <div class="card-login">
+                                    <a href="{{url('auth/google')}}" class="social-login facebook-login">
+                                        <img src="assets-front/imgs/theme/icons/logo-facebook.svg" alt="" />
+                                    </a>
+                                    <a href="{{url('auth/google')}}" class="social-login google-login">
+                                        <img src="assets-front/imgs/theme/icons/logo-google.svg" alt="" />
+                                    </a>
+                                    <a href="{{url('auth/google')}}" class="social-login apple-login">
+                                        <img src="assets-front/imgs/theme/icons/logo-apple.svg" alt="" />
+                                    </a>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </main>
 </div>

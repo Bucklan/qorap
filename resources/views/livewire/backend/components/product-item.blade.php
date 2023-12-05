@@ -18,12 +18,12 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{$product->price}} KZT</span></div>
+            <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{(formatPrice($product->price))}} KZT</span></div>
             <div class="col-lg-2 col-sm-2 col-4 col-status">
                 <span class="badge rounded-pill alert-success">Active</span>
             </div>
             <div class="col-lg-1 col-sm-2 col-4 col-date">
-                <span>{{$product->created_at->format('d.m.Y') }}</span>
+                <span>{{ $product->created_at->format('d.m.y') }}</span>
             </div>
             <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
                 <a href="#" class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-edit"></i> Edit </a>

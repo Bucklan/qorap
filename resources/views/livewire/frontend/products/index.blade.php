@@ -1,6 +1,6 @@
 
 <div>
-
+    {{ Breadcrumbs::render('products.index') }}
     <main class="main">
         <!-- this div need center-->
 

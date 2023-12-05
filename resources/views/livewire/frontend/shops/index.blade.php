@@ -1,13 +1,6 @@
 <div>
     <main class="main pages mb-80">
-        <div class="page-header breadcrumb-wrap">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Shops List
-                </div>
-            </div>
-        </div>
+        {{ Breadcrumbs::render('shops.index') }}
         <div class="page-content pt-50">
             <div class="container">
                 <div class="archive-header-2 text-center">

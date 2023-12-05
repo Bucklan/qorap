@@ -1,16 +1,6 @@
 <div>
-
-
     <main class="main">
-        <div class="page-header breadcrumb-wrap">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Store <span></span>
-                    {{$shop->name}}
-                </div>
-            </div>
-        </div>
+        {{ Breadcrumbs::render('shops.show',$shop) }}
         <div class="container mb-30">
             <div class="archive-header-2 text-center pt-80 pb-50">
                 <h1 class="display-2 mb-50">{{$shop->name}}</h1>

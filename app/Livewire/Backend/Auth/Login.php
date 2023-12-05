@@ -18,7 +18,6 @@ class Login extends Component
     {
         $validate = $this->validate();
         $check = $this->checkUserRole();
-//        dd(Auth::attempt($validate));
         if ($check && Auth::attempt($validate)){
             $this->reset($this->email, $this->password);
             return redirect()->intended('/admin/dashboard');

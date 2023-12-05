@@ -14,6 +14,6 @@ class Show extends Component
     }
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.frontend.shops.show');
+        return view('livewire.frontend.shops.show')->layout('layouts.app');
     }
 }

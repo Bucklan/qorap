@@ -2,18 +2,28 @@
 
 namespace App\Enums\Product;
 
-enum Type: int
-{
-    case ACTIVE = 1;
-    case NOT_ACTIVE = 2;
-    case ARCHIVE = 3;
+use BenSampo\Enum\Enum;
 
-    public function label(): string
+class Type extends Enum
+{
+    const ACTIVE = 1;
+    const NOT_ACTIVE = 2;
+    const ARCHIVE = 3;
+
+    public static function getDescription($value): string
     {
-        return match ($this) {
-            self::ACTIVE => 'ACTIVE',
-            self::NOT_ACTIVE => 'NOT_ACTIVE',
-            self::ARCHIVE => 'ARCHIVE',
-        };
+        if ($value === self::ACTIVE) {
+            return 'active';
+        }
+
+        if ($value === self::NOT_ACTIVE) {
+            return 'not active';
+        }
+
+        if ($value === self::ARCHIVE) {
+            return 'archive';
+        }
+
+        return parent::getDescription($value);
     }
 }

@@ -9,6 +9,10 @@ use \Illuminate\Database\Eloquent\Relations as Relations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property mixed $colors
+ * @property mixed $categories
+ */
 class Product extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
@@ -35,20 +39,19 @@ class Product extends Model implements HasMedia
     }
 
 
-//    public function scopeGetCategory($query, $categoryId)
-//    {
-//        return $query->with('categories', function ($query) use ($categoryId) {
-//            $query->where('category_id', $categoryId);
-//        });
-//    }
+    public function scopeGetCategory($query, $searchCategory): void
+    {
+        $query->whereHas('categories', function ($query2) use ($searchCategory) {
+            $query2->whereIn('category_id', $searchCategory);
+        });
+    }
 
     public function scopeWherePriceBetween(Builder $query, int $fromPriceByFilter, int $toPriceByFilter): ?Builder
     {
-        return $fromPriceByFilter ||
-        $toPriceByFilter &&
-        $fromPriceByFilter <= $toPriceByFilter
-            ? $query
-                ->whereBetween('price', [$fromPriceByFilter, $toPriceByFilter])
+        return $fromPriceByFilter || $toPriceByFilter &&
+        $fromPriceByFilter <= $toPriceByFilter ?
+            $query->whereBetween('price',
+                [$fromPriceByFilter, $toPriceByFilter])
             : null;
     }
 
@@ -56,4 +59,5 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsTo(Shop::class);
     }
+
 }

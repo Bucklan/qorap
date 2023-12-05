@@ -15,6 +15,6 @@ class ProductItem extends Component
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.admin.components.product-item')->layout('layouts.admin');
+        return view('livewire.backend.components.product-item')->layout('layouts.admin');
     }
 }
