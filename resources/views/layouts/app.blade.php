@@ -7,12 +7,11 @@
 <head>
     <meta charset="utf-8"/>
     <title>
-        Nest
+        Qorap
         -
-        Multipurpose
+        Best
         eCommerce
-        HTML
-        Template</title>
+        from Kazakhstan</title>
     <meta http-equiv="x-ua-compatible"
           content="ie=edge"/>
     <meta name="description"

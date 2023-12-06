@@ -18,7 +18,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{(formatPrice($product->price))}} KZT</span></div>
+            <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{($product->price)}} KZT</span></div>
             <div class="col-lg-2 col-sm-2 col-4 col-status">
                 <span class="badge rounded-pill alert-success">Active</span>
             </div>

@@ -9,6 +9,7 @@ class Dashboard extends Component
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.backend.employer.dashboard')->layout('layouts.admin');
+        return view('livewire.backend.admin.dashboard')
+            ->layout('layouts.admin');
     }
 }

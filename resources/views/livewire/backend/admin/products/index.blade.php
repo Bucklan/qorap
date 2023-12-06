@@ -75,11 +75,13 @@
             </header>
             <!-- card-header end// -->
             <div class="card-body">
-                @foreach($products as $product)
+                @forelse($products as $product)
                     <livewire:backend.components.product-item
                             :product="$product"
                             :key="$product->id"/>
-                @endforeach
+                @empty
+                    <p class="text-center">No products found</p>
+                @endforelse
 
                 {{--                {!! $products->links() !!}--}}
             </div>

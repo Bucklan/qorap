@@ -12,6 +12,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 
+/**
+ * @method static hasRoleIsUser()
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory,
@@ -42,9 +45,8 @@ class User extends Authenticatable
 //        'password' => 'hashed',
     ];
 
-    public function scopeHasRoleIsUser(Builder $query, string $email): bool
+    public function scopeHasRoleIsUser(Builder $query): bool
     {
-        $query = $query->where('email', $email)->first();
         return $query->hasRole(Role::USER);
     }
 

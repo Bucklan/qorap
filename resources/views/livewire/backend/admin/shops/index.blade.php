@@ -35,7 +35,7 @@
             </header>
             <div class="card-body">
                 <div class="row gx-3">
-                    @foreach($shops as $shop)
+                    @forelse($shops as $shop)
                         <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                             <figure class="card border-1">
                                 <div class="card-header bg-white text-center">
@@ -49,7 +49,14 @@
                                 </figcaption>
                             </figure>
                         </div>
-                    @endforeach
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    <i class="text-warning material-icons md-warning"></i>
+                                    <span>No shops found</span>
+                                </div>
+                            </div>
+                    @endforelse
                 </div>
             </div>
         </div>

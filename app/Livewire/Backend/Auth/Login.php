@@ -3,37 +3,31 @@
 namespace App\Livewire\Backend\Auth;
 
 use App\Models\User;
+use App\Services\Backend\Auth\LoginService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Features\SupportValidation\Rule;
 
 class Login extends Component
 {
-    #[Rule('required|email|exists:users,email')]
-    public string $email;
-    #[Rule('required|string|max:255')]
-    public string $password;
+    public $email;
+    public $password;
+    protected $rules = [
+        'email' => 'required|email',
+        'password' => 'required|min:8',
+    ];
 
-    public function login()
-    {
-        $validate = $this->validate();
-        $check = $this->checkUserRole();
-        if ($check && Auth::attempt($validate)){
-            $this->reset($this->email, $this->password);
-            return redirect()->intended('/admin/dashboard');
-        }
-        else{
-            return redirect()->back()->with('error','your email or password is wrong');
-        }
-    }
 
-    private function checkUserRole(): bool
+
+    public function login(): void
     {
-        return !User::hasRoleIsUser($this->email);
+        $this->validate();
+        app(LoginService::class)->run($this->email, $this->password);
     }
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.backend.auth.login')->layout('layouts.admin');
+        return view('livewire.backend.auth.login')
+            ->layout('layouts.admin');
     }
 }

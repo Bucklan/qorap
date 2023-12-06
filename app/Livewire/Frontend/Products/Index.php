@@ -20,13 +20,14 @@ class Index extends Component
     public array $searchCategory = [];
     public ?int $fromPrice = null;
     public ?int $toPrice = null;
-    public array $paginates = [15, 20, 50, 100, 0];
+    public array $paginates = [15, 20, 50, 100];
     public int $paginate = 15;
     protected $queryString = ['searchCategory'];
 
     public function mount(): void
     {
         $this->categories = Category::with('products')->get();
+
     }
 
     public function LengthPagination(int $length): void
@@ -65,19 +66,16 @@ class Index extends Component
 
     public function render(): View
     {
-        $products = Product::with('categories')->
-            when($this->searchQuery, function (Builder $query) {
-                $query->where('name', 'like', '%' . $this->searchQuery . '%');
+        $products = Product::with('categories', 'colors', 'shop', 'media')
+            ->when($this->searchQuery, function (Builder $query) {
+                $query->whereNameAndDescription($this->searchQuery);
             })
-           /* ->when($this->searchCategory, function (Builder $query) {
-                $query->whereHas('categories', function ($query2) {
-                    $query2->whereIn('category_id', $this->searchCategory);
-                });
-            })*/
+            ->when($this->searchCategory, function (Builder $query) {
+                $query->getCategory($this->searchCategory);
+            })
             ->when($this->toPrice || $this->fromPrice, function (Builder $query) {
                 $query->wherePriceBetween($this->fromPrice, $this->toPrice);
-            });
-            $products = $this->paginate === 0 ? $products->get() : $products->paginate($this->paginate);
+            })->paginate($this->paginate);
         return view('livewire.frontend.products.index', compact('products'))
             ->layout('layouts.app');
     }

@@ -203,7 +203,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         \App\Services\Frontend\Auth\Providers\ActionServiceProvider::class,
-        \App\Services\Frontend\Product\Providers\ActionServiceProvider::class,
         RepositoryServiceProvider::class,
         \Spatie\Permission\PermissionServiceProvider::class,
         \App\Providers\ObserverProvider::class,
