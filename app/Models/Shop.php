@@ -10,16 +10,10 @@ use Spatie\Translatable\HasTranslations;
 class Shop extends Model
 {
     use HasFactory;
-
-
-    protected $fillable = [
-        'name',
-        'phone',
-        'number_of_stores',
-        'social_link',
-        'status',
-        'user_id',
-        'address_id',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
     ];
 
     public function address(): Relations\BelongsTo
@@ -36,19 +30,11 @@ class Shop extends Model
 
     public function getStatusClass(): string
     {
-        switch ($this->status) {
-            case 'online market':
-                return 'hot';
-                break;
-            case 'store market':
-                return 'best';
-                break;
-            case 'online and store market':
-                return 'sale';
-                break;
-            default:
-                return 'new';
-                break;
-        }
+        return match ($this->status) {
+            'online market' => 'hot',
+            'store market' => 'best',
+            'online and store market' => 'sale',
+            default => 'new',
+        };
     }
 }

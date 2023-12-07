@@ -4,17 +4,25 @@ namespace App\Livewire\Frontend\Shops;
 
 use Livewire\Component;
 use App\Models as Models;
+use Livewire\WithPagination;
+
 class Index extends Component
 {
-    public $shops = [];
+    use withPagination;
+//public $shopProductCount;
 
-    public function mount(): void
-    {
-        $this->shops = Models\Shop::all();
-    }
+public function mount()
+{
+//   $this->shopProductCount = Models\Shop::withCount('products')->get();
+//   foreach ($this->shopProductCount as $shop){
+//       dd($shop->products_count);
+//   }
+}
+
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.frontend.shops.index')
+        $shops = Models\Shop::withCount('products','address')->paginate(10);
+        return view('livewire.frontend.shops.index',compact('shops'))
             ->layout('layouts.app');
     }
 }

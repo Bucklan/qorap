@@ -2,12 +2,9 @@
 
 namespace App\Livewire\Frontend\Products;
 
-use App\Models\Category;
-use App\Models\Product;
-use App\Services\Frontend\Product\Contracts\Filter;
+use App\Models as Models;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,18 +12,23 @@ class Index extends Component
 {
     use WithPagination;
 
-    public Collection $categories;
+    public $categories;
+    public $colors;
+    public $shops;
     public string $searchQuery = '';
     public array $searchCategory = [];
+    public array $searchColor = [];
+    public array $searchShop = [];
     public ?int $fromPrice = null;
     public ?int $toPrice = null;
     public array $paginates = [15, 20, 50, 100];
     public int $paginate = 15;
-    protected $queryString = ['searchCategory'];
 
     public function mount(): void
     {
-        $this->categories = Category::with('products')->get();
+        $this->categories = Models\Category::withCount('products')->get();
+        $this->colors = Models\Color::withCount('products')->get();
+        $this->shops = Models\Shop::withCount('products')->get();
 
     }
 
@@ -37,11 +39,9 @@ class Index extends Component
 
     public function updating($key): void
     {
-        if ($key === 'searchQuery'
-            || $key === 'searchCategory'
-            || $key === 'fromPrice'
-            || $key === 'toPrice'
-            || $key === 'paginate'
+        if ($key === 'searchQuery' || $key === 'searchCategory'
+            || $key === 'fromPrice' || $key === 'toPrice'
+            || $key === 'paginate' || $key === 'searchColor'
         ) {
             $this->resetPage();
         }
@@ -50,8 +50,8 @@ class Index extends Component
     function updated($value): void
     {
         $this->fromPrice = (int)$value;
-        $this->paginate = (int)$value;
         $this->toPrice = (int)$value;
+        $this->paginate = (int)$value;
     }
 
     function updatedFromPrice($value): void
@@ -66,7 +66,7 @@ class Index extends Component
 
     public function render(): View
     {
-        $products = Product::with('categories', 'colors', 'shop', 'media')
+        $products = Models\Product::withCount('categories', 'colors', 'shop', 'media')
             ->when($this->searchQuery, function (Builder $query) {
                 $query->whereNameAndDescription($this->searchQuery);
             })

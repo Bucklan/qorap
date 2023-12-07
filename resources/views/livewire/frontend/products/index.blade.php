@@ -12,7 +12,25 @@
                             <input type="search" wire:model.live="searchQuery" placeholder="Search…" />
                         </div>
                     </div>
-                    <livewire:frontend.components.category-filter-checkbox :categories="$categories"/>
+                    <livewire:frontend.components.filter-checkbox
+                            :elements="$categories"
+                            :search-element="$searchCategory"
+                            :search-model='"searchCategory"'
+                            :name-element="'Category'"
+                    />
+
+                    <livewire:frontend.components.filter-checkbox
+                            :elements="$colors"
+                            :search-element="$searchColor"
+                            :search-model='"searchColor"'
+                            :name-element="'Color'"
+                    />
+                    <livewire:frontend.components.filter-checkbox
+                            :elements="$shops"
+                            :search-element="$searchShop"
+                            :search-model='"searchShop"'
+                            :name-element="'Shop'"
+                    />
                     <!-- Fillter By Price -->
                    <livewire:frontend.components.price-filter />
                 </div>

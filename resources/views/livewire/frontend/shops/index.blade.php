@@ -27,7 +27,7 @@
 
 
                             <div class="totall-product">
-                                <p>We have <strong class="text-brand">{{count($shops)}}</strong> vendors now</p>
+                                <p>We have <strong class="text-brand">{{$shops->total()}}</strong> vendors now</p>
                             </div>
 
 
@@ -83,7 +83,7 @@
                 <div class="row vendor-grid">
 
 {{--                    foreach--}}
-                    @foreach($shops as $shop)
+                    @forelse($shops as $shop)
 
                         <div class="col-lg-6 col-md-6 col-12 col-sm-6">
                             <div class="vendor-wrap style-2 mb-40">
@@ -97,7 +97,7 @@
                                         </a>
                                     </div>
                                     <div class="mt-10">
-                                        <span class="font-small total-product">{{count($shop->products)}} products</span>
+                                        <span class="font-small total-product">{{$shop->products_count}} products</span>
                                     </div>
                                 </div>
                                 <div class="vendor-content-wrap">
@@ -129,8 +129,13 @@
                             </div>
                         </div>
 
-
-                    @endforeach
+                    @empty
+                        <div class="col-lg-12 text-center mt-100">
+                            <div class="section-title">
+                                <h2 class="title">No Shop Found</h2>
+                            </div>
+                        </div>
+                    @endforelse
 {{--                    end--}}
                     <!--end vendor card-->
                 </div>

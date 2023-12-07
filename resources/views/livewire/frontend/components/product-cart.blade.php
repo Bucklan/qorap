@@ -4,17 +4,14 @@
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
                     <a href="#">
-                        {{--                                                @dump($product->getFirstMediaUrl('products'))--}}
-                        @if($product->getFirstMedia('products'))
-                            <img src="{{$product->getFirstMediaUrl('products')}}" alt="">
-                        @else
-                            <img class="default-img"
+                        {{--                        https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg--}}
+                        {{--                                 {{$product->getFirstMediaUrl('products')}}--}}
+                        <img class="default-img"
                                  src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
                                  alt=""/>
                             <img class="hover-img"
                                  src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg"
                                  alt=""/>
-                        @endif
                     </a>
                 </div>
                 <div class="product-action-1">
