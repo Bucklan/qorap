@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations as Relations;
 use Spatie\Translatable\HasTranslations;
+use \Staudenmeir\LaravelAdjacencyList\Eloquent as AdjacencyList;
 
 class Category extends Model
 {
     use HasFactory,
-        HasTranslations;
+        HasTranslations,
+        AdjacencyList\HasRecursiveRelationships;
 
     public array $translatable = ['name'];
 
@@ -22,16 +24,6 @@ class Category extends Model
     protected $casts = [
 
     ];
-
-    public function parent(): Relations\BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
-
-    public function children(): Relations\HasMany
-    {
-        return $this->hasMany(Category::class, 'parent_id');
-    }
 
     public function products(): Relations\BelongsToMany
     {

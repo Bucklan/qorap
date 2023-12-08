@@ -66,7 +66,7 @@ class Index extends Component
 
     public function render(): View
     {
-        $products = Models\Product::withCount('categories', 'colors', 'shop', 'media')
+        $products = Models\Product::with( 'categories','shop', 'media')->withCount('colors')
             ->when($this->searchQuery, function (Builder $query) {
                 $query->whereNameAndDescription($this->searchQuery);
             })

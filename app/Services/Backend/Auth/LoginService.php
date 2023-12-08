@@ -13,7 +13,7 @@ use Nette\Schema\ValidationException;
 class LoginService
 {
 
-    public function run(string $email, string $password)
+    public function run(string $email, string $password): void
     {
         $user = $this->findUserByEmail($email);
         $this->checkIsUser($user);
@@ -21,13 +21,14 @@ class LoginService
         $this->loginUser($email, $password);
 
     }
-    private function LoginUser(string $email, string $password): void
+    private function LoginUser(string $email, string $password)
     {
         if (!Auth::attempt(['email' => $email, 'password' => $password])) {
             throw \Illuminate\Validation\ValidationException::withMessages([
                 'email' => __('login.Invalid password or email. Please try again.'),
             ]);
         }
+        return redirect()->route('admin.dashboard');
     }
     private function checkIsUser(User $user): void
     {

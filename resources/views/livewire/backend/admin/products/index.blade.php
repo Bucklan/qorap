@@ -40,12 +40,13 @@
                                 category
                             </option>
                             @foreach($categories as $category)
-                                @if(!$category->parent_id)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                    @foreach($category->children as $child)
-                                        <option value="{{$child->id}}">--{{$child->name}}</option>
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @foreach($category->children as $child)
+                                    <option value="{{$child->id}}">--{{$child->name}}</option>
+                                    @foreach($child->children as $child2)
+                                        <option value="{{$child2->id}}">----{{$child2->name}}</option>
                                     @endforeach
-                                @endif
+                                @endforeach
                             @endforeach
                         </select>
                     </div>

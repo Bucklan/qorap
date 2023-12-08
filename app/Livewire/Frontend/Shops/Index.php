@@ -21,7 +21,7 @@ public function mount()
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $shops = Models\Shop::withCount('products','address')->paginate(10);
+        $shops = Models\Shop::with('products')->with('address')->paginate(10);
         return view('livewire.frontend.shops.index',compact('shops'))
             ->layout('layouts.app');
     }

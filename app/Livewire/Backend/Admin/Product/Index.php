@@ -13,7 +13,9 @@ class Index extends Component
     public $categories;
     public function mount(): void
     {
-        $this->categories = Category::get();
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
+
+
     }
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {

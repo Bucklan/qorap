@@ -23,9 +23,8 @@
                 <div class="product-category">
                     @foreach($product->categories as $value => $category)
                         <a href="#">{{$category->name}}</a>
-                        {{$value < count($product->categories) - 1 ? ', ' : ''}}
+                        {{$value < $product->categories_count - 1 ? ', ' : ''}}
                     @endforeach
-
                 </div>
                 <h2>
                     <a href="#">{{$product->name}}</a>
@@ -47,7 +46,7 @@
                     </div>
                     <div class="add-cart">
                         <a class="add"
-                           href="shop-cart.html"><i
+                           href="#"><i
                                     class="fi-rs-shopping-cart mr-5"></i>Add</a>
                     </div>
                 </div>
