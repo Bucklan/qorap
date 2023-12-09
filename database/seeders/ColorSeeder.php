@@ -13,7 +13,7 @@ class ColorSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $colors = [
             1 => ['kz' => 'Қызғылт', 'ru' => 'Красный', 'en' => 'Red'],

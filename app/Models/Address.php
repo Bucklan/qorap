@@ -23,4 +23,14 @@ class Address extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function addressable(): Relations\MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    public function shop(): Relations\HasOne
+    {
+        return $this->hasOne(Shop::class);
+    }
 }

@@ -26,9 +26,7 @@
                         <div class="shop-product-fillter">
 
 
-                            <div class="totall-product">
-                                <p>We have <strong class="text-brand">{{$shops->total()}}</strong> vendors now</p>
-                            </div>
+                            <livewire:frontend.components.total-product :total="$shops->total()" :items="'shops'">
 
 
                             <div class="sort-by-product-area">
@@ -84,20 +82,19 @@
 
 {{--                    foreach--}}
                     @forelse($shops as $shop)
-
-                        <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-12 col-sm-6 {{$shop->products_count ?: 'opacity-50'}}">
                             <div class="vendor-wrap style-2 mb-40">
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="{{$shop->getStatusClass()}}">{{$shop->status}}</span>
                                 </div>
                                 <div class="vendor-img-action-wrap">
                                     <div class="vendor-img">
-                                        <a href="vendor-details-1.html">
+                                        <a href="#">
                                             <img class="default-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
                                         </a>
                                     </div>
-                                    <div class="mt-10">
-                                        <span class="font-small total-product">{{$shop->products_count}} products</span>
+                                    <div class="mt-10 text-center">
+                                        <span class="font-small total-product">{{$shop->products_count ? $shop->products_count .' products': 'no product'}}</span>
                                     </div>
                                 </div>
                                 <div class="vendor-content-wrap">
@@ -105,7 +102,7 @@
                                         <div class="product-category">
                                             <span class="text-muted">Since 2012</span>
                                         </div>
-                                        <h4 class="mb-5"><a href="vendor-details-1.html">{{$shop->name}}</a></h4>
+                                        <h4 class="mb-5"><a href="#">{{$shop->name}}</a></h4>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 90%"></div>
@@ -114,12 +111,12 @@
                                         </div>
                                         <div class="vendor-info d-flex justify-content-between align-items-end mt-30">
                                             <ul class="contact-infor text-muted">
-                                                @if($shop->address)
+                                                @isset($shop->address_id)
                                                 <li><img src="assets-front/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>{{$shop->address?->city->name . '/' .$shop->address?->street . ',' .$shop->address?->building.','.$shop->address?->apartment}}</span></li>
                                                 @else
                                                     <li><img src="assets-front/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span> Online fdsfsdfdsfdsfdsfdsfdsfs fdssssssssssssssssfdsfds fsdfdsfs</span></li>
 
-                                                @endif
+                                                @endisset
                                                 <li><img src="assets-front/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Call Us:</strong><span>{{$shop->phone}}</span></li>
                                             </ul>
                                             <a href="{{route('shops.show',$shop->id)}}" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>

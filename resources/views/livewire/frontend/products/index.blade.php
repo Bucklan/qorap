@@ -37,7 +37,7 @@
                 <div class="col-lg-4-5">
 
                     <div class="shop-product-fillter">
-                        <livewire:frontend.components.total-product :total="$products->total()" />
+                        <livewire:frontend.components.total-product :total="$products->total()" :items="'items'" />
 
                         {{--                        start--}}
 

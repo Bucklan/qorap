@@ -18,9 +18,9 @@ class Shop extends Model
 
     public function address(): Relations\BelongsTo
     {
-        return $this->belongsTo(Address::class,'id','addressable_id')
-            ->where('addressable_type', self::class)
-            ->where('id', $this->address_id);
+        return $this->belongsTo(Address::class, 'address_id','id')
+            ->where('addressable_type', self::class);
+//            ->where('id', $this->address_id);
     }
 
     public function products(): Relations\HasMany

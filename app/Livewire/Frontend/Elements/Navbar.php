@@ -10,7 +10,7 @@ class Navbar extends Component
     public $cities;
     public function mount(): void
     {
-        $this->cities = City::get();
+        $this->cities = City::select('name')->get();
     }
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {

@@ -12,18 +12,11 @@ class Type extends Enum
 
     public static function getDescription($value): string
     {
-        if ($value === self::ACTIVE) {
-            return 'active';
-        }
-
-        if ($value === self::NOT_ACTIVE) {
-            return 'not active';
-        }
-
-        if ($value === self::ARCHIVE) {
-            return 'archive';
-        }
-
-        return parent::getDescription($value);
+       return match ($value) {
+            self::ACTIVE => 'active',
+            self::NOT_ACTIVE => 'not active',
+            self::ARCHIVE => 'archive',
+            default => 'unknown',
+        };
     }
 }

@@ -1,4 +1,5 @@
 <div>
+    @php($type = \App\Enums\Product\Type::getDescription($product->type))
     <article class="itemlist">
         <div class="row align-items-center">
             <div class="col col-check flex-grow-0">
@@ -20,7 +21,7 @@
             </div>
             <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{($product->price)}} KZT</span></div>
             <div class="col-lg-1 col-sm-2 col-4 col-status">
-                <span class="badge rounded-pill alert-success">Active</span>
+                <span class="badge rounded-pill alert-{{$type=='active'?'success':'danger'}}">{{$type}}</span>
             </div>
             <div class="col-lg-2 col-sm-4 col-4 col-date">
                 <span>{{ $product->created_at->format('d F Y') }}</span>

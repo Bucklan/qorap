@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->morphs('addressable');
-            $table->foreignId('city_id')
-                ->constrained('cities');
-            $table->string('street')->comment('Улица');
-            $table->string('building')->nullable()->comment('Дом/корпус');
-            $table->string('apartment')->nullable()->comment('Кв/офис');
+            $table->foreignId('city_id')->constrained('cities')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->string('street');
+            $table->string('building')->nullable();
+            $table->string('apartment')->nullable();
             $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use Livewire\Component;
 class TotalProduct extends Component
 {
     public $total;
+    public $items;
     public function render()
     {
         return view('livewire.frontend.components.total-product');
