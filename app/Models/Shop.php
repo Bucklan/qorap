@@ -37,4 +37,10 @@ class Shop extends Model
             default => 'new',
         };
     }
+
+
+    public function user(): Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

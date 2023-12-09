@@ -52,7 +52,7 @@ class Create extends Component
         ],
     ];
 
-    public function previousStep()
+    public function previousStep(): void
     {
         $this->currentStep--;
     }
@@ -63,24 +63,24 @@ class Create extends Component
         $this->colors = Models\Color::query()->get();
     }
 
-    public function stepPage($index)
+    public function stepPage($index): void
     {
         $this->currentStep = $index;
     }
 
-    public function submitStep()
+    public function submitStep(): void
     {
         $this->validate($this->rulesForStep(self::STEP_GENERAL));
         $this->currentStep++;
     }
 
-    public function submitStepCategories()
+    public function submitStepCategories(): void
     {
         $this->validate($this->rulesForStep(self::STEP_CATEGORY_INFO));
         $this->currentStep++;
     }
 
-    public function submitStepImages()
+    public function submitStepImages(): void
     {
         $this->validate($this->rulesForStep(self::STEP_IMAGES));
         $this->nextStep();
@@ -103,9 +103,9 @@ class Create extends Component
             'short_description' => $this->short_description,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'type' => $this->type,
+            'type' => $this->type
         ]);
-
+        $product->shop()->associate(auth()->user()->shop)->save();
         $product->categories()->sync($this->productCategories);
         $product->colors()->sync($this->productColors);
         foreach ($this->images as $image) {
@@ -121,24 +121,24 @@ class Create extends Component
                 'name' => 'required|string|min:3|max:255',
                 'description' => 'required|string|min:3|max:255',
                 'short_description' => 'required|string|min:3|max:255',
+            ],
+            self::STEP_CATEGORY_INFO => [
                 'price' => 'required|numeric|min:0',
                 'quantity' => 'required|numeric|min:0',
                 'type' => 'required|numeric|min:0',
-            ],
-            self::STEP_CATEGORY_INFO => [
                 'productCategories' => 'required|array|min:1',
                 'productCategories.*' => 'required|numeric|exists:categories,id',
                 'productColors' => 'required|array|min:1',
-                'productColors.*' => 'required|numeric|exists:colors,id',
+                'productColors.*' => 'required|exists:colors,id',
             ],
             self::STEP_IMAGES => [
                 'images' => 'required|array|min:1',
-                'images.*' => 'required|image|mimes:jpg,jpeg,png|max:1024',
+                'images.*' => 'required|mimes:jpeg,jpg,png,gif|file|max:10000'
             ],
         };
         }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.backend.admin.products.create')
             ->layout('layouts.admin');

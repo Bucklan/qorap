@@ -10,3 +10,6 @@ Route::get('products/create', Livewire\Backend\Admin\Product\Create::class)
 
 Route::get('products/{product}/edit', Livewire\Backend\Admin\Product\Edit::class)
     ->name('products.edit');
+
+Route::delete('products/{product}',Livewire\Backend\Admin\Product\Delete::class)
+    ->name('products.delete');

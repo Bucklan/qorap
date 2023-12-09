@@ -19,15 +19,18 @@
                 </a>
             </div>
             <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{($product->price)}} KZT</span></div>
-            <div class="col-lg-2 col-sm-2 col-4 col-status">
+            <div class="col-lg-1 col-sm-2 col-4 col-status">
                 <span class="badge rounded-pill alert-success">Active</span>
             </div>
-            <div class="col-lg-1 col-sm-2 col-4 col-date">
-                <span>{{ $product->created_at->format('d.m.y') }}</span>
+            <div class="col-lg-2 col-sm-4 col-4 col-date">
+                <span>{{ $product->created_at->format('d F Y') }}</span>
             </div>
             <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
                 <a href="#" class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-edit"></i> Edit </a>
-                <a href="#" class="btn btn-sm font-sm btn-light rounded"> <i class="material-icons md-delete_forever"></i> Delete </a>
+                <form wire:model="deleteProduct">
+                    <button class="btn btn-sm font-sm btn-light rounded">
+                        <i class="material-icons md-delete_forever"></i>Delete </button>
+                </form>
             </div>
         </div>
         <!-- row .// -->

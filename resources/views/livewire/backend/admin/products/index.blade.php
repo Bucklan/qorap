@@ -6,19 +6,11 @@
                 <h2 class="content-title card-title">
                     Products
                     List</h2>
-                <p>
-                    Lorem
-                    ipsum
-                    dolor
-                    sit
-                    amet.</p>
             </div>
             <div>
                 <a href="#"
-                   class="btn btn-light rounded font-md">Export</a>
-                <a href="#"
                    class="btn btn-light rounded font-md">Import</a>
-                <a href="{{--{{route('admin.products.create')}}--}}"
+                <a href="{{route('admin.products.create')}}"
                    class="btn btn-primary btn-sm rounded">Create
                     new</a>
             </div>
@@ -41,12 +33,7 @@
                             </option>
                             @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
-                                @foreach($category->children as $child)
-                                    <option value="{{$child->id}}">--{{$child->name}}</option>
-                                    @foreach($child->children as $child2)
-                                        <option value="{{$child2->id}}">----{{$child2->name}}</option>
-                                    @endforeach
-                                @endforeach
+                                @include('livewire.backend.components.child_category', ['child_category' => $category])
                             @endforeach
                         </select>
                     </div>
