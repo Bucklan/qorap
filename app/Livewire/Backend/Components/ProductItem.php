@@ -16,7 +16,7 @@ class ProductItem extends Component
 
     public function deleteProduct(): void
     {
-        dd($this->product->id);
+//        dd($this->product->id);
         $this->product->delete();
     }
 

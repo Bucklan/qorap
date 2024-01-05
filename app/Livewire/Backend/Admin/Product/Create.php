@@ -133,7 +133,7 @@ class Create extends Component
             ],
             self::STEP_IMAGES => [
                 'images' => 'required|array|min:1',
-                'images.*' => 'required|mimes:jpeg,jpg,png,gif|file|max:10000'
+                'images.*' => 'required|mimes:jpeg,jpg,png,gif'
             ],
         };
         }

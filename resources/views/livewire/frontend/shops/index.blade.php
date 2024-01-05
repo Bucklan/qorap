@@ -11,7 +11,7 @@
                             <div class="sidebar-widget-2 widget_search mb-50">
                                 <div class="search-form">
                                     <form action="#">
-                                        <input type="text" placeholder="Search vendors (by name or ID)..." />
+                                        <input wire:model.live="search" type="text" placeholder="Search vendors (by name or ID)..." />
                                         <button type="submit"><i class="fi-rs-search"></i></button>
                                     </form>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="vendor-img-action-wrap">
                                     <div class="vendor-img">
                                         <a href="#">
-                                            <img class="default-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
+                                            <img class="default-img" src="{{$shop->getFirstMediaUrl('shops')}}" alt="" />
                                         </a>
                                     </div>
                                     <div class="mt-10 text-center">
@@ -103,12 +103,7 @@
                                             <span class="text-muted">Since 2012</span>
                                         </div>
                                         <h4 class="mb-5"><a href="#">{{$shop->name}}</a></h4>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
+
                                         <div class="vendor-info d-flex justify-content-between align-items-end mt-30">
                                             <ul class="contact-infor text-muted">
                                                 @isset($shop->address_id)

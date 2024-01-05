@@ -81,11 +81,21 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Shop::class);
     }
 
-    protected function price(): Attribute
+//    protected function price(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn ($price) => $price / 100,
+//            set: fn ($price) => $price * 100,
+//        );
+//    }
+
+    public function ratings(): Relations\HasMany
     {
-        return Attribute::make(
-            get: fn ($price) => $price / 100,
-            set: fn ($price) => $price * 100,
-        );
+        return $this->hasMany(Rating::class);
+    }
+
+
+    public function cart(){
+        return $this->belongsToMany(Cart::class);
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Client\User\Cart;
 
 use App\Http\Controllers\Controller;
-use App\Models\Gift;
+use App\Models\Product;
+use App\Models\Cart;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -12,7 +14,7 @@ class CartController extends Controller
     {
         $bool = false;
         $price = 0;
-        $qwert = Auth::user()->giftsWithStatus('in_cart')->get();
+        $qwert = Auth::user()->productsWithStatus('in_cart')->get();
         foreach ($qwert as $q) {
             $price += $q->pivot->number * $q->price;
         }
@@ -22,9 +24,9 @@ class CartController extends Controller
             }
         }
         if ($bool) {
-            $ids = Auth::user()->giftsWithStatus('in_cart')->allRelatedIds();
+            $ids = Auth::user()->productsWithStatus('in_cart')->allRelatedIds();
             foreach ($ids as $id) {
-                Auth::user()->giftsWithStatus('in_cart')->updateExistingPivot($id, ['status' => 'ordered']);
+                Auth::user()->productsWithStatus('in_cart')->updateExistingPivot($id, ['status' => 'ordered']);
             }
             Auth::user()->update(['my_balance' => Auth::user()->my_balance - $price]);
             return back()->with('message', __('cart.your carts successfully sended'));
@@ -35,68 +37,83 @@ class CartController extends Controller
 
     public function index()
     {
-        $giftsInCart = Auth::user()->giftsWithStatus('in_cart')->where('number', '>', 0)->get();
-        $giftsIsNull = Auth::user()->giftsWithStatus('in_cart')->where('number', '<=', 0)->get();
-        for ($i = 0; $i < count($giftsIsNull); $i++) {
-            if ($giftsIsNull[$i]->pivot->number <= 0 && $giftsIsNull[$i] != null) {
-                $this->deleteFromCart($giftsIsNull[$i]);
-                return back();
-            }
-        }
-        $total = 0;
-        for ($i = 0; $i < count($giftsInCart); $i++) {
-            $total = $total + $giftsInCart[$i]->price * $giftsInCart[$i]->pivot->number;
-        }
-        for ($i = 0; $i < count($giftsInCart); $i++) {
-            if ($giftsInCart[$i]) {
-                return view('cart.index', ['giftsInCart' => $giftsInCart, 'total' => $total]);
-            }
-        }
-        return view('cart.index', ['giftsInNull' => true]);
+        $qwe = Auth::user()->cart()->get();
+
+//        $productsInCart = Auth::user()->productsWithStatus('in_cart')->where('number', '>', 0)->get();
+//        $productsIsNull = Auth::user()->productsWithStatus('in_cart')->where('number', '<=', 0)->get();
+//        for ($i = 0; $i < count($productsIsNull); $i++) {
+//            if ($productsIsNull[$i]->pivot->number <= 0 && $productsIsNull[$i] != null) {
+//                $this->deleteFromCart($productsIsNull[$i]);
+//                return back();
+//            }
+//        }
+//        $total = 0;
+//        for ($i = 0; $i < count($productsInCart); $i++) {
+//            $total = $total + $productsInCart[$i]->price * $productsInCart[$i]->pivot->number;
+//        }
+//        for ($i = 0; $i < count($productsInCart); $i++) {
+//            if ($productsInCart[$i]) {
+//                return view('cart.index', ['productsInCart' => $productsInCart, 'total' => $total]);
+//            }
+//        }
+//        return view('livewire.frontend.carts.index', compact('qwe'));
     }
 
-    public function putToCart(Gift $gift)
+    public function putToCart(Product $product)
     {
-        $giftsInCart = Auth::user()->giftsWithStatus('in_cart')->where('gift_id', $gift->id)->first();
-        if ($giftsInCart != null)
-            Auth::user()->giftsWithStatus('in_cart')
-                ->updateExistingPivot($gift->id,
-                    ['number' => $giftsInCart->pivot->number + 1]);
+        $productsInCart = Auth::user()->productsWithStatus('in_cart')->where('product_id', $product->id)->first();
+        if ($productsInCart != null)
+            Auth::user()->productsWithStatus('in_cart')
+                ->updateExistingPivot($product->id,
+                    ['number' => $productsInCart->pivot->number + 1]);
         else
-            Auth::user()->giftsWithStatus('in_cart')
-                ->attach($gift->id, ['number' => 1]);
+            Auth::user()->productsWithStatus('in_cart')
+                ->attach($product->id, ['number' => 1]);
 
         return redirect()->route('cart.index')->with('message', __('session.cart to successfully added'));
     }
 
-    public function removecart(Gift $gift)
+    public function removecart(Product $product)
     {
-        $giftsInCart = Auth::user()->giftsWithStatus('in_cart')->where('gift_id', $gift->id)->first();
-        if ($giftsInCart != null)
-            Auth::user()->giftsWithStatus('in_cart')->updateExistingPivot($gift->id,
-                ['number' => $giftsInCart->pivot->number - 1]);
+        $productsInCart = Auth::user()->productsWithStatus('in_cart')->where('product_id', $product->id)->first();
+        if ($productsInCart != null)
+            Auth::user()->productsWithStatus('in_cart')->updateExistingPivot($product->id,
+                ['number' => $productsInCart->pivot->number - 1]);
         else
-            Auth::user()->giftsWithStatus('in_cart')->attach($gift->id,
+            Auth::user()->productsWithStatus('in_cart')->attach($product->id,
                 ['number' => 1]);
 
         return redirect()->route('cart.index')->with('message', __('session.cart to successfully deleted'));
     }
 
-    public function deleteFromCart(Gift $gift)
+    public function deleteFromCart(Product $product)
     {
-        $giftsBought = Auth::user()->giftsWithStatus('in_cart')
-            ->where('gift_id', $gift->id)->first();
-        if ($giftsBought != null)
-            Auth::user()->giftsWithStatus('in_cart')->detach($gift->id);
+        $productsBought = Auth::user()->productsWithStatus('in_cart')
+            ->where('product_id', $product->id)->first();
+        if ($productsBought != null)
+            Auth::user()->productsWithStatus('in_cart')->detach($product->id);
         return back()->with('message', __('session.cart to successfully deleted'));
     }
 
     public function deleteallcart()
     {
-        $giftsBought = Auth::user()->giftsWithStatus('in_cart')->get();
-        if ($giftsBought != null)
-            Auth::user()->giftsWithStatus('in_cart')->detach();
+        $productsBought = Auth::user()->productsWithStatus('in_cart')->get();
+        if ($productsBought != null)
+            Auth::user()->productsWithStatus('in_cart')->detach();
         return redirect()->route('cart.index')->with('message', 'session.cart to successfully deleted');
     }
 
+    public function create(\Illuminate\Http\Request $request)
+    {
+        $where = Auth::user()->cart()->where('product_id', $request->product_id)->first();
+
+            Cart::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'city_id' => 1,
+                'price' => $request->price
+            ]);
+        return redirect()->route('cart.index')->with('message', __('session.cart to successfully added'));
+    }
 }

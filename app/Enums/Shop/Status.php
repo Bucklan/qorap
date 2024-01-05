@@ -12,18 +12,11 @@ class Status extends Enum
 
     public static function getDescription($value): string
     {
-        if ($value === self::ONLINE) {
-            return 'online market';
-        }
-
-        if ($value === self::STORE) {
-            return 'store market';
-        }
-
-        if ($value === self::ONLINE_AND_STORE) {
-            return 'online and store market';
-        }
-
-        return parent::getDescription($value);
+        return match ($value) {
+            self::ONLINE => 'online market',
+            self::STORE => 'store market',
+            self::ONLINE_AND_STORE => 'online and store market',
+            default => 'unknown',
+        };
     }
 }

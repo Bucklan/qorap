@@ -18,32 +18,9 @@
                        class="requestfullscreen nav-link btn-icon"><i
                                 class="material-icons md-cast"></i></a>
                 </li>
-                <li class="dropdown nav-item">
-                    <a class="dropdown-toggle"
-                       data-bs-toggle="dropdown"
-                       href="#"
-                       id="dropdownLanguage"
-                       aria-expanded="false"><i
-                                class="material-icons md-public"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end"
-                         aria-labelledby="dropdownLanguage">
-                        <a class="dropdown-item text-brand"
-                           href="#"><img
-                                    src="{{asset('assets-back/imgs/theme/flag-us.png')}}"
-                                    alt="English"/>English</a>
-                        <a class="dropdown-item"
-                           href="#"><img
-                                    src="{{asset('assets-back/imgs/theme/flag-fr.png')}}"
-                                    alt="Français"/>Français</a>
-                        <a class="dropdown-item"
-                           href="#"><img
-                                    src="{{asset('assets-back/imgs/theme/flag-jp.png')}}"
-                                    alt="Français"/>日本語</a>
-                        <a class="dropdown-item"
-                           href="#"><img
-                                    src="{{asset('assets-back/imgs/theme/flag-cn.png')}}"
-                                    alt="Français"/>中国人</a>
-                    </div>
+                <li class="nav-item">
+                    <a href="{{route('dashboard')}}"
+                       class="nav-link btn-icon">Home page</a>
                 </li>
                 <li class="dropdown nav-item">
                     <a class="dropdown-toggle"

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>
-        Qorap
+        Fixbox
         -
         Best
         eCommerce
@@ -29,7 +29,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon"
           type="image/x-icon"
-          href="{{asset('favicon.ico')}}"/>
+          href="{{asset('logoo.svg')}}"/>
     <!-- Template CSS -->
     @livewireStyles
     <link rel="stylesheet"

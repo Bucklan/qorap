@@ -7,6 +7,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
         Route::get('',function (){
             return redirect()->route('admin.dashboard');
         });
+        require_once ('admin/shop.php');
         require_once('admin/base.php');
         require_once('partner/base.php');
 

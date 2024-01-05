@@ -32,7 +32,7 @@
                                 category
                             </option>
                             @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                                 @include('livewire.backend.components.child_category', ['child_category' => $category])
                             @endforeach
                         </select>
@@ -65,7 +65,7 @@
             <div class="card-body">
                 @forelse($products as $product)
                     <livewire:backend.components.product-item
-                            :product="$product"
+                            :$product
                             :key="$product->id"/>
                 @empty
                     <p class="text-center">No products found</p>

@@ -6,6 +6,7 @@ use App\Traits\User\HasScopes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,36 +48,38 @@ class User extends Authenticatable
     {
         return $this->hasOne(Shop::class);
     }
-    public function address(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function address(): BelongsTo
     {
-        return $this->hasOne(Address::class);
+        return $this->belongsTo(Address::class, 'address_id','id')
+            ->where('addressable_type', self::class);
+//            ->where('id', $this->address_id);
     }
-    /*
-    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
+
+//    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+//    {
+//        return $this->hasMany(Order::class);
+//    }
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function favorites(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Favorite::class);
-    }
+//    public function favorites(): \Illuminate\Database\Eloquent\Relations\HasMany
+//    {
+//        return $this->hasMany(Favorite::class);
+//    }
+//
+//    public function carts(): \Illuminate\Database\Eloquent\Relations\HasMany
+//    {
+//        return $this->hasMany(Cart::class);
+//    }
 
-    public function carts(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Cart::class);
-    }
+//    public function payments(): \Illuminate\Database\Eloquent\Relations\HasMany
+//    {
+//        return $this->hasMany(Payment::class);
+//    }
 
-    public function payments(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Payment::class);
-    }
-    */
 
     public function getFullNameAttribute(): string
     {
@@ -92,6 +95,11 @@ class User extends Authenticatable
     public function getIsVerifiedAttribute(): bool
     {
         return $this->email_verified_at != null;
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Product::class, 'cart')->withPivot('product_id','quantity','price','city_id');
     }
 
 

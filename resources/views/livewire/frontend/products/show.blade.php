@@ -12,37 +12,24 @@
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                     <!-- MAIN SLIDES -->
                                     <div class="product-image-slider">
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
-                                        </figure>
+                                        @foreach($product->getMedia('products') as $image)
+                                            <figure class="border-radius-10">
+                                                <img src="{{$image->getUrl()}}" alt="product image" />
+                                            </figure>
+                                            @break($loop->index == 0)
+                                            <figure class="border-radius-10">
+                                                <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" />
+                                            </figure>
+                                        @endforeach
+
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails">
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
-                                        <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
+                                        @foreach($product->getMedia('products') as $image)
+                                            <div><img src="{{$image->getUrl()}}" alt="product image" /></div>
+                                            @break($loop->index == 0)
+                                                                                            <div><img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="product image" /></div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <!-- End Gallery -->
@@ -56,7 +43,7 @@
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 90%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+{{--                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>--}}
                                         </div>
                                     </div>
                                     <div class="clearfix product-price-cover">
@@ -71,16 +58,16 @@
                                     <div class="short-desc mb-30">
                                         <p class="font-lg">{{$product->short_description}}</p>
                                     </div>
-                                    <div class="attr-detail attr-size mb-30">
-                                        <strong class="mr-10">Size / Weight: </strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">50g</a></li>
-                                            <li class="active"><a href="#">60g</a></li>
-                                            <li><a href="#">80g</a></li>
-                                            <li><a href="#">100g</a></li>
-                                            <li><a href="#">150g</a></li>
-                                        </ul>
-                                    </div>
+{{--                                    <div class="attr-detail attr-size mb-30">--}}
+{{--                                        <strong class="mr-10">Size / Weight: </strong>--}}
+{{--                                        <ul class="list-filter size-filter font-small">--}}
+{{--                                            <li><a href="#">50g</a></li>--}}
+{{--                                            <li class="active"><a href="#">60g</a></li>--}}
+{{--                                            <li><a href="#">80g</a></li>--}}
+{{--                                            <li><a href="#">100g</a></li>--}}
+{{--                                            <li><a href="#">150g</a></li>--}}
+{{--                                        </ul>--}}
+{{--                                    </div>--}}
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">COLORS </strong>
                                         <ul class="list-filter size-filter font-small">
@@ -90,6 +77,11 @@
                                         </ul>
                                     </div>
                                     <div class="detail-extralink mb-50">
+                                        <form action="{{route('cart.create')}}" method="post">
+                                            @method('POST')
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                            <input type="hidden" name="price" value="{{$product->price}}">
                                         <div class="detail-qty border radius">
                                             <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                             <input type="text" name="quantity" class="qty-val" value="1" min="1">
@@ -97,8 +89,8 @@
                                         </div>
                                         <div class="product-extra-link2">
                                             <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         </div>
+                                        </form>
                                     </div>
                                     <div class="font-xs">
                                         <ul class="mr-50 float-start">
@@ -445,8 +437,8 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
-                                                        <img class="default-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
-                                                        <img class="hover-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
+                                                        <img class="default-img" src="{{asset('цветы2.jpg')}}" alt="" />
+                                                        <img class="hover-img" src="{{asset('цветы1.jpg')}}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -475,8 +467,8 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
-                                                        <img class="default-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
-                                                        <img class="hover-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
+                                                        <img class="default-img" src="{{asset('фотоальбом.jpg')}}" alt="" />
+                                                        <img class="hover-img" src="{{asset('фотоальбом.jpg')}}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -505,8 +497,8 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
-                                                        <img class="default-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
-                                                        <img class="hover-img" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" />
+                                                        <img class="default-img" src="{{asset('бокс1.jpg')}}" alt="" />
+                                                        <img class="hover-img" src="{{asset('бокс2.jpg')}}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">

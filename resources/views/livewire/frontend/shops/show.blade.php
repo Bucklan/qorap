@@ -107,11 +107,18 @@
                         </div>
                     </div>
                     <div class="row product-grid">
-                        @foreach($shop->products as $product)
+                        @forelse($shop->products as $product)
                             <livewire:frontend.components.product-cart
                                     :product="$product"
                                     :key="$product->id"/>
-                        @endforeach
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    <i class="text-warning material-icons md-warning"></i>
+                                    <span>No products found</span>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                     <!--product grid-->
                     <div class="pagination-area mt-20 mb-20">
@@ -156,7 +163,7 @@
                 <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
                     <div class="sidebar-widget widget-store-info mb-30 bg-3 border-0">
                         <div class="vendor-logo mb-30">
-                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                            <img src="{{$shop->getFirstMediaUrl('shops')}}"
                                  alt=""/>
                         </div>
                         <div class="vendor-info">
@@ -172,7 +179,6 @@
                                     <div class="product-rating"
                                          style="width: 90%"></div>
                                 </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
                             <div class="vendor-des mb-30">
                                 <p class="font-sm text-heading">
@@ -203,7 +209,7 @@
                                         </a>
                                     </li>
                                     <li class="hover-up">
-                                        <a href="{{url($shop_link?->facebook)}}">
+                                        <a href="{{url($shop_link?->instagram)}}">
                                             <img src="{{asset('assets-front/imgs/theme/icons/social-insta.svg')}}" alt="" />
                                         </a>
                                     </li>

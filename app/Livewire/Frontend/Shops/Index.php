@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use withPagination;
+    public $search;
 //public $shopProductCount;
 
 public function mount()
@@ -21,7 +22,11 @@ public function mount()
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $shops = Models\Shop::withCount('products')->with('address')->paginate(10);
+        $shops = Models\Shop::withCount('products')->with('address')
+            ->when($this->search, function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->paginate(10);
 
         return view('livewire.frontend.shops.index',compact('shops'))
             ->layout('layouts.app');

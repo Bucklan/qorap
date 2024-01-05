@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations as Relations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class Shop extends Model
+class Shop extends Model  implements HasMedia
 {
-    use HasFactory;
+    use HasFactory,InteractsWithMedia;
     protected $guarded = [
         'id',
         'created_at',

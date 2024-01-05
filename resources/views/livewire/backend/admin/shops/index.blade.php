@@ -5,9 +5,6 @@
                 <h2 class="content-title card-title">Shops</h2>
                 <p>Brand and shop management</p>
             </div>
-            <div>
-                <a href="#" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Add New Brand</a>
-            </div>
         </div>
         <div class="card mb-4">
             <header class="card-header">
@@ -39,7 +36,7 @@
                         <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                             <figure class="card border-1">
                                 <div class="card-header bg-white text-center">
-                                    <img height="76" src="{{asset('assets-back/imgs/items/1.jpg')}}" class="img-fluid" alt="Logo" />
+                                    <img height="76" src="{{$shop->getFirstMediaUrl('shops')}}" class="img-fluid" alt="Logo" />
                                 </div>
                                 <figcaption class="card-body text-center">
                                     <h6 class="card-title m-0">
